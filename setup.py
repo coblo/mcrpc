@@ -14,7 +14,7 @@ requirements = ["requests"]
 setup(
     name='mcrpc',
     version='0.1.0',
-    description="Multichain RPC Client",
+    description="mcrpc: MultiChain RPC Library",
     long_description=readme,
     author="Titusz Pan",
     author_email='tp@py7.de',
@@ -24,7 +24,7 @@ setup(
     install_requires=requirements,
     license="GNU General Public License v3",
     zip_safe=False,
-    keywords='mcrpc',
+    keywords="mcrpc, multichain, rpc, client, api, library",
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
