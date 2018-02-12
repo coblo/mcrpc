@@ -39,7 +39,6 @@ def get_api_methods(client):
         else:
             meth_name = line.split()[0]
             meth_sig = ' '.join(line.split()[1:])
-            print(meth_name, meth_sig)
             methods.append((meth_name, meth_sig))
     return methods
 
