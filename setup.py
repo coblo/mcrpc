@@ -13,7 +13,7 @@ def readme():
 
 setup(
     name='mcrpc',
-    version='0.2.1',
+    version='0.2.2',
     description="mcrpc: MultiChain RPC Library",
     long_description=readme(),
     author="Titusz Pan",
