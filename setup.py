@@ -8,9 +8,6 @@ from setuptools import setup, find_packages
 with open('README.rst') as readme_file:
     readme = readme_file.read()
 
-with open('HISTORY.rst') as history_file:
-    history = history_file.read()
-
 requirements = ["requests"]
 
 setup_requirements = []
@@ -21,7 +18,7 @@ setup(
     name='mcrpc',
     version='0.1.0',
     description="Multichain RPC Client",
-    long_description=readme + '\n\n' + history,
+    long_description=readme,
     author="Titusz Pan",
     author_email='tp@py7.de',
     url='https://github.com/titusz/mcrpc',
