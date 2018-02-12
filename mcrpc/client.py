@@ -21,7 +21,11 @@ class RpcClient:
         url = '{}:{}@{}:{}'.format(self.user, self.pwd, self.host, self.port)
         return 'https://' + url if self.use_ssl else 'http://' + url
 
-    def _call(self, method, *args):
+    def _call(self, method, *args, **kwargs):
+        if kwargs:
+            raise RuntimeError(
+                'Keyword argument in api call {}'.format(method)
+            )
         args = [arg for arg in args if arg is not None]
         payload = {"method": method, "params": args}
         serialized = json.dumps(payload)
@@ -31,8 +35,8 @@ class RpcClient:
             raise RpcError(data['error'].get('message'))
         return data['result']
 
-    def __getattr__(self, item):
-        return partial(self._call, item)
+    def __getattr__(self, method):
+        return partial(self._call, method)
 
 
 if __name__ == '__main__':
