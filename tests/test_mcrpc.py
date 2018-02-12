@@ -34,3 +34,9 @@ class TestMCRPC(unittest.TestCase):
         methods = get_api_methods(self.c)
         self.assertEqual(len(methods), 148)
         self.c.getinfo()
+
+    def test_kwargs_raise(self):
+        with self.assertRaises(RuntimeError):
+            self.c.listblocks('1', verbose=True)
+        self.assertIsInstance(self.c.listblocks('1', False), list)
+        self.assertIsInstance(self.c.listblocks('1'), list)
