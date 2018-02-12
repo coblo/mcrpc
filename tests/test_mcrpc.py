@@ -15,9 +15,6 @@ class TestRpcClient(unittest.TestCase):
             '127.0.0.1', '7010', 'testuser', 'testpassword', False
         )
 
-    def tearDown(self):
-        """Tear down test fixtures, if any."""
-
     def test_getinfo(self):
         """Test something."""
         r = self.c.getinfo()
@@ -26,6 +23,3 @@ class TestRpcClient(unittest.TestCase):
     def test_nonexisting_method(self):
         with self.assertRaises(RpcError):
             self.c.noexist()
-
-
-
