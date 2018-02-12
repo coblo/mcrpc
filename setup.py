@@ -21,7 +21,7 @@ setup(
     long_description=readme,
     author="Titusz Pan",
     author_email='tp@py7.de',
-    url='https://github.com/titusz/mcrpc',
+    url='https://github.com/coblo/mcrpc',
     packages=find_packages(include=['mcrpc']),
     include_package_data=True,
     install_requires=requirements,
