@@ -1,0 +1,5 @@
+addmultisigaddress: ['nrequired: int, keys: t.List[str]', 'str']
+addnode: ['node: str, command:str', 'None']
+appendrawchange: ['tx_hex: str, address: str, native_fee=None', 'str']
+create: ['entity_type: str, entity_name: str, open: bool, custom_fields: t.Optional[dict]=None', 'str']
+listwallettransactions: ['count: int=10, skip: int=0, includeWatchonly: bool=False, verbose: bool=False', 't.List[t.Dict]']
