@@ -4,7 +4,12 @@ import typing as t
 
 class RpcClient:
 
-    def __init__(self, host: str, port: str, user: str, pwd: str, use_ssl: bool=False): ...
+    def __init__(self, host: str, port: str, user: str, pwd: str, use_ssl: bool=False):
+        self.host: str
+        self.port: str
+        self.user: str
+        self.pwd: str
+        self.use_ssl: bool
 
     def _url(self) -> str: ...
 
@@ -2632,7 +2637,7 @@ class RpcClient:
 
         """
 
-    def listblocks(self, *args) -> t.Dict:
+    def listblocks(self, blocks: t.Union[str,list,dict], verbose: bool=False) -> list:
         """
         listblocks block-set-identifier ( verbose )
 
