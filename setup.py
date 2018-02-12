@@ -13,7 +13,7 @@ requirements = ["requests"]
 
 setup(
     name='mcrpc',
-    version='0.1.0',
+    version='0.2.0',
     description="mcrpc: MultiChain RPC Library",
     long_description=readme,
     author="Titusz Pan",
@@ -26,7 +26,7 @@ setup(
     zip_safe=False,
     keywords="mcrpc, multichain, rpc, client, api, library",
     classifiers=[
-        'Development Status :: 2 - Pre-Alpha',
+        'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Natural Language :: English',
