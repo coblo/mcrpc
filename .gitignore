@@ -102,3 +102,6 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# local dev code gen script
+gen.py
