@@ -3,10 +3,10 @@
 """Tests for `mcrpc` package."""
 import unittest
 from string import Template
-
 from codegen import get_api_methods, get_stub_template
 from mcrpc import RpcClient
 from mcrpc.exceptions import RpcError
+from mcrpc import responses
 
 
 class TestMCRPC(unittest.TestCase):
@@ -21,7 +21,7 @@ class TestMCRPC(unittest.TestCase):
     def test_getinfo(self):
         """Test something."""
         r = self.c.getinfo()
-        self.assertIsInstance(r, dict)
+        self.assertIsInstance(r, responses.Getinfo)
 
     def test_nonexisting_method(self):
         with self.assertRaises(RpcError):
@@ -34,9 +34,3 @@ class TestMCRPC(unittest.TestCase):
         methods = get_api_methods(self.c)
         self.assertEqual(len(methods), 148)
         self.c.getinfo()
-
-    def test_kwargs_raise(self):
-        with self.assertRaises(RuntimeError):
-            self.c.listblocks('1', verbose=True)
-        self.assertIsInstance(self.c.listblocks('1', False), list)
-        self.assertIsInstance(self.c.listblocks('1'), list)
