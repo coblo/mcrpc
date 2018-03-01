@@ -1,19 +1,11 @@
 # -*- coding: utf-8 -*-
 """Multichain RPC Client"""
-import json
+import simplejson as json
 import requests
 from functools import partial
 from decimal import Decimal
 from mcrpc.exceptions import RpcError
 from mcrpc.base import BaseApiMethods
-
-
-class DecimalEncoder(json.JSONEncoder):
-    """Custom json encoder that supports Decimal"""
-    def default(self, o):
-        if isinstance(o, Decimal):
-            return float(o)
-        return super(DecimalEncoder, self).default(o)
 
 
 class RpcClient(BaseApiMethods):
@@ -33,9 +25,9 @@ class RpcClient(BaseApiMethods):
     def _call(self, method, *args):
         args = [arg for arg in args if arg is not None]
         payload = {"method": method, "params": args}
-        serialized = json.dumps(payload, cls=DecimalEncoder)
+        serialized = json.dumps(payload, use_decimal=True)
         response = requests.post(self._url, data=serialized, verify=False)
-        data = response.json(parse_float=Decimal)
+        data = response.json(parse_float=Decimal, parse_int=Decimal)
         if data['error'] is not None:
             raise RpcError(data['error'].get('message'))
         return data['result']

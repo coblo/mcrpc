@@ -13,7 +13,7 @@ def readme():
 
 setup(
     name='mcrpc',
-    version='0.2.3',
+    version='0.2.4',
     description="mcrpc: MultiChain RPC Library",
     long_description=readme(),
     author="Titusz Pan",
@@ -21,7 +21,7 @@ setup(
     url='https://github.com/coblo/mcrpc',
     packages=find_packages(include=['mcrpc']),
     include_package_data=True,
-    install_requires=['requests'],
+    install_requires=['requests', 'simplejson'],
     license="GNU General Public License v3",
     zip_safe=False,
     keywords="mcrpc, multichain, rpc, client, api, library",
