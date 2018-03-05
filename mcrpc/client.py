@@ -27,7 +27,7 @@ class RpcClient(BaseApiMethods):
         payload = {"method": method, "params": args}
         serialized = json.dumps(payload, use_decimal=True)
         response = requests.post(self._url, data=serialized, verify=False)
-        data = response.json(parse_float=Decimal, parse_int=Decimal)
+        data = response.json(parse_float=Decimal)
         if data['error'] is not None:
             raise RpcError(data['error'].get('message'))
         return data['result']
