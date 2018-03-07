@@ -38,3 +38,14 @@ class TestMCRPC(unittest.TestCase):
         methods = get_api_methods(self.c)
         self.assertEqual(len(methods), 148)
         self.c.getinfo()
+
+    def test_encoding_text(self):
+        s = 'I sat döwn for “coffee” at the café'
+        try:
+            self.c.create('stream', 'test', True)
+        except RpcError:
+            pass
+        txid = self.c.publish('test', 'testkey', {'text': s})
+        resp = self.c.getstreamitem('test', txid)
+        rs = resp['data']['text']
+        self.assertEqual(rs, s)
