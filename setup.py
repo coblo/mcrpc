@@ -13,7 +13,7 @@ def readme():
 
 setup(
     name='mcrpc',
-    version='0.2.6',
+    version='1.0.0',
     description="mcrpc: MultiChain RPC Library",
     long_description=readme(),
     author="Titusz Pan",
@@ -26,7 +26,7 @@ setup(
     zip_safe=False,
     keywords="mcrpc, multichain, rpc, client, api, library",
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Natural Language :: English',
