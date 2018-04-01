@@ -12,10 +12,10 @@ mrpc
    :alt: PyPI License
 
 
-MultiChain RPC Client
-=====================
+Content Blockchain RPC Client
+=============================
 
-A Python 3 RPC client build for the `Content Blockchain Project <https://content-blockchain.org/>`_
+A Python 3 MultiChain RPC client build for the `Content Blockchain Project <https://content-blockchain.org/>`_
 
 This client is build against the API of the latest v2.0 alpha build of `MultiChain <https://www.multichain.com/developers/multichain-2-0-preview-releases/>`_ and includes code generated function annotations and api documentation to support code completion and get you up to speed fast.
 
