@@ -178,8 +178,8 @@ class BaseApiMethods:
     def addmultisigaddress(self, nrequired, keys, account=None):
         return self._call("addmultisigaddress", nrequired, keys, account)
 
-    def appendrawexchange(self, hex_txid, vout, ask_assets):
-        return self._call("appendrawexchange", hex_txid, vout, ask_assets)
+    def appendrawexchange(self, hex, txid, vout, ask_assets):
+        return self._call("appendrawexchange", hex, txid, vout, ask_assets)
 
     def approvefrom(self, from_address, upgrade_identifier, approve=None):
         return self._call("approvefrom", from_address, upgrade_identifier, approve)

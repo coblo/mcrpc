@@ -1566,7 +1566,7 @@ class RpcClient:
 
         """
 
-    def appendrawexchange(self, hex_txid, vout, ask_assets):
+    def appendrawexchange(self, hex, txid, vout, ask_assets):
         """
         appendrawexchange "hex" "txid" vout ask-assets 
 
