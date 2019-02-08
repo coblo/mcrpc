@@ -190,8 +190,8 @@ class BaseApiMethods:
     def combineunspent(self, addresses=None, minconf=None, maxcombines=None, mininputs=None, maxinputs=None, maxtime=None):
         return self._call("combineunspent", addresses, minconf, maxcombines, mininputs, maxinputs, maxtime)
 
-    def completerawexchange(self, hex_txid, vout, ask_assets, data_or_publish_new_stream_item=None):
-        return self._call("completerawexchange", hex_txid, vout, ask_assets, data_or_publish_new_stream_item)
+    def completerawexchange(self, hex, txid, vout, ask_assets, data_or_publish_new_stream_item=None):
+        return self._call("completerawexchange", hex, txid, vout, ask_assets, data_or_publish_new_stream_item)
 
     def create(self, entity_type, entity_name, open_, custom_fields=None):
         return self._call("create", entity_type, entity_name, open_, custom_fields)

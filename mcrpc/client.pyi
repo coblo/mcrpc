@@ -1654,7 +1654,7 @@ class RpcClient:
 
         """
 
-    def completerawexchange(self, hex_txid, vout, ask_assets, data_or_publish_new_stream_item=None):
+    def completerawexchange(self, hex, txid, vout, ask_assets, data_or_publish_new_stream_item=None):
         """
         completerawexchange hex txid vout ask-assets ( data|publish-new-stream-item ) 
 
