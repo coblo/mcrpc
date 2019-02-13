@@ -18,6 +18,25 @@ class RpcClient:
 
     def _call(self, method: str, *args): ...
 
+    def getassetinfo(self, asset_identifier, verbose=None):
+        """
+        getassetinfo "asset-identifier" ( verbose )
+
+        Returns information about a single asset
+
+        Arguments:
+        1. "asset-identifier"               (string, required) Asset identifier - one of: issue txid, asset reference, asset name.
+        2. verbose                          (boolean, optional, default=false) If true, returns list of all issue transactions, including follow-ons 
+
+        Result:
+        Object with asset details
+
+        Examples:
+        > multichain-cli testchain getassetinfo myasset
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getassetinfo", "params": [myasset] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
+
+        """
+
     def getbestblockhash(self) -> str:
         """
         getbestblockhash
@@ -28,8 +47,8 @@ class RpcClient:
         "hex"                               (string) the block hash hex encoded
 
         Examples
-        > multichain-cli coblo2 getbestblockhash 
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getbestblockhash", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain getbestblockhash 
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getbestblockhash", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -71,8 +90,8 @@ class RpcClient:
         "data"                              (string) A string that is serialized, hex-encoded data for block 'hash'.
 
         Examples:
-        > multichain-cli coblo2 getblock "00000000c937983704a73af28acdec37b049d214adbda81d7e2a3dd146f6ed09"
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getblock", "params": ["00000000c937983704a73af28acdec37b049d214adbda81d7e2a3dd146f6ed09"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain getblock "00000000c937983704a73af28acdec37b049d214adbda81d7e2a3dd146f6ed09"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getblock", "params": ["00000000c937983704a73af28acdec37b049d214adbda81d7e2a3dd146f6ed09"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -97,8 +116,8 @@ class RpcClient:
         }
 
         Examples:
-        > multichain-cli coblo2 getblockchaininfo 
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getblockchaininfo", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain getblockchaininfo 
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getblockchaininfo", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -112,8 +131,8 @@ class RpcClient:
         n                                   (numeric) The current block count
 
         Examples:
-        > multichain-cli coblo2 getblockcount 
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getblockcount", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain getblockcount 
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getblockcount", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -130,8 +149,8 @@ class RpcClient:
         "hash"                              (string) The block hash
 
         Examples:
-        > multichain-cli coblo2 getblockhash 1000
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getblockhash", "params": [1000] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain getblockhash 1000
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getblockhash", "params": [1000] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -163,8 +182,8 @@ class RpcClient:
         5.  "active"                        This is the tip of the active main chain, which is certainly valid
 
         Examples:
-        > multichain-cli coblo2 getchaintips 
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getchaintips", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain getchaintips 
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getchaintips", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -178,8 +197,50 @@ class RpcClient:
         n.nnn                                 (numeric) the proof-of-work difficulty as a multiple of the minimum difficulty.
 
         Examples:
-        > multichain-cli coblo2 getdifficulty 
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getdifficulty", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain getdifficulty 
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getdifficulty", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
+
+        """
+
+    def getfiltercode(self, filter_identifier):
+        """
+        getfiltercode "filter-identifier"
+
+        Returns code for specified filter
+
+        Arguments:
+        1. "filter-identifier"              (string, required) Filter identifier - one of: create txid, filter reference, filter name.
+
+        Result:
+        Filter code in plain text
+
+        Examples:
+        > multichain-cli testchain getfiltercode filter1
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getfiltercode", "params": [filter1] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
+
+        """
+
+    def getlastblockinfo(self, skip=None):
+        """
+        getlastblockinfo ( skip )
+
+        Returns information about the last or recent blocks in the active chain.
+
+        Arguments:
+        1. skip                            (numeric, optional) The number of blocks back to skip. Default 0.
+
+        Result:
+        {
+          "hash" : "hash",                  (string) The block hash
+          "height" : n,                     (numeric) The block height or index
+          "time" : ttt,                     (numeric) The block time in seconds since epoch (Jan 1 1970 GMT)
+          "txcount" : n,                    (numeric) Number of transactions in block
+          "miner" : n,                       (string) The address of the miner
+        }
+
+        Examples:
+        > multichain-cli testchain getlastblockinfo 
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getlastblockinfo", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -196,8 +257,8 @@ class RpcClient:
         }
 
         Examples:
-        > multichain-cli coblo2 getmempoolinfo 
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getmempoolinfo", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain getmempoolinfo 
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getmempoolinfo", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -232,8 +293,27 @@ class RpcClient:
         ]
 
         Examples
-        > multichain-cli coblo2 getrawmempool true
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getrawmempool", "params": [true] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain getrawmempool true
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getrawmempool", "params": [true] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
+
+        """
+
+    def getstreaminfo(self, stream_identifier, verbose=None):
+        """
+        getstreaminfo "stream-identifier" ( verbose )
+
+        Returns information about a single stream
+
+        Arguments:
+        1. "stream-identifier"              (string, required) Stream identifier - one of: create txid, stream reference, stream name.
+        2. verbose                          (boolean, optional, default=false) If true, returns list of creators 
+
+        Result:
+        Object with stream details
+
+        Examples:
+        > multichain-cli testchain getstreaminfo mystream
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getstreaminfo", "params": [mystream] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -246,7 +326,7 @@ class RpcClient:
         Arguments:
         1. "txid"                           (string, required) The transaction id
         2. n                                (numeric, required) vout value
-        3. includemempool                   (boolean, optional) Whether to included the mem pool
+        3. includemempool                   (boolean, optional, default true) Whether to included the mem pool
 
         Result:
         {
@@ -270,13 +350,13 @@ class RpcClient:
         Examples:
 
         Get unspent transactions
-        > multichain-cli coblo2 listunspent 
+        > multichain-cli testchain listunspent 
 
         View the details
-        > multichain-cli coblo2 gettxout "txid" 1
+        > multichain-cli testchain gettxout "txid" 1
 
         As a json rpc call
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "gettxout", "params": ["txid", 1] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "gettxout", "params": ["txid", 1] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -299,8 +379,8 @@ class RpcClient:
         }
 
         Examples:
-        > multichain-cli coblo2 gettxoutsetinfo 
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "gettxoutsetinfo", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain gettxoutsetinfo 
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "gettxoutsetinfo", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -311,7 +391,7 @@ class RpcClient:
         Returns list of defined assets
 
         Arguments:
-        1. "asset-identifier"               (string, optional) Asset identifier - one of the following: issue txid, asset reference, asset name.
+        1. "asset-identifier"               (string, optional, default=*) Asset identifier - one of: issue txid, asset reference, asset name.
          or
         1. asset-identifier(s)              (array, optional) A json array of asset identifiers 
         2. verbose                          (boolean, optional, default=false) If true, returns list of all issue transactions, including follow-ons 
@@ -322,8 +402,8 @@ class RpcClient:
         An array containing list of defined assets
 
         Examples:
-        > multichain-cli coblo2 listassets 
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listassets", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain listassets 
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listassets", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -353,9 +433,9 @@ class RpcClient:
         An array containing list of block information objects
 
         Examples:
-        > multichain-cli coblo2 listblocks "1000,1100-1120"
-        > multichain-cli coblo2 listblocks "00000000c937983704a73af28acdec37b049d214adbda81d7e2a3dd146f6ed09"
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listblocks", "params": [1000] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain listblocks "1000,1100-1120"
+        > multichain-cli testchain listblocks "00000000c937983704a73af28acdec37b049d214adbda81d7e2a3dd146f6ed09"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listblocks", "params": [1000] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -366,8 +446,8 @@ class RpcClient:
         Returns a list of all permissions which have been explicitly granted to addresses.
 
         Arguments:
-        1. "permission(s)"                  (string, optional) Permission strings, comma delimited. Possible values: connect,send,receive,issue,mine,admin,activate,create. Default: all. 
-        2. "address(es)"                    (string, optional, default "*") The addresses to retrieve permissions for. "*" for all addresses
+        1. "permission(s)"                  (string, optional, default=*) Permission strings, comma delimited. Possible values: connect,send,receive,issue,mine,admin,activate,create
+        2. "address(es)"                    (string, optional, default=*) The addresses to retrieve permissions for. "*" for all addresses
          or
         2. address(es)                      (array, optional) A json array of addresses to return permissions for
         3. verbose                          (boolean, optional, default=false) If true, returns list of pending grants 
@@ -376,9 +456,30 @@ class RpcClient:
         An array containing list of permissions
 
         Examples:
-        > multichain-cli coblo2 listpermissions connect,send,receive
-        > multichain-cli coblo2 listpermissions all "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd"
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listpermissions", "params": [connect,send,receive] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain listpermissions connect,send,receive
+        > multichain-cli testchain listpermissions all "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listpermissions", "params": [connect,send,receive] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
+
+        """
+
+    def liststreamfilters(self, filter_identifiers=None, verbose=None):
+        """
+        liststreamfilters ( filter-identifier(s) verbose )
+
+        Returns list of defined stream filters
+
+        Arguments:
+        1. "filter-identifier"              (string, optional, default=*) Filter identifier - one of: create txid, filter reference, filter name.
+         or
+        1. filter-identifier(s)             (array, optional) A json array of filter identifiers 
+        2. verbose                          (boolean, optional, default=false) If true, returns list of creators and approval details 
+
+        Result:
+        An array containing list of defined stream filters
+
+        Examples:
+        > multichain-cli testchain liststreamfilters 
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "liststreamfilters", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -389,10 +490,10 @@ class RpcClient:
         Returns list of defined streams
 
         Arguments:
-        1. "stream-identifier(s)"           (string, optional, default=*, all streams) Stream identifier - one of the following: issue txid, stream reference, stream name.
+        1. "stream-identifier(s)"           (string, optional, default=*) Stream identifier - one of: create txid, stream reference, stream name.
          or
         1. stream-identifier(s)             (array, optional) A json array of stream identifiers 
-        2. verbose                          (boolean, optional, default=false) If true, returns stream list of creators 
+        2. verbose                          (boolean, optional, default=false) If true, returns list of stream creators 
         3. count                            (number, optional, default=INT_MAX - all) The number of streams to display
         4. start                            (number, optional, default=-count - last) Start from specific stream, 0 based, if negative - from the end
 
@@ -400,24 +501,176 @@ class RpcClient:
         An array containing list of defined streams
 
         Examples:
-        > multichain-cli coblo2 liststreams 
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "liststreams", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain liststreams 
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "liststreams", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
+
+        """
+
+    def listtxfilters(self, filter_identifiers=None, verbose=None):
+        """
+        listtxfilters ( filter-identifier(s) verbose )
+
+        Returns list of defined tx filters
+
+        Arguments:
+        1. "filter-identifier"              (string, optional, default=*) Filter identifier - one of: create txid, filter reference, filter name.
+         or
+        1. filter-identifier(s)             (array, optional) A json array of filter identifiers 
+        2. verbose                          (boolean, optional, default=false) If true, returns list of creators and approval details 
+
+        Result:
+        An array containing list of defined tx filters
+
+        Examples:
+        > multichain-cli testchain listtxfilters 
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listtxfilters", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
     def listupgrades(self, upgrade_identifiers=None):
         """
         listupgrades (upgrade-identifier(s))
-        1. "upgrade-identifier(s)"          (string, optional, default=*, all upgrades) Upgrade identifier - one of the following:
-                                                                                        upgrade txid, upgrade name.
+        1. "upgrade-identifier(s)"          (string, optional, default=*) Upgrade identifier - one of:
+                                                                                        create txid, upgrade name.
          or
         1. upgrade-identifier(s)            (array, optional) A json array of upgrade identifiers 
 
         Returns list of defined upgrades
 
         Examples:
-        > multichain-cli coblo2 listupgrades 
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listupgrades", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain listupgrades 
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listupgrades", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
+
+        """
+
+    def runstreamfilter(self, filter_identifier, tx_hex_or_txid=None, vout=None):
+        """
+        runstreamfilter "filter-identifier" ( "tx-hex"|"txid" vout )
+
+        Compile an existing filter and optionally test it on a transaction
+
+        Arguments:
+        1. "filter-identifier"              (string, required) Filter identifier - one of: create txid, filter reference, filter name.
+        2. "tx-hex"                         (string, optional) The transaction hex string to filter, otherwise filter compiled only
+         or
+        2. "txid"                           (string, optional) The transaction id
+        3. vout:n                           (numeric, optional) The output number, if omitted and txid/tx-hex is specified, found automatically
+
+        Result:
+        {
+          "compiled": true|false,           (boolean) Filter passed compilation
+          "passed": true|false,             (boolean) Transaction passed the filter
+          "callbacks": callbacks,           (array of objects) Information about callback calls by filter
+          "reason": "rejection reason",     (boolean) Reason for rejection, null if passed
+          "time": x.xxxxxx,                 (numeric) Seconds to run transaction through the filter
+        }
+
+        Examples:
+        > multichain-cli testchain runstreamfilter filter1
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "runstreamfilter", "params": [filter1] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
+
+        """
+
+    def runtxfilter(self, filter_identifier, tx_hex_or_txid=None):
+        """
+        runtxfilter "filter-identifier" ( "tx-hex"|"txid" )
+
+        Compile an existing filter and optionally test it on a transaction
+
+        Arguments:
+        1. "filter-identifier"              (string, required) Filter identifier - one of: create txid, filter reference, filter name.
+        2. "tx-hex"                         (string, optional) The transaction hex string to filter, otherwise filter compiled only
+         or
+        2. "txid"                           (string, optional) The transaction id
+        {
+          "compiled": true|false,           (boolean) Filter passed compilation
+          "passed": true|false,             (boolean) Transaction passed the filter
+          "callbacks": callbacks,           (array of objects) Information about callback calls by filter
+          "reason": "rejection reason",     (boolean) Reason for rejection, null if passed
+          "time": x.xxxxxx,                 (numeric) Seconds to run transaction through the filter
+        }
+
+        Examples:
+        > multichain-cli testchain runtxfilter filter1
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "runtxfilter", "params": [filter1] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
+
+        """
+
+    def teststreamfilter(self, restrictions, javascript_code, tx_hex_or_txid=None, vout=None):
+        """
+        teststreamfilter restrictions "javascript-code" ( "tx-hex"|"txid" vout )
+
+        Compile a test filter and optionally test it on a transaction
+
+        Arguments:
+        1. restrictions                     (object, required)  a json object with filter restrictions
+            {
+            }
+        2. "javascript-code"                (string, required) JavaScript filter code, see help filters. Example:
+                                                                 function filterstreamitem()
+                                                                 {
+                                                                     var item=getfilterstreamitem();
+                                                                                          
+                                                                     if (item.keys.length<2)
+                                                                         return "At least two keys required";
+                                                                 }   
+        3. "tx-hex"                         (string, optional) The transaction hex string to filter, otherwise filter compiled only
+         or
+        3. "txid"                           (string, optional) The transaction id
+        4. vout:n                           (numeric, optional) The output number, if omitted and txid/tx-hex is specified, found automatically
+
+        Result:
+        {
+          "compiled": true|false,           (boolean) Filter passed compilation
+          "passed": true|false,             (boolean) Transaction passed the filter
+          "callbacks": callbacks,           (array of objects) Information about callback calls by filter
+          "reason": "rejection reason",     (boolean) Reason for rejection, null if passed
+          "time": x.xxxxxx,                 (numeric) Seconds to run transaction through the filter
+        }
+
+        Examples:
+        > multichain-cli testchain teststreamfilter "{}" "javascript-code"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "teststreamfilter", "params": ["{}", "javascript-code"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
+
+        """
+
+    def testtxfilter(self, restrictions, javascript_code, tx_hex_or_txid=None):
+        """
+        testtxfilter restrictions "javascript-code" ( "tx-hex"|"txid" )
+
+        Compile a test filter and optionally test it on a transaction
+
+        Arguments:
+        1. restrictions                     (object, required)  a json object with filter restrictions
+            {
+              "for": "entity-identifier"    (string, optional) Asset/stream identifier - one of: create txid, stream reference, stream name.
+                or
+              "for": entity-identifier(s)   (array, optional) A json array of asset/stream identifiers .
+            }
+        2. "javascript-code"                (string, required) JavaScript filter code, see help filters. Example:
+                                                                 function filtertransaction()
+                                                                 {
+                                                                     var tx=getfiltertransaction();
+                                                                                          
+                                                                     if (tx.vout.length<1)
+                                                                         return "One output required";
+                                                                 }   
+         3. "tx-hex"                         (string, optional) The transaction hex string to filter, otherwise filter compiled only
+         or
+        3. "txid"                           (string, optional) The transaction id
+
+        Result:
+        {
+          "compiled": true|false,           (boolean) Filter passed compilation
+          "passed": true|false,             (boolean) Transaction passed the filter
+          "callbacks": callbacks,           (array of objects) Information about callback calls by filter
+          "reason": "rejection reason",     (boolean) Reason for rejection, null if passed
+          "time": x.xxxxxx,                 (numeric) Seconds to run transaction through the filter
+        }
+
+        Examples:
+        > multichain-cli testchain testtxfilter "{}" "javascript-code"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "testtxfilter", "params": ["{}", "javascript-code"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -435,8 +688,27 @@ class RpcClient:
         true|false                          (boolean) Verified or not
 
         Examples:
-        > multichain-cli coblo2 verifychain 
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "verifychain", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain verifychain 
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "verifychain", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
+
+        """
+
+    def verifypermission(self, address, permission):
+        """
+        verifypermission "address" "permission" 
+
+        Checks whether the address has a specified permission.
+
+        Arguments:
+        1. "address"                      (string, required) The address to verify permission for. 
+        2. "permission"                   (string, required) Permission string. Possible values: connect,send,receive,issue,mine,admin,activate,create. 
+
+        Result:
+        True if address has specified permission, false otherwise
+
+        Examples:
+        > multichain-cli testchain verifypermission "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" send
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "verifypermission", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "send"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -448,8 +720,8 @@ class RpcClient:
         Local mining and the processing of incoming transactions and blocks should be paused.
 
         Examples:
-        > multichain-cli coblo2 clearmempool 
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "clearmempool", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain clearmempool 
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "clearmempool", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -457,7 +729,7 @@ class RpcClient:
         """
         getblockchainparams ( displaynames with-upgrades )
 
-        Returns a list of values of this blockchainâ  s parameters
+        Returns a list of values of this blockchain’s parameters
 
         Arguments:
         1. displaynames                     (boolean, optional, default=true) use display names instead of internal
@@ -467,8 +739,8 @@ class RpcClient:
         An object containing various blockchain parameters.
 
         Examples:
-        > multichain-cli coblo2 getblockchainparams 
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getblockchainparams", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain getblockchainparams 
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getblockchainparams", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -505,8 +777,8 @@ class RpcClient:
         }
 
         Examples:
-        > multichain-cli coblo2 getinfo 
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getinfo", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain getinfo 
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getinfo", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -514,14 +786,14 @@ class RpcClient:
         """
         getruntimeparams 
 
-        Returns a selection of this nodeâ  s runtime parameters.
+        Returns a selection of this node’s runtime parameters.
 
         Result:
         An object containing various runtime parameters
 
         Examples:
-        > multichain-cli coblo2 getruntimeparams 
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getruntimeparams", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain getruntimeparams 
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getruntimeparams", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -546,11 +818,11 @@ class RpcClient:
         Pauses local mining or the processing of incoming transactions and blocks.
 
         Arguments:
-        1. "task(s)"                        (string, required) Task(s) to be paused. Possible values: incoming,mining 
+        1. "task(s)"                        (string, required) Task(s) to be paused. Possible values: incoming,mining,offchain 
 
         Examples:
-        > multichain-cli coblo2 pause incoming,mining
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "pause", "params": [incoming] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain pause incoming,mining
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "pause", "params": [incoming] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -561,11 +833,11 @@ class RpcClient:
         Resumes local mining or the processing of incoming transactions and blocks
 
         Arguments:
-        1. "task(s)"                        (string, required) Task(s) to be resumed. Possible values: incoming,mining 
+        1. "task(s)"                        (string, required) Task(s) to be resumed. Possible values: incoming,mining,offchain 
 
         Examples:
-        > multichain-cli coblo2 resume incoming,mining
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "resume", "params": [mining] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain resume incoming,mining
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "resume", "params": [mining] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -585,8 +857,8 @@ class RpcClient:
         "hash"                              (string) The block hash of the chain tip
 
         Examples:
-        > multichain-cli coblo2 setlastblock "00000000c937983704a73af28acdec37b049d214adbda81d7e2a3dd146f6ed09"
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "setlastblock", "params": ["00000000c937983704a73af28acdec37b049d214adbda81d7e2a3dd146f6ed09"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain setlastblock "00000000c937983704a73af28acdec37b049d214adbda81d7e2a3dd146f6ed09"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "setlastblock", "params": ["00000000c937983704a73af28acdec37b049d214adbda81d7e2a3dd146f6ed09"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -597,24 +869,28 @@ class RpcClient:
         Sets value for runtime parameter
 
         Arguments:
-        1. "parameter-name"                 (string, required) Parameter name, one of the following:
+        1. "parameter-name"                 (string, required) Parameter name, one of:
                                                                miningrequirespeers,
                                                                mineemptyrounds,
                                                                miningturnover,
                                                                lockadminminerounds,
                                                                maxshowndata, 
+                                                               maxqueryscanitems, 
                                                                bantx,
                                                                lockblock,
                                                                autosubscribe,
                                                                handshakelocal,
                                                                hideknownopdrops
+                                                               acceptfiltertimeout
+                                                               sendfiltertimeout
+                                                               lockinlinemetadata
         2. parameter-value                  (required) parameter value
 
         Result:
 
         Examples:
-        > multichain-cli coblo2 setruntimeparam "miningturnover" 0.3
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "setruntimeparam", "params": ["miningturnover", 0.3] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain setruntimeparam "miningturnover" 0.3
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "setruntimeparam", "params": ["miningturnover", 0.3] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -637,8 +913,8 @@ class RpcClient:
         true|false                          (boolean) If the server is set to generate coins or not
 
         Examples:
-        > multichain-cli coblo2 getgenerate 
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getgenerate", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain getgenerate 
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getgenerate", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -653,8 +929,8 @@ class RpcClient:
         n                                   (numeric) The recent hashes per second when generation is on (will return 0 if generation is off)
 
         Examples:
-        > multichain-cli coblo2 gethashespersec 
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "gethashespersec", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain gethashespersec 
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "gethashespersec", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -676,16 +952,16 @@ class RpcClient:
         Examples:
 
         Set the generation on with a limit of one processor
-        > multichain-cli coblo2 setgenerate true 1
+        > multichain-cli testchain setgenerate true 1
 
         Check the setting
-        > multichain-cli coblo2 getgenerate 
+        > multichain-cli testchain getgenerate 
 
         Turn off generation
-        > multichain-cli coblo2 setgenerate false
+        > multichain-cli testchain setgenerate false
 
         Using json rpc
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "setgenerate", "params": [true, 1] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "setgenerate", "params": [true, 1] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -746,8 +1022,8 @@ class RpcClient:
         }
 
         Examples:
-        > multichain-cli coblo2 getblocktemplate 
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getblocktemplate", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain getblocktemplate 
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getblocktemplate", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -772,8 +1048,8 @@ class RpcClient:
         }
 
         Examples:
-        > multichain-cli coblo2 getmininginfo 
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getmininginfo", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain getmininginfo 
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getmininginfo", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -793,8 +1069,8 @@ class RpcClient:
         x                                   (numeric) Hashes per second estimated
 
         Examples:
-        > multichain-cli coblo2 getnetworkhashps 
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getnetworkhashps", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain getnetworkhashps 
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getnetworkhashps", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -816,8 +1092,8 @@ class RpcClient:
         true                                (boolean) Returns true
 
         Examples:
-        > multichain-cli coblo2 prioritisetransaction "txid" 0.0 10000
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "prioritisetransaction", "params": ["txid", 0.0, 10000] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain prioritisetransaction "txid" 0.0 10000
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "prioritisetransaction", "params": ["txid", 0.0, 10000] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -839,8 +1115,8 @@ class RpcClient:
         Result:
 
         Examples:
-        > multichain-cli coblo2 submitblock "mydata"
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "submitblock", "params": ["mydata"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain submitblock "mydata"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "submitblock", "params": ["mydata"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -857,8 +1133,8 @@ class RpcClient:
                                                                'onetry' to try a connection to the node once
 
         Examples:
-        > multichain-cli coblo2 addnode "192.168.0.6:8333" "onetry"
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "addnode", "params": ["192.168.0.6:8333", "onetry"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain addnode "192.168.0.6:8333" "onetry"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "addnode", "params": ["192.168.0.6:8333", "onetry"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -894,9 +1170,33 @@ class RpcClient:
         ]
 
         Examples:
-        > multichain-cli coblo2 getaddednodeinfo true
-        > multichain-cli coblo2 getaddednodeinfo true "192.168.0.201"
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getaddednodeinfo", "params": [true, "192.168.0.201"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain getaddednodeinfo true
+        > multichain-cli testchain getaddednodeinfo true "192.168.0.201"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getaddednodeinfo", "params": [true, "192.168.0.201"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
+
+        """
+
+    def getchunkqueueinfo(self) -> Getchunkqueueinfo:
+        """
+        getchunkqueueinfo
+
+        Returns data about each current chunk queue status.
+
+        Examples:
+        > multichain-cli testchain getchunkqueueinfo 
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getchunkqueueinfo", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
+
+        """
+
+    def getchunkqueuetotals(self) -> Getchunkqueuetotals:
+        """
+        getchunkqueuetotals
+
+        Returns chunks delivery statistics.
+
+        Examples:
+        > multichain-cli testchain getchunkqueuetotals 
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getchunkqueuetotals", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -910,8 +1210,8 @@ class RpcClient:
         n                                   (numeric) The connection count
 
         Examples:
-        > multichain-cli coblo2 getconnectioncount 
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getconnectioncount", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain getconnectioncount 
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getconnectioncount", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -930,8 +1230,8 @@ class RpcClient:
         }
 
         Examples:
-        > multichain-cli coblo2 getnettotals 
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getnettotals", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain getnettotals 
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getnettotals", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -969,8 +1269,8 @@ class RpcClient:
         }
 
         Examples:
-        > multichain-cli coblo2 getnetworkinfo 
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getnetworkinfo", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain getnetworkinfo 
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getnetworkinfo", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -1012,8 +1312,8 @@ class RpcClient:
         ]
 
         Examples:
-        > multichain-cli coblo2 getpeerinfo 
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getpeerinfo", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain getpeerinfo 
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getpeerinfo", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -1028,12 +1328,12 @@ class RpcClient:
         Result:
 
         Examples:
-        > multichain-cli coblo2 ping 
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "ping", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain ping 
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "ping", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
-    def appendrawchange(self, tx_hex_address, native_fee=None):
+    def appendrawchange(self, tx_hex, address, native_fee=None):
         """
         appendrawchange "tx-hex" "address" ( native-fee )
 
@@ -1050,9 +1350,9 @@ class RpcClient:
         "transaction"                       (string) hex string of the transaction
 
         Examples:
-        > multichain-cli coblo2 appendrawchange "hex""1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 
-        > multichain-cli coblo2 appendrawchange "hex""1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 0.01
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "appendrawchange", "params": ["hex" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain appendrawchange "hex""1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 
+        > multichain-cli testchain appendrawchange "hex""1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 0.01
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "appendrawchange", "params": ["hex" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -1071,8 +1371,8 @@ class RpcClient:
         "transaction"                         (string) hex string of the transaction
 
         Examples:
-        > multichain-cli coblo2 appendrawdata "tx-hexstring" 48656C6C6F20576F726C64210A
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "appendrawdata", "params": ["tx-hexstring","48656C6C6F20576F726C64210A"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain appendrawdata "tx-hexstring" 48656C6C6F20576F726C64210A
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "appendrawdata", "params": ["tx-hexstring","48656C6C6F20576F726C64210A"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -1110,8 +1410,8 @@ class RpcClient:
         "hex"                                     (string) The transaction hash in hex (if action= "send")
 
         Examples
-        > multichain-cli coblo2 appendrawtransaction "hexstring" "[{\"txid\":\"myid\",\"vout\":0}]" "{\"address\":0.01}"
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "appendrawtransaction", "params": ["hexstring", "[{\"txid\":\"myid\",\"vout\":0}]", "{\"address\":0.01}"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain appendrawtransaction "hexstring" "[{\"txid\":\"myid\",\"vout\":0}]" "{\"address\":0.01}"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "appendrawtransaction", "params": ["hexstring", "[{\"txid\":\"myid\",\"vout\":0}]", "{\"address\":0.01}"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -1148,8 +1448,8 @@ class RpcClient:
         "hex"                                     (string) The transaction hash in hex (if action= "send")
 
         Examples
-        > multichain-cli coblo2 createrawtransaction "[{\"txid\":\"myid\",\"vout\":0}]" "{\"address\":0.01}"
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "createrawtransaction", "params": ["[{\"txid\":\"myid\",\"vout\":0}]", "{\"address\":0.01}"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain createrawtransaction "[{\"txid\":\"myid\",\"vout\":0}]" "{\"address\":0.01}"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "createrawtransaction", "params": ["[{\"txid\":\"myid\",\"vout\":0}]", "{\"address\":0.01}"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -1199,8 +1499,8 @@ class RpcClient:
         }
 
         Examples:
-        > multichain-cli coblo2 decoderawtransaction "hexstring"
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "decoderawtransaction", "params": ["hexstring"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain decoderawtransaction "hexstring"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "decoderawtransaction", "params": ["hexstring"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -1227,8 +1527,8 @@ class RpcClient:
         }
 
         Examples:
-        > multichain-cli coblo2 decodescript "hexstring"
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "decodescript", "params": ["hexstring"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain decodescript "hexstring"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "decodescript", "params": ["hexstring"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -1247,7 +1547,7 @@ class RpcClient:
 
         Arguments:
         1. "txid"                           (string, required) The transaction id
-        2. verbose                          (numeric, optional, default=0) If 0, return a string, other return a json object
+        2. verbose                          (numeric or boolean, optional, default=0(false)) If 0, return a string, other return a json object
 
         Result (if verbose is not set or set to 0):
         "data"                              (string) The serialized, hex-encoded data for 'txid'
@@ -1294,13 +1594,13 @@ class RpcClient:
         }
 
         Examples:
-        > multichain-cli coblo2 getrawtransaction "mytxid"
-        > multichain-cli coblo2 getrawtransaction "mytxid" 1
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getrawtransaction", "params": ["mytxid", 1] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain getrawtransaction "mytxid"
+        > multichain-cli testchain getrawtransaction "mytxid" 1
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getrawtransaction", "params": ["mytxid", 1] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
-    def sendrawtransaction(self, tx_hex_, allowhighfees=None):
+    def sendrawtransaction(self, tx_hex, allowhighfees=None):
         """
         sendrawtransaction "tx-hex" ( allowhighfees )
 
@@ -1318,15 +1618,15 @@ class RpcClient:
         Examples:
 
         Create a transaction
-        > multichain-cli coblo2 createrawtransaction "[{\"txid\" : \"mytxid\",\"vout\":0}]" "{\"myaddress\":0.01}"
+        > multichain-cli testchain createrawtransaction "[{\"txid\" : \"mytxid\",\"vout\":0}]" "{\"myaddress\":0.01}"
         Sign the transaction, and get back the hex
-        > multichain-cli coblo2 sendrawtransaction "myhex"
+        > multichain-cli testchain sendrawtransaction "myhex"
 
         Send the transaction (signed hex)
-        > multichain-cli coblo2 sendrawtransaction "signedhex"
+        > multichain-cli testchain sendrawtransaction "signedhex"
 
         As a json rpc call
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "sendrawtransaction", "params": ["signedhex"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "sendrawtransaction", "params": ["signedhex"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -1372,8 +1672,44 @@ class RpcClient:
         }
 
         Examples:
-        > multichain-cli coblo2 signrawtransaction "myhex"
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "signrawtransaction", "params": ["myhex"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain signrawtransaction "myhex"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "signrawtransaction", "params": ["myhex"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
+
+        """
+
+    def appendbinarycache(self, identifier, data_hex):
+        """
+        appendbinarycache "identifier" "data-hex" 
+
+        Appends data to binary cache.
+
+        Arguments:
+        1. "identifier"                     (string, required) Binary cache item identifier
+        2. "data-hex"                       (string, required) The hex string to be added to binary cache item
+
+        Result:
+        size                                (numeric) Size of the binary cache item
+
+        Examples:
+        > multichain-cli testchain appendbinarycache "TjnVWwHYEg4" "f4c3dd510dd55761015c9d96bff7793b0d501dd6f01a959fd7"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "appendbinarycache", "params": ["TjnVWwHYEg4","f4c3dd510dd55761015c9d96bff7793b0d501dd6f01a959fd7"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
+
+        """
+
+    def createbinarycache(self) -> str:
+        """
+        createbinarycache 
+
+        Returns random string, which can be used as binary cache item identifier
+
+        Arguments:
+
+        Result:
+        "identifier"                               (string) Binary cache item identifier
+
+        Examples:
+        > multichain-cli testchain createbinarycache 
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "createbinarycache", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -1396,8 +1732,8 @@ class RpcClient:
         ]
 
         Examples:
-        > multichain-cli coblo2 createkeypairs 
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "createkeypairs", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain createkeypairs 
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "createkeypairs", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -1425,10 +1761,27 @@ class RpcClient:
         Examples:
 
         Create a multisig address from 2 addresses
-        > multichain-cli coblo2 createmultisig 2 "[\"16sSauSf5pF2UkUwvKGq4qjNRzBZYqgEL5\",\"171sgjn4YtPu27adkKGrdDwzRTxnRkBfKV\"]"
+        > multichain-cli testchain createmultisig 2 "[\"16sSauSf5pF2UkUwvKGq4qjNRzBZYqgEL5\",\"171sgjn4YtPu27adkKGrdDwzRTxnRkBfKV\"]"
 
         As a json rpc call
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "createmultisig", "params": [2, "[\"16sSauSf5pF2UkUwvKGq4qjNRzBZYqgEL5\",\"171sgjn4YtPu27adkKGrdDwzRTxnRkBfKV\"]"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "createmultisig", "params": [2, "[\"16sSauSf5pF2UkUwvKGq4qjNRzBZYqgEL5\",\"171sgjn4YtPu27adkKGrdDwzRTxnRkBfKV\"]"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
+
+        """
+
+    def deletebinarycache(self, identifier):
+        """
+        deletebinarycache "identifier"  
+
+        Clear binary cache item
+
+        Arguments:
+        1. "identifier"                     (string, required) Binary cache item identifier, "*" - to clear all items
+
+        Result:
+
+        Examples:
+        > multichain-cli testchain deletebinarycache "TjnVWwHYEg4"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "deletebinarycache", "params": ["TjnVWwHYEg4"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -1450,7 +1803,7 @@ class RpcClient:
         blocks have been observed to make an estimate.
 
         Example:
-        > multichain-cli coblo2 estimatefee 6
+        > multichain-cli testchain estimatefee 6
 
         """
 
@@ -1472,7 +1825,7 @@ class RpcClient:
         blocks have been observed to make an estimate.
 
         Example:
-        > multichain-cli coblo2 estimatepriority 6
+        > multichain-cli testchain estimatepriority 6
 
         """
 
@@ -1501,8 +1854,8 @@ class RpcClient:
         }
 
         Examples:
-        > multichain-cli coblo2 validateaddress "1PSSGeFHDnKNxiEyFrD1wcEaHr9hrQDDWc"
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "validateaddress", "params": ["1PSSGeFHDnKNxiEyFrD1wcEaHr9hrQDDWc"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain validateaddress "1PSSGeFHDnKNxiEyFrD1wcEaHr9hrQDDWc"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "validateaddress", "params": ["1PSSGeFHDnKNxiEyFrD1wcEaHr9hrQDDWc"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -1523,16 +1876,16 @@ class RpcClient:
         Examples:
 
         Unlock the wallet for 30 seconds
-        > multichain-cli coblo2 walletpassphrase "mypassphrase" 30
+        > multichain-cli testchain walletpassphrase "mypassphrase" 30
 
         Create the signature
-        > multichain-cli coblo2 signmessage "1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ" "my message"
+        > multichain-cli testchain signmessage "1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ" "my message"
 
         Verify the signature
-        > multichain-cli coblo2 verifymessage "1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ" "signature" "my message"
+        > multichain-cli testchain verifymessage "1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ" "signature" "my message"
 
         As json rpc
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "verifymessage", "params": ["1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ", "signature", "my message"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "verifymessage", "params": ["1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ", "signature", "my message"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -1559,14 +1912,14 @@ class RpcClient:
         Examples:
 
         Add a multisig address from 2 addresses
-        > multichain-cli coblo2 addmultisigaddress 2 "[\"16sSauSf5pF2UkUwvKGq4qjNRzBZYqgEL5\",\"171sgjn4YtPu27adkKGrdDwzRTxnRkBfKV\"]"
+        > multichain-cli testchain addmultisigaddress 2 "[\"16sSauSf5pF2UkUwvKGq4qjNRzBZYqgEL5\",\"171sgjn4YtPu27adkKGrdDwzRTxnRkBfKV\"]"
 
         As json rpc call
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "addmultisigaddress", "params": [2, "[\"16sSauSf5pF2UkUwvKGq4qjNRzBZYqgEL5\",\"171sgjn4YtPu27adkKGrdDwzRTxnRkBfKV\"]"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "addmultisigaddress", "params": [2, "[\"16sSauSf5pF2UkUwvKGq4qjNRzBZYqgEL5\",\"171sgjn4YtPu27adkKGrdDwzRTxnRkBfKV\"]"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
-    def appendrawexchange(self, hex_txid, vout, ask_assets):
+    def appendrawexchange(self, hex, txid, vout, ask_assets):
         """
         appendrawexchange "hex" "txid" vout ask-assets 
 
@@ -1589,29 +1942,41 @@ class RpcClient:
         }
 
         Examples:
-        > multichain-cli coblo2 appendrawexchange "hexstring" f4c3dd510dd55761015c9d96bff7793b0d501dd6f01a959fd7dd02478fb47dfb 1 "{\"1234-5678-1234\":200}"
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "appendrawexchange", "params": ["hexstring","f4c3dd510dd55761015c9d96bff7793b0d501dd6f01a959fd7dd02478fb47dfb",1,"{\"1234-5678-1234\":200}\"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain appendrawexchange "hexstring" f4c3dd510dd55761015c9d96bff7793b0d501dd6f01a959fd7dd02478fb47dfb 1 "{\"1234-5678-1234\":200}"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "appendrawexchange", "params": ["hexstring","f4c3dd510dd55761015c9d96bff7793b0d501dd6f01a959fd7dd02478fb47dfb",1,"{\"1234-5678-1234\":200}\"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
-    def approvefrom(self, from_address, upgrade_identifier, approve=None):
+    def approvefrom(self, from_address, upgrade_identifier_or_filter_identifier, approve=None):
         """
-        approvefrom "from-address" "upgrade-identifier" ( approve )
+        approvefrom "from-address" "upgrade-identifier"|"filter-identifier" ( approve )
 
         Approve upgrade using specific address.
 
         Arguments:
         1. "from-address"                   (string, required) Address used for approval.
-        2. "upgrade-identifier"             (string, required) Upgrade identifier - one of the following: upgrade txid, upgrade name.
+        2. "upgrade-identifier"             (string, required) Upgrade identifier - one of: create txid, upgrade name.
         3. approve                          (boolean, required)  Approve or disapprove
+         or
+        1. "from-address"                   (string, required) Address used for approval.
+        2. "tx-filter-identifier"           (string, required) Tx Filter identifier - one of: create txid, filter reference, filter name.
+        3. approve                          (boolean, required)  Approve or disapprove
+         or
+        1. "from-address"                   (string, required) Address used for approval.
+        2. "stream-filter-identifier"       (string, required) Stream Filter identifier - one of: create txid, filter reference, filter name.
+        3. approve                          (object, required)  Approve or disapprove
+            {
+              "approve" : approve           (boolean, required) Approve or disapprove
+              "for" : "stream-identifier"   (string, required)  Stream identifier - one of: create txid, stream reference, stream name.
+            }
 
         Result:
         "transactionid"                     (string) The transaction id.
 
         Examples:
-        > multichain-cli coblo2 approvefrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "upgrade1"
-        > multichain-cli coblo2 approvefrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "upgrade1" false
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "approvefrom", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "upgrade1", true] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain approvefrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "upgrade1"
+        > multichain-cli testchain approvefrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "upgrade1" false
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "approvefrom", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "upgrade1", true] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -1625,8 +1990,8 @@ class RpcClient:
         1. "destination"                  (string) The destination directory or file
 
         Examples:
-        > multichain-cli coblo2 backupwallet "backup.dat"
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "backupwallet", "params": ["backup.dat"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain backupwallet "backup.dat"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "backupwallet", "params": ["backup.dat"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -1648,9 +2013,9 @@ class RpcClient:
         "transactionids"                    (array) Array of transaction ids.
 
         Examples:
-        > multichain-cli coblo2 combineunspent "*" 1 100 5 20 120
-        > multichain-cli coblo2 combineunspent "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "combineunspent", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd",1,100, 5, 20, 120] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain combineunspent "*" 1 100 5 20 120
+        > multichain-cli testchain combineunspent "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "combineunspent", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd",1,100, 5, 20, 120] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -1676,8 +2041,8 @@ class RpcClient:
         "transaction"                       (string) hex string of the transaction
 
         Examples:
-        > multichain-cli coblo2 completerawexchange "hexstring" f4c3dd510dd55761015c9d96bff7793b0d501dd6f01a959fd7dd02478fb47dfb 1 "{\"1234-5678-1234\":200}"
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "completerawexchange", "params": ["hexstring","f4c3dd510dd55761015c9d96bff7793b0d501dd6f01a959fd7dd02478fb47dfb",1,"{\"1234-5678-1234\":200}\"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain completerawexchange "hexstring" f4c3dd510dd55761015c9d96bff7793b0d501dd6f01a959fd7dd02478fb47dfb 1 "{\"1234-5678-1234\":200}"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "completerawexchange", "params": ["hexstring","f4c3dd510dd55761015c9d96bff7793b0d501dd6f01a959fd7dd02478fb47dfb",1,"{\"1234-5678-1234\":200}\"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -1691,6 +2056,11 @@ class RpcClient:
         1. "entity-type"                    (string, required) stream
         2. "stream-name"                    (string, required) Stream name, if not "" should be unique.
         3. open                             (boolean, required ) Allow anyone to publish in this stream
+          or 
+        3. restrictions                     (object, optional) Stream restrictions
+            {
+              "restrict" : "restrictions"   (string, optional) Stream restrictions, comma delimited. Possible values: write,offchain,onchain
+            }
         4  custom-fields                    (object, optional)  a json object with custom fields
             {
               "param-name": "param-value"   (strings, required) The key is the parameter name, the value is parameter value
@@ -1703,25 +2073,63 @@ class RpcClient:
         4  custom-fields                    (object, required)  a json object with custom fields
             {
               "protocol-version": version   (numeric, optional) Protocol version to upgrade to
-              "parameter-name": value       (numeric, optional) New value for upgradable parameter, one of the following: 
+              "parameter-name": value       (numeric, optional) New value for upgradable parameter, one of: 
                                                                 target-block-time,
                                                                 maximum-block-size,
                                                                 max-std-tx-size,
                                                                 max-std-op-returns-count,
                                                                 max-std-op-return-size,
                                                                 max-std-op-drops-count,
-                                                                max-std-element-size
+                                                                max-std-element-size,
+                                                                anyone-can-connect,
+                                                                anyone-can-send,
+                                                                anyone-can-receive,
+                                                                anyone-can-receiveempty,
+                                                                anyone-can-issue,
+                                                                anyone-can-create,
+                                                                anyone-can-activate
               "startblock": block           (numeric, optional, default 0) Block to apply from 
               ,...
             }
+          or 
+        1. "entity-type"                    (string, required) txfilter
+        2. "txfilter-name"                  (string, required) Tx filter name, if not "" should be unique.
+        3. restrictions                     (object, required) A json object with optional filter restrictions
+            {
+              "for": "entity-identifier"    (string, optional) Asset/stream identifier - one of: create txid, stream reference, stream name.
+                or
+              "for": entity-identifier(s)   (array, optional) A json array of asset/stream identifiers.
+            }
+        4. "javascript-code"                (string, required) JavaScript filter code, see help filters. Example:
+                                                               function filtertransaction()
+                                                               {
+                                                                   var tx=getfiltertransaction();
+                                                                                        
+                                                                   if (tx.vout.length<1)
+                                                                       return "One output required";
+                                                               }
+          or 
+        1. "entity-type"                    (string, required) streamfilter
+        2. "streamfilter-name"              (string, required) Stream filter name, if not "" should be unique.
+        3. restrictions                     (object, required) A json object with filter restrictions
+            {
+            }
+        4. "javascript-code"                (string, required) JavaScript filter code, see help filters. Example:
+                                                               function filterstreamitem()
+                                                               {
+                                                                   var item=getfilterstreamitem();
+                                                                                        
+                                                                   if (item.keys.length<2)
+                                                                       return "At least two keys required";
+                                                               }   
 
         Result:
         "transactionid"  (string) The transaction id.
 
         Examples:
-        > multichain-cli coblo2 create stream test false 
-        > multichain-cli coblo2 create stream test false '{"Description":"Test stream"}'
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "create", "params": ["stream", "test", false] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain create stream test false 
+        > multichain-cli testchain create stream test false '{"Description":"Test stream"}'
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "create", "params": ["stream", "test", false] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -1736,6 +2144,11 @@ class RpcClient:
         2. entity-type                      (string, required) stream
         3. "stream-name"                    (string, required) Stream name, if not "" should be unique.
         4. open                             (boolean, required) Allow anyone to publish in this stream
+          or 
+        4. restrictions                     (object, optional) Stream restrictions
+            {
+              "restrict" : "restrictions"   (string, optional) Stream restrictions, comma delimited. Possible values: write,offchain,onchain
+            }
         5  custom-fields                    (object, optional)  a json object with custom fields
             {
               "param-name": "param-value"   (strings, required) The key is the parameter name, the value is parameter value
@@ -1749,25 +2162,65 @@ class RpcClient:
         5  custom-fields                    (object, required)  a json object with custom fields
             {
               "protocol-version": version   (numeric, optional) Protocol version to upgrade to 
-              "parameter-name": value       (numeric, optional) New value for upgradable parameter, one of the following: 
+              "parameter-name": value       (numeric, optional) New value for upgradable parameter, one of: 
                                                                 target-block-time,
                                                                 maximum-block-size,
                                                                 max-std-tx-size,
                                                                 max-std-op-returns-count,
                                                                 max-std-op-return-size,
                                                                 max-std-op-drops-count,
-                                                                max-std-element-size
+                                                                max-std-element-size,
+                                                                anyone-can-connect,
+                                                                anyone-can-send,
+                                                                anyone-can-receive,
+                                                                anyone-can-receiveempty,
+                                                                anyone-can-issue,
+                                                                anyone-can-create,
+                                                                anyone-can-activate
               "start-block": block          (numeric, optional, default 0) Block to apply from 
               ,...
             }
+          or 
+        1. "from-address"                   (string, required) Address used for creating.
+        2. "entity-type"                    (string, required) txfilter
+        3. "txfilter-name"                  (string, required) Tx filter name, if not "" should be unique.
+        4. restrictions                     (object, required)  a json object with filter restrictions
+            {
+              "for": "entity-identifier"    (string, optional) Asset/stream identifier - one of: create txid, stream reference, stream name.
+                or
+              "for": entity-identifier(s)   (array, optional) A json array of asset/stream identifiers .
+            }
+        5. "javascript-code"                (string, required) JavaScript filter code, see help filters. Example:
+                                                                 function filtertransaction()
+                                                                 {
+                                                                     var tx=getfiltertransaction();
+                                                                                          
+                                                                     if (tx.vout.length<1)
+                                                                         return "One output required";
+                                                                 }   
+           or 
+        1. "from-address"                   (string, required) Address used for creating.
+        2. "entity-type"                    (string, required) streamfilter
+        3. "streamfilter-name"              (string, required) Stream filter name, if not "" should be unique.
+        4. restrictions                     (object, required) A json object with filter restrictions
+            {
+            }
+        5. "javascript-code"                (string, required) JavaScript filter code, see help filters. Example:
+                                                                 function filterstreamitem()
+                                                                 {
+                                                                     var item=getfilterstreamitem();
+                                                                                          
+                                                                     if (item.keys.length<2)
+                                                                         return "At least two keys required";
+                                                                 }   
 
         Result:
         "transactionid"                     (string) The transaction id.
 
         Examples:
-        > multichain-cli coblo2 createfrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" stream test false 
-        > multichain-cli coblo2 createfrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" stream test false '{"Description":"Test stream"}'
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "createfrom", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "stream", "test", false] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain createfrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" stream test false 
+        > multichain-cli testchain createfrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" stream test false '{"Description":"Test stream"}'
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "createfrom", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "stream", "test", false] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -1791,8 +2244,8 @@ class RpcClient:
         "transaction"                       (string) hex string of the transaction
 
         Examples:
-        > multichain-cli coblo2 createrawexchange f4c3dd510dd55761015c9d96bff7793b0d501dd6f01a959fd7dd02478fb47dfb 1 "{\"1234-5678-1234\":200}"
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "createrawexchange", "params": ["f4c3dd510dd55761015c9d96bff7793b0d501dd6f01a959fd7dd02478fb47dfb",1,"{\"1234-5678-1234\":200}\"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain createrawexchange f4c3dd510dd55761015c9d96bff7793b0d501dd6f01a959fd7dd02478fb47dfb 1 "{\"1234-5678-1234\":200}"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "createrawexchange", "params": ["f4c3dd510dd55761015c9d96bff7793b0d501dd6f01a959fd7dd02478fb47dfb",1,"{\"1234-5678-1234\":200}\"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -1819,12 +2272,12 @@ class RpcClient:
         "hex"                                       (string) The transaction hash in hex (if action= "send")
 
         Examples
-        > multichain-cli coblo2 createrawsendfrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "{\"address\":0.01}"
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "createrawsendfrom", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "{\"address\":0.01}"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain createrawsendfrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "{\"address\":0.01}"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "createrawsendfrom", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "{\"address\":0.01}"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
-    def decoderawexchange(self, tx_hex_, verbose=None):
+    def decoderawexchange(self, tx_hex, verbose=None):
         """
         decoderawexchange "tx-hex" ( verbose )
 
@@ -1838,8 +2291,8 @@ class RpcClient:
         Results is an object with exchange details
 
         Examples:
-        > multichain-cli coblo2 decoderawexchange "hexstring"
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "decoderawexchange", "params": ["hexstring"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain decoderawexchange "hexstring"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "decoderawexchange", "params": ["hexstring"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -1856,8 +2309,8 @@ class RpcClient:
         "transactionid"                     (string) The transaction id.
 
         Examples:
-        > multichain-cli coblo2 disablerawtransaction "hexstring"
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "disablerawtransaction", "params": ["hexstring"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain disablerawtransaction "hexstring"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "disablerawtransaction", "params": ["hexstring"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -1875,9 +2328,9 @@ class RpcClient:
         "key"                               (string) The private key
 
         Examples:
-        > multichain-cli coblo2 dumpprivkey "1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ"
-        > multichain-cli coblo2 importprivkey "mykey"
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "dumpprivkey", "params": ["1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain dumpprivkey "1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ"
+        > multichain-cli testchain importprivkey "mykey"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "dumpprivkey", "params": ["1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -1891,8 +2344,8 @@ class RpcClient:
         1. "filename"                       (string, required) The filename
 
         Examples:
-        > multichain-cli coblo2 dumpwallet "test"
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "dumpwallet", "params": ["test"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain dumpwallet "test"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "dumpwallet", "params": ["test"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -1913,19 +2366,19 @@ class RpcClient:
         Examples:
 
         Encrypt you wallet
-        > multichain-cli coblo2 encryptwallet "my pass phrase"
+        > multichain-cli testchain encryptwallet "my pass phrase"
 
         Now set the passphrase to use the wallet, such as for signing or sending assets
-        > multichain-cli coblo2 walletpassphrase "my pass phrase"
+        > multichain-cli testchain walletpassphrase "my pass phrase"
 
         Now we can so something like sign
-        > multichain-cli coblo2 signmessage "address" "test message"
+        > multichain-cli testchain signmessage "address" "test message"
 
         Now lock the wallet again by removing the passphrase
-        > multichain-cli coblo2 walletlock 
+        > multichain-cli testchain walletlock 
 
         As a json rpc call
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "encryptwallet", "params": ["my pass phrase"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "encryptwallet", "params": ["my pass phrase"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -1942,8 +2395,8 @@ class RpcClient:
         "accountname"                       (string) the account address
 
         Examples:
-        > multichain-cli coblo2 getaccount "1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ"
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getaccount", "params": ["1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain getaccount "1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getaccount", "params": ["1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -1963,10 +2416,10 @@ class RpcClient:
         "address"                           (string) The account address
 
         Examples:
-        > multichain-cli coblo2 getaccountaddress 
-        > multichain-cli coblo2 getaccountaddress ""
-        > multichain-cli coblo2 getaccountaddress "myaccount"
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getaccountaddress", "params": ["myaccount"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain getaccountaddress 
+        > multichain-cli testchain getaccountaddress ""
+        > multichain-cli testchain getaccountaddress "myaccount"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getaccountaddress", "params": ["myaccount"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -1987,9 +2440,9 @@ class RpcClient:
         Examples:
 
         The total amount in the server across all accounts
-        > multichain-cli coblo2 getaddressbalances "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd"
-        > multichain-cli coblo2 getaddressbalances "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 0 true
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getaddressbalances", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain getaddressbalances "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd"
+        > multichain-cli testchain getaddressbalances "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 0 true
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getaddressbalances", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -2011,8 +2464,8 @@ class RpcClient:
         ]
 
         Examples:
-        > multichain-cli coblo2 getaddresses 
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getaddresses", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain getaddresses 
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getaddresses", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -2032,8 +2485,8 @@ class RpcClient:
         ]
 
         Examples:
-        > multichain-cli coblo2 getaddressesbyaccount "tabby"
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getaddressesbyaccount", "params": ["tabby"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain getaddressesbyaccount "tabby"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getaddressesbyaccount", "params": ["tabby"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -2041,7 +2494,7 @@ class RpcClient:
         """
         getaddresstransaction "address" "txid" ( verbose )
 
-        Provides information about transaction txid related to address in this nodeâ  s wallet
+        Provides information about transaction txid related to address in this node’s wallet
 
         Arguments:
         1. "address"                        (string, required) Address used for balance calculation.
@@ -2079,9 +2532,9 @@ class RpcClient:
         ]
 
         Examples:
-        > multichain-cli coblo2 getaddresstransaction "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d"
-        > multichain-cli coblo2 getaddresstransaction "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d" true
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getaddresstransaction", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain getaddresstransaction "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d"
+        > multichain-cli testchain getaddresstransaction "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d" true
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getaddresstransaction", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -2104,19 +2557,19 @@ class RpcClient:
         Examples:
 
         The total amount in the server across all accounts
-        > multichain-cli coblo2 getassetbalances 
+        > multichain-cli testchain getassetbalances 
 
         The total amount in the server across all accounts, with at least 5 confirmations
-        > multichain-cli coblo2 getassetbalances "*" 6
+        > multichain-cli testchain getassetbalances "*" 6
 
         The total amount in the default account with at least 1 confirmation
-        > multichain-cli coblo2 getassetbalances ""
+        > multichain-cli testchain getassetbalances ""
 
         The total amount in the account named tabby with at least 6 confirmations
-        > multichain-cli coblo2 getassetbalances "tabby" 6 true
+        > multichain-cli testchain getassetbalances "tabby" 6 true
 
         As a json rpc call
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getassetbalances", "params": ["tabby", 6] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getassetbalances", "params": ["tabby", 6] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -2127,7 +2580,7 @@ class RpcClient:
         Retrieves a specific transaction txid involving asset.
 
         Arguments:
-        1. "asset-identifier"               (string, required) Asset identifier - one of the following: asset txid, asset reference, asset name.
+        1. "asset-identifier"               (string, required) Asset identifier - one of: issue txid, asset reference, asset name.
         2. "txid"                           (string, required) The transaction id
         3. verbose                          (boolean, optional, default=false) If true, returns information about item transaction 
 
@@ -2135,9 +2588,9 @@ class RpcClient:
         "transaction"                       (object) Information about an individual transaction from the perspective of a particular asset.
 
         Examples:
-        > multichain-cli coblo2 getassettransaction "myasset" "mytxid"
-        > multichain-cli coblo2 getassettransaction "myasset" "mytxid"  true
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getassettransaction", "params": ["myasset", "mytxid", false] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain getassettransaction "myasset" "mytxid"
+        > multichain-cli testchain getassettransaction "myasset" "mytxid"  true
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getassettransaction", "params": ["myasset", "mytxid", false] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -2161,19 +2614,19 @@ class RpcClient:
         Examples:
 
         The total amount in the server across all accounts
-        > multichain-cli coblo2 getbalance 
+        > multichain-cli testchain getbalance 
 
         The total amount in the server across all accounts, with at least 5 confirmations
-        > multichain-cli coblo2 getbalance "*" 6
+        > multichain-cli testchain getbalance "*" 6
 
         The total amount in the default account with at least 1 confirmation
-        > multichain-cli coblo2 getbalance ""
+        > multichain-cli testchain getbalance ""
 
         The total amount in the account named tabby with at least 6 confirmations
-        > multichain-cli coblo2 getbalance "tabby" 6
+        > multichain-cli testchain getbalance "tabby" 6
 
         As a json rpc call
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getbalance", "params": ["tabby", 6] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getbalance", "params": ["tabby", 6] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -2184,12 +2637,12 @@ class RpcClient:
         Returns asset balances for specified address
 
         Arguments:
-        1. "address(es)"                    (string, optional) Address(es) to return balance for, comma delimited. Default - all
+        1. "address(es)"                    (string, optional, default=*) Address(es) to return balance for, comma delimited
          or
         1. address(es)                      (array, optional) A json array of addresses to return balance for
-        2. "asset"                          (string) Single asset identifier to return balance for, default "*"
+        2. "asset"                          (string, optional, default=*) Single asset identifier to return balance for
          or
-        2. assets                           (array, optional) Json array of asset identifiers to return balance for
+        2. assets                           (array, optional) A json array of asset identifiers to return balance for
         3. minconf                          (numeric, optional, default=1) Only include transactions confirmed at least this many times.
         4. includeWatchonly                 (bool, optional, default=false) Include transactions to watchonly addresses (see 'importaddress')
         5. includeLocked                    (bool, optional, default=false) Also take locked outputs into account
@@ -2198,9 +2651,9 @@ class RpcClient:
         An object of balance arrays with totals and details for each address.
 
         Examples:
-        > multichain-cli coblo2 getmultibalances 
-        > multichain-cli coblo2 getmultibalances "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd"
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getmultibalances", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain getmultibalances 
+        > multichain-cli testchain getmultibalances "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getmultibalances", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -2222,10 +2675,10 @@ class RpcClient:
         "address"                           (string) The new address
 
         Examples:
-        > multichain-cli coblo2 getnewaddress 
-        > multichain-cli coblo2 getnewaddress ""
-        > multichain-cli coblo2 getnewaddress "myaccount"
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getnewaddress", "params": ["myaccount"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain getnewaddress 
+        > multichain-cli testchain getnewaddress ""
+        > multichain-cli testchain getnewaddress "myaccount"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getnewaddress", "params": ["myaccount"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -2240,8 +2693,8 @@ class RpcClient:
         "address"                           (string) The address
 
         Examples:
-        > multichain-cli coblo2 getrawchangeaddress 
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getrawchangeaddress", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain getrawchangeaddress 
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getrawchangeaddress", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -2261,16 +2714,16 @@ class RpcClient:
         Examples:
 
         Amount received by the default account with at least 1 confirmation
-        > multichain-cli coblo2 getreceivedbyaccount ""
+        > multichain-cli testchain getreceivedbyaccount ""
 
         Amount received at the tabby account including unconfirmed amounts with zero confirmations
-        > multichain-cli coblo2 getreceivedbyaccount "tabby" 0
+        > multichain-cli testchain getreceivedbyaccount "tabby" 0
 
         The amount with at least 6 confirmation, very safe
-        > multichain-cli coblo2 getreceivedbyaccount "tabby" 6
+        > multichain-cli testchain getreceivedbyaccount "tabby" 6
 
         As a json rpc call
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getreceivedbyaccount", "params": ["tabby", 6] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getreceivedbyaccount", "params": ["tabby", 6] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -2290,16 +2743,16 @@ class RpcClient:
         Examples:
 
         The amount from transactions with at least 1 confirmation
-        > multichain-cli coblo2 getreceivedbyaddress "1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ"
+        > multichain-cli testchain getreceivedbyaddress "1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ"
 
         The amount including unconfirmed transactions, zero confirmations
-        > multichain-cli coblo2 getreceivedbyaddress "1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ" 0
+        > multichain-cli testchain getreceivedbyaddress "1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ" 0
 
         The amount with at least 6 confirmation, very safe
-        > multichain-cli coblo2 getreceivedbyaddress "1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ" 6
+        > multichain-cli testchain getreceivedbyaddress "1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ" 6
 
         As a json rpc call
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getreceivedbyaddress", "params": ["1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ", 6] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getreceivedbyaddress", "params": ["1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ", 6] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -2310,7 +2763,7 @@ class RpcClient:
         Returns stream item.
 
         Arguments:
-        1. "stream-identifier"              (string, required) Stream identifier - one of the following: stream txid, stream reference, stream name.
+        1. "stream-identifier"              (string, required) Stream identifier - one of: create txid, stream reference, stream name.
         2. "txid"                           (string, required) The transaction id
         3. verbose                          (boolean, optional, default=false) If true, returns information about item transaction 
 
@@ -2318,9 +2771,9 @@ class RpcClient:
         "stream-item"                       (object) Stream item.
 
         Examples:
-        > multichain-cli coblo2 getstreamitem "mytxid"
-        > multichain-cli coblo2 getstreamitem "mytxid"  true
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getstreamitem", "params": ["mytxid", false] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain getstreamitem "mytxid"
+        > multichain-cli testchain getstreamitem "mytxid"  true
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getstreamitem", "params": ["mytxid", false] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -2331,14 +2784,15 @@ class RpcClient:
         Returns stream json object items summary for specific key.
 
         Arguments:
-        1. "stream-identifier"              (string, required) Stream identifier - one of the following: stream txid, stream reference, stream name.
+        1. "stream-identifier"              (string, required) Stream identifier - one of: create txid, stream reference, stream name.
         2. "key"                            (string, required) Stream key
         3. "mode"                           (string, required) Comma delimited list of the following:
                                                                jsonobjectmerge (required) - merge json objects
                                                                recursive - merge json sub-objects recursively
                                                                noupdate -  preserve first value for each key instead of taking the last
                                                                omitnull - omit keys with null values
-                                                               ignore - ignore items that cannot be included in summary (otherwise returns an error)
+                                                               ignoreother - ignore items that cannot be included in summary (otherwise returns an error)
+                                                               ignoremissing - ignore missing offchain items (otherwise returns an error)
                                                                firstpublishersany - only summarize items by a publisher of first item with this key
                                                                firstpublishersall - only summarize items by all publishers of first item with this key
 
@@ -2346,9 +2800,9 @@ class RpcClient:
         summary-object                      (object) Summary object for specific key.
 
         Examples:
-        > multichain-cli coblo2 getstreamkeysummary "test-stream" "key01" "jsonobjectmerge"
-        > multichain-cli coblo2 getstreamkeysummary "test-stream" "key01" "jsonobjectmerge,ignore,recursive"
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getstreamkeysummary", "params": ["test-stream", "key01", "jsonobjectmerge,ignore,recursive"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain getstreamkeysummary "test-stream" "key01" "jsonobjectmerge"
+        > multichain-cli testchain getstreamkeysummary "test-stream" "key01" "jsonobjectmerge,ignore,recursive"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getstreamkeysummary", "params": ["test-stream", "key01", "jsonobjectmerge,ignore,recursive"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -2359,22 +2813,23 @@ class RpcClient:
         Returns stream json object items summary for specific publisher.
 
         Arguments:
-        1. "stream-identifier"              (string, required) Stream identifier - one of the following: stream txid, stream reference, stream name.
+        1. "stream-identifier"              (string, required) Stream identifier - one of: create txid, stream reference, stream name.
         2. "address"                        (string, required) Publisher address
         3. "mode"                           (string, required) Comma delimited list of the following:
                                                                jsonobjectmerge (required) - merge json objects
                                                                recursive - merge json sub-objects recursively
                                                                noupdate -  preserve first value for each key instead of taking the last
                                                                omitnull - omit keys with null values
-                                                               ignore - ignore items that cannot be included in summary (otherwise returns an error)
+                                                               ignoreother - ignore items that cannot be included in summary (otherwise returns an error)
+                                                               ignoremissing - ignore missing offchain items (otherwise returns an error)
 
         Result:
         summary-object                      (object) Summary object for specific publisher.
 
         Examples:
-        > multichain-cli coblo2 liststreampublisheritems "test-stream" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "jsonobjectmerge"
-        > multichain-cli coblo2 liststreampublisheritems "test-stream" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "jsonobjectmerge,ignore,recursive"
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "liststreampublisheritems", "params": ["test-stream", "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "jsonobjectmerge,ignore,recursive"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain liststreampublisheritems "test-stream" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "jsonobjectmerge"
+        > multichain-cli testchain liststreampublisheritems "test-stream" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "jsonobjectmerge,ignore,recursive"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "liststreampublisheritems", "params": ["test-stream", "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "jsonobjectmerge,ignore,recursive"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -2382,7 +2837,7 @@ class RpcClient:
         """
         gettotalbalances ( minconf includeWatchonly includeLocked )
 
-        Returns a list of all the asset balances in this nodeâ  s wallet, with at least minconf confirmations.
+        Returns a list of all the asset balances in this node’s wallet, with at least minconf confirmations.
 
         Arguments:
         1. minconf                          (numeric, optional, default=1) Only include transactions confirmed at least this many times.
@@ -2395,19 +2850,19 @@ class RpcClient:
         Examples:
 
         The total amount in the server across all accounts
-        > multichain-cli coblo2 gettotalbalances 
+        > multichain-cli testchain gettotalbalances 
 
         The total amount in the server across all accounts, with at least 5 confirmations
-        > multichain-cli coblo2 gettotalbalances 6
+        > multichain-cli testchain gettotalbalances 6
 
         The total amount in the default account with at least 1 confirmation
-        > multichain-cli coblo2 gettotalbalances 
+        > multichain-cli testchain gettotalbalances 
 
         The total amount in the account named tabby with at least 6 confirmations
-        > multichain-cli coblo2 gettotalbalances 6 true
+        > multichain-cli testchain gettotalbalances 6 true
 
         As a json rpc call
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "gettotalbalances", "params": ["tabby", 6] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "gettotalbalances", "params": ["tabby", 6] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -2445,9 +2900,9 @@ class RpcClient:
         }
 
         Examples:
-        > multichain-cli coblo2 gettransaction "1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d"
-        > multichain-cli coblo2 gettransaction "1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d" true
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "gettransaction", "params": ["1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain gettransaction "1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d"
+        > multichain-cli testchain gettransaction "1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d" true
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "gettransaction", "params": ["1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -2469,10 +2924,10 @@ class RpcClient:
         Examples:
 
         View the data
-        > multichain-cli coblo2 gettxoutdata "txid" 1
+        > multichain-cli testchain gettxoutdata "txid" 1
 
         As a json rpc call
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "gettxoutdata", "params": ["txid", 1] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "gettxoutdata", "params": ["txid", 1] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -2501,8 +2956,8 @@ class RpcClient:
         }
 
         Examples:
-        > multichain-cli coblo2 getwalletinfo 
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getwalletinfo", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain getwalletinfo 
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getwalletinfo", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -2548,9 +3003,9 @@ class RpcClient:
         ]
 
         Examples:
-        > multichain-cli coblo2 getwallettransaction "1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d"
-        > multichain-cli coblo2 getwallettransaction "1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d" true
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getwallettransaction", "params": ["1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain getwallettransaction "1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d"
+        > multichain-cli testchain getwallettransaction "1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d" true
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getwallettransaction", "params": ["1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -2580,10 +3035,10 @@ class RpcClient:
         "transactionid"                     (string) The transaction id.
 
         Examples:
-        > multichain-cli coblo2 grant "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 0.1 connect,send,receive
-        > multichain-cli coblo2 grant "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 0.1 mystream.admin,write
-        > multichain-cli coblo2 grant "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 0.1 mine "permission to mine" "Miners Ltd."
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "grant", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", 0.1, admin "temporary admin", "Admins Ltd." 20000 30000] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain grant "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 0.1 connect,send,receive
+        > multichain-cli testchain grant "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 0.1 mystream.admin,write
+        > multichain-cli testchain grant "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 0.1 mine "permission to mine" "Miners Ltd."
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "grant", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", 0.1, admin "temporary admin", "Admins Ltd." 20000 30000] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -2614,9 +3069,9 @@ class RpcClient:
         "transactionid"                     (string) The transaction id.
 
         Examples:
-        > multichain-cli coblo2 grantfrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 0.1 connect,send,receive
-        > multichain-cli coblo2 grantfrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 0.1 mine "permission to mine" "Miners Ltd."
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "grantfrom", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", 0.1, admin "temporary admin", "Admins Ltd." 20000 30000] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain grantfrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 0.1 connect,send,receive
+        > multichain-cli testchain grantfrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 0.1 mine "permission to mine" "Miners Ltd."
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "grantfrom", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", 0.1, admin "temporary admin", "Admins Ltd." 20000 30000] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -2642,9 +3097,9 @@ class RpcClient:
         "transactionid"                     (string) The transaction id.
 
         Examples:
-        > multichain-cli coblo2 grantwithdata "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" connect,send,receive 48656C6C6F20576F726C64210A
-        > multichain-cli coblo2 grantwithdata "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" mine 48656C6C6F20576F726C64210A 0.1
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "grantwithdata", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", admin, 48656C6C6F20576F726C64210A] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain grantwithdata "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" connect,send,receive 48656C6C6F20576F726C64210A
+        > multichain-cli testchain grantwithdata "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" mine 48656C6C6F20576F726C64210A 0.1
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "grantwithdata", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", admin, 48656C6C6F20576F726C64210A] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -2671,9 +3126,9 @@ class RpcClient:
         "transactionid"                     (string) The transaction id.
 
         Examples:
-        > multichain-cli coblo2 grantwithdatafrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" connect,send,receive 48656C6C6F20576F726C64210A
-        > multichain-cli coblo2 grantwithdatafrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" mine 48656C6C6F20576F726C64210A 0.1 
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "grantwithdatafrom", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", admin, 48656C6C6F20576F726C64210A] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain grantwithdatafrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" connect,send,receive 48656C6C6F20576F726C64210A
+        > multichain-cli testchain grantwithdatafrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" mine 48656C6C6F20576F726C64210A 0.1 
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "grantwithdatafrom", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", admin, 48656C6C6F20576F726C64210A] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -2688,7 +3143,8 @@ class RpcClient:
          or
         1. address(es)                      (array, optional) A json array of addresses 
         2. "label"                          (string, optional, default="") An optional label
-        3. rescan                           (boolean, optional, default=true) Rescan the wallet for transactions
+        3. rescan                           (boolean or integer, optional, default=true) Rescan the wallet for transactions. 
+                                                               If integer rescan from block, if negative - from the end.
 
         Note: This call can take minutes to complete if rescan is true.
 
@@ -2697,13 +3153,13 @@ class RpcClient:
         Examples:
 
         Import an address with rescan
-        > multichain-cli coblo2 importaddress "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd"
+        > multichain-cli testchain importaddress "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd"
 
         Import using a label without rescan
-        > multichain-cli coblo2 importaddress "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "testing" false
+        > multichain-cli testchain importaddress "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "testing" false
 
         As a JSON-RPC call
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "importaddress", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "testing", false] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "importaddress", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "testing", false] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -2718,7 +3174,8 @@ class RpcClient:
          or
         1. privkey(s)                       (array, optional) A json array of private keys 
         2. "label"                          (string, optional, default="") An optional label
-        3. rescan                           (boolean, optional, default=true) Rescan the wallet for transactions
+        3. rescan                           (boolean or integer, optional, default=true) Rescan the wallet for transactions. 
+                                                               If integer rescan from block, if negative - from the end.
 
         Note: This call can take minutes to complete if rescan is true.
 
@@ -2727,38 +3184,40 @@ class RpcClient:
         Examples:
 
         Dump a private key
-        > multichain-cli coblo2 dumpprivkey "myaddress"
+        > multichain-cli testchain dumpprivkey "myaddress"
 
         Import the private key with rescan
-        > multichain-cli coblo2 importprivkey "mykey"
+        > multichain-cli testchain importprivkey "mykey"
 
         Import using a label and without rescan
-        > multichain-cli coblo2 importprivkey "mykey" "testing" false
+        > multichain-cli testchain importprivkey "mykey" "testing" false
 
         As a JSON-RPC call
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "importprivkey", "params": ["mykey", "testing", false] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "importprivkey", "params": ["mykey", "testing", false] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
-    def importwallet(self, filename):
+    def importwallet(self, filename, rescan=None):
         """
-        importwallet "filename"
+        importwallet "filename" ( rescan )
 
         Imports keys from a wallet dump file (see dumpwallet).
 
         Arguments:
         1. "filename"                       (string, required) The wallet file
+        2. rescan                           (boolean or integer, optional, default=true) Rescan the wallet for transactions. 
+                                                               If integer rescan from block, if negative - from the end.
 
         Examples:
 
         Dump the wallet
-        > multichain-cli coblo2 dumpwallet "test"
+        > multichain-cli testchain dumpwallet "test"
 
         Import the wallet
-        > multichain-cli coblo2 importwallet "test"
+        > multichain-cli testchain importwallet "test"
 
         Import using the json rpc call
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "importwallet", "params": ["test"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "importwallet", "params": ["test"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -2792,9 +3251,9 @@ class RpcClient:
         "transactionid"                     (string) The transaction id.
 
         Examples:
-        > multichain-cli coblo2 issue "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "Dollar" 1000000
-        > multichain-cli coblo2 issue "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" Dollar 1000000 0.01 0.01 
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "issue", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "Dollar", 1000000, 0.01, 0.01 "description=1 Million dollars"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain issue "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "Dollar" 1000000
+        > multichain-cli testchain issue "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" Dollar 1000000 0.01 0.01 
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "issue", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "Dollar", 1000000, 0.01, 0.01 "description=1 Million dollars"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -2829,9 +3288,9 @@ class RpcClient:
         "transactionid"                     (string) The transaction id.
 
         Examples:
-        > multichain-cli coblo2 issuefrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "Dollar" 1000000
-        > multichain-cli coblo2 issuefrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" Dollar 1000000 0.01 0.01 
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "issuefrom", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "Dollar", 1000000, 0.01, 0.01 "description=1 Million dollars"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain issuefrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "Dollar" 1000000
+        > multichain-cli testchain issuefrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" Dollar 1000000 0.01 0.01 
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "issuefrom", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "Dollar", 1000000, 0.01, 0.01 "description=1 Million dollars"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -2843,7 +3302,7 @@ class RpcClient:
 
         Arguments:
         1. "address"                        (string, required) The address to send newly created asset to.
-        2. "asset-identifier"               (string, required) Asset identifier - one of the following: issue txid, asset reference, asset name.
+        2. "asset-identifier"               (string, required) Asset identifier - one of: issue txid, asset reference, asset name.
         3. quantity                         (numeric, required) The asset total amount in display units. eg. 1234.56
         4. native-amount                    (numeric, optional) native currency amount to send. eg 0.1, Default: minimum-per-output.
         5  custom-fields                    (object, optional)  a json object with custom fields
@@ -2856,9 +3315,9 @@ class RpcClient:
         "transactionid"                     (string) The transaction id.
 
         Examples:
-        > multichain-cli coblo2 issuemore "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "Dollar" 1000000
-        > multichain-cli coblo2 issuemore "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" Dollar 1000000 0.01 
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "issuemore", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "Dollar", 1000000,  0.01 "description=1 Million dollars"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain issuemore "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "Dollar" 1000000
+        > multichain-cli testchain issuemore "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" Dollar 1000000 0.01 
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "issuemore", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "Dollar", 1000000,  0.01 "description=1 Million dollars"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -2871,7 +3330,7 @@ class RpcClient:
         Arguments:
         1. "from-address"                   (string, required) Address used for issuing.
         2. "to-address"                     (string, required) The  address to send newly created asset to.
-        3. "asset-identifier"               (string, required) Asset identifier - one of the following: issue txid, asset reference, asset name.
+        3. "asset-identifier"               (string, required) Asset identifier - one of: issue txid, asset reference, asset name.
         4. quantity                         (numeric, required) The asset total amount in display units. eg. 1234.56
         5. native-amount                    (numeric, optional) native currency amount to send. eg 0.1, Default: minimum-per-output.
         6  custom-fields                    (object, optional)  a json object with custom fields
@@ -2884,9 +3343,9 @@ class RpcClient:
         "transactionid"                     (string) The transaction id.
 
         Examples:
-        > multichain-cli coblo2 issuemorefrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "Dollar" 1000000
-        > multichain-cli coblo2 issuemorefrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" Dollar 1000000 0.01 
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "issuemorefrom", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "Dollar", 1000000, 0.01 "description=1 Million dollars"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain issuemorefrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "Dollar" 1000000
+        > multichain-cli testchain issuemorefrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" Dollar 1000000 0.01 
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "issuemorefrom", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "Dollar", 1000000, 0.01 "description=1 Million dollars"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -2899,8 +3358,8 @@ class RpcClient:
         1. newsize                          (numeric, optional, default=100) The new keypool size
 
         Examples:
-        > multichain-cli coblo2 keypoolrefill 
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "keypoolrefill", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain keypoolrefill 
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "keypoolrefill", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -2923,16 +3382,16 @@ class RpcClient:
         Examples:
 
         List account balances where there at least 1 confirmation
-        > multichain-cli coblo2 listaccounts 
+        > multichain-cli testchain listaccounts 
 
         List account balances including zero confirmation transactions
-        > multichain-cli coblo2 listaccounts 0
+        > multichain-cli testchain listaccounts 0
 
         List account balances for 6 or more confirmations
-        > multichain-cli coblo2 listaccounts 6
+        > multichain-cli testchain listaccounts 6
 
         As json rpc call
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listaccounts", "params": [6] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listaccounts", "params": [6] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -2943,7 +3402,7 @@ class RpcClient:
         Returns asset balances for specified address
 
         Arguments:
-        1. "address(es)"                    (string, optional, default *) Address(es) to return information for, comma delimited. Default - all
+        1. "address(es)"                    (string, optional, default=*) Address(es) to return information for, comma delimited. Default - all
          or
         1. address(es)                      (array, optional) A json array of addresses to return information for
         2. verbose                          (boolean, optional, default=false) If true return more information about address.
@@ -2954,10 +3413,10 @@ class RpcClient:
         An array of address Objects.
 
         Examples:
-        > multichain-cli coblo2 listaddresses 
-        > multichain-cli coblo2 listaddresses "*" true
-        > multichain-cli coblo2 listaddresses "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" true
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listaddresses", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain listaddresses 
+        > multichain-cli testchain listaddresses "*" true
+        > multichain-cli testchain listaddresses "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" true
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listaddresses", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -2983,8 +3442,8 @@ class RpcClient:
         ]
 
         Examples:
-        > multichain-cli coblo2 listaddressgroupings 
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listaddressgroupings", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain listaddressgroupings 
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listaddressgroupings", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -2992,7 +3451,7 @@ class RpcClient:
         """
         listaddresstransactions "address" ( count skip verbose )
 
-        Lists information about the <count> most recent transactions related to address in this nodeâ  s wallet.
+        Lists information about the <count> most recent transactions related to address in this node’s wallet.
 
         Arguments:
         1. "address"                        (string, required)  Address to list transactions for.
@@ -3033,13 +3492,13 @@ class RpcClient:
         Examples:
 
         List the most recent 10 transactions in the systems
-        > multichain-cli coblo2 listaddresstransactions "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd"
+        > multichain-cli testchain listaddresstransactions "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd"
 
         List transactions 100 to 120 
-        > multichain-cli coblo2 listaddresstransactions "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 20 100
+        > multichain-cli testchain listaddresstransactions "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 20 100
 
         As a json rpc call
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listaddresstransactions", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", 20, 100] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listaddresstransactions", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", 20, 100] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -3050,7 +3509,7 @@ class RpcClient:
         Lists transactions involving asset.
 
         Arguments:
-        1. "asset-identifier"               (string, required) Asset identifier - one of the following: asset txid, asset reference, asset name.
+        1. "asset-identifier"               (string, required) Asset identifier - one of: issue txid, asset reference, asset name.
         2. verbose                          (boolean, optional, default=false) If true, returns information about transaction 
         3. count                            (number, optional, default=10) The number of transactions to display
         4. start                            (number, optional, default=-count - last) Start from specific transaction, 0 based, if negative - from the end
@@ -3061,9 +3520,9 @@ class RpcClient:
         "stream-items"                      (array) List of transactions.
 
         Examples:
-        > multichain-cli coblo2 listassettransactions "test-asset"
-        > multichain-cli coblo2 listassettransactions "test-asset" true 10 100
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listassettransactions", "params": ["test-asset", false, 20] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain listassettransactions "test-asset"
+        > multichain-cli testchain listassettransactions "test-asset" true 10 100
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listassettransactions", "params": ["test-asset", false, 20] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -3086,19 +3545,19 @@ class RpcClient:
         Examples:
 
         List the unspent transactions
-        > multichain-cli coblo2 listunspent 
+        > multichain-cli testchain listunspent 
 
         Lock an unspent transaction
-        > multichain-cli coblo2 lockunspent false "[{\"txid\":\"a08e6907dbbd3d809776dbfc5d82e371b764ed838b5655e72f463568df1aadf0\",\"vout\":1}]"
+        > multichain-cli testchain lockunspent false "[{\"txid\":\"a08e6907dbbd3d809776dbfc5d82e371b764ed838b5655e72f463568df1aadf0\",\"vout\":1}]"
 
         List the locked transactions
-        > multichain-cli coblo2 listlockunspent 
+        > multichain-cli testchain listlockunspent 
 
         Unlock the transaction again
-        > multichain-cli coblo2 lockunspent true "[{\"txid\":\"a08e6907dbbd3d809776dbfc5d82e371b764ed838b5655e72f463568df1aadf0\",\"vout\":1}]"
+        > multichain-cli testchain lockunspent true "[{\"txid\":\"a08e6907dbbd3d809776dbfc5d82e371b764ed838b5655e72f463568df1aadf0\",\"vout\":1}]"
 
         As a json rpc call
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listlockunspent", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listlockunspent", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -3125,9 +3584,9 @@ class RpcClient:
         ]
 
         Examples:
-        > multichain-cli coblo2 listreceivedbyaccount 
-        > multichain-cli coblo2 listreceivedbyaccount 6 true
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listreceivedbyaccount", "params": [6, true, true] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain listreceivedbyaccount 
+        > multichain-cli testchain listreceivedbyaccount 6 true
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listreceivedbyaccount", "params": [6, true, true] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -3155,9 +3614,9 @@ class RpcClient:
         ]
 
         Examples:
-        > multichain-cli coblo2 listreceivedbyaddress 
-        > multichain-cli coblo2 listreceivedbyaddress 6 true
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listreceivedbyaddress", "params": [6, true, true] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain listreceivedbyaddress 
+        > multichain-cli testchain listreceivedbyaddress 6 true
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listreceivedbyaddress", "params": [6, true, true] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -3197,9 +3656,9 @@ class RpcClient:
         }
 
         Examples:
-        > multichain-cli coblo2 listsinceblock 
-        > multichain-cli coblo2 listsinceblock "000000000000000bacf66f7497b7dc45ef753ee9a7d38571037cdb1a57f663ad" 6
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listsinceblock", "params": ["000000000000000bacf66f7497b7dc45ef753ee9a7d38571037cdb1a57f663ad", 6] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain listsinceblock 
+        > multichain-cli testchain listsinceblock "000000000000000bacf66f7497b7dc45ef753ee9a7d38571037cdb1a57f663ad" 6
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listsinceblock", "params": ["000000000000000bacf66f7497b7dc45ef753ee9a7d38571037cdb1a57f663ad", 6] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -3210,7 +3669,7 @@ class RpcClient:
         Returns stream items in certain block range.
 
         Arguments:
-        1. "stream-identifier"              (string, required) Stream identifier - one of the following: stream txid, stream reference, stream name.
+        1. "stream-identifier"              (string, required) Stream identifier - one of: create txid, stream reference, stream name.
         2. "block-set-identifier"           (string, required) Comma delimited list of block identifiers: 
                                                                block height,
                                                                block hash,
@@ -3232,9 +3691,9 @@ class RpcClient:
         stream-items                        (array) List of stream items.
 
         Examples:
-        > multichain-cli coblo2 liststreamblockitems "test-stream" 1000,1100-1120 
-        > multichain-cli coblo2 liststreamblockitems "test-stream" 1000 true 10 100
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "liststreamblockitems", "params": ["test-stream", 1000, false, 20] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain liststreamblockitems "test-stream" 1000,1100-1120 
+        > multichain-cli testchain liststreamblockitems "test-stream" 1000 true 10 100
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "liststreamblockitems", "params": ["test-stream", 1000, false, 20] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -3245,7 +3704,7 @@ class RpcClient:
         Returns stream items.
 
         Arguments:
-        1. "stream-identifier"              (string, required) Stream identifier - one of the following: stream txid, stream reference, stream name.
+        1. "stream-identifier"              (string, required) Stream identifier - one of: create txid, stream reference, stream name.
         2. verbose                          (boolean, optional, default=false) If true, returns information about item transaction 
         3. count                            (number, optional, default=10) The number of items to display
         4. start                            (number, optional, default=-count - last) Start from specific item, 0 based, if negative - from the end
@@ -3256,9 +3715,9 @@ class RpcClient:
         "stream-items"                      (array) List of stream items.
 
         Examples:
-        > multichain-cli coblo2 liststreamitems "test-stream"
-        > multichain-cli coblo2 liststreamitems "test-stream" true 10 100
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "liststreamitems", "params": ["test-stream", false, 20] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain liststreamitems "test-stream"
+        > multichain-cli testchain liststreamitems "test-stream" true 10 100
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "liststreamitems", "params": ["test-stream", false, 20] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -3269,7 +3728,7 @@ class RpcClient:
         Returns stream items for specific key.
 
         Arguments:
-        1. "stream-identifier"              (string, required) Stream identifier - one of the following: stream txid, stream reference, stream name.
+        1. "stream-identifier"              (string, required) Stream identifier - one of: create txid, stream reference, stream name.
         2. "key"                            (string, required) Stream key
         3. verbose                          (boolean, optional, default=false) If true, returns information about item transaction 
         4. count                            (number, optional, default=10) The number of items to display
@@ -3281,9 +3740,9 @@ class RpcClient:
         "stream-items"                      (array) List of stream items for specific key.
 
         Examples:
-        > multichain-cli coblo2 liststreamkeyitems "test-stream" "key01"
-        > multichain-cli coblo2 liststreamkeyitems "test-stream" "key01" true 10 100
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "liststreamkeyitems", "params": ["test-stream", "key01", false 20] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain liststreamkeyitems "test-stream" "key01"
+        > multichain-cli testchain liststreamkeyitems "test-stream" "key01" true 10 100
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "liststreamkeyitems", "params": ["test-stream", "key01", false 20] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -3294,7 +3753,7 @@ class RpcClient:
         Returns stream keys.
 
         Arguments:
-        1. "stream-identifier"              (string, required) Stream identifier - one of the following: stream txid, stream reference, stream name.
+        1. "stream-identifier"              (string, required) Stream identifier - one of: create txid, stream reference, stream name.
         2. "key"                            (string, optional, default=*) Stream key
          or
         2. key(s)                           (array, optional) A json array of stream keys 
@@ -3308,10 +3767,10 @@ class RpcClient:
         "stream-keys"                       (array) List of stream keys.
 
         Examples:
-        > multichain-cli coblo2 liststreamkeys "test-stream" 
-        > multichain-cli coblo2 liststreamkeys "test-stream" "key01"
-        > multichain-cli coblo2 liststreamkeys "test-stream" "*" true 10 100
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "liststreamkeys", "params": ["test-stream", "key01"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain liststreamkeys "test-stream" 
+        > multichain-cli testchain liststreamkeys "test-stream" "key01"
+        > multichain-cli testchain liststreamkeys "test-stream" "*" true 10 100
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "liststreamkeys", "params": ["test-stream", "key01"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -3322,7 +3781,7 @@ class RpcClient:
         Returns stream items for specific publisher.
 
         Arguments:
-        1. "stream-identifier"              (string, required) Stream identifier - one of the following: stream txid, stream reference, stream name.
+        1. "stream-identifier"              (string, required) Stream identifier - one of: create txid, stream reference, stream name.
         2. "address"                        (string, required) Publisher address
         3. verbose                          (boolean, optional, default=false) If true, returns information about item transaction 
         4. count                            (number, optional, default=10) The number of items to display
@@ -3334,9 +3793,9 @@ class RpcClient:
         "stream-items"                      (array) List of stream items for specific publisher.
 
         Examples:
-        > multichain-cli coblo2 liststreampublisheritems "test-stream" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd"
-        > multichain-cli coblo2 liststreampublisheritems "test-stream" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" true 10 100
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "liststreampublisheritems", "params": ["test-stream", "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", false, 20] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain liststreampublisheritems "test-stream" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd"
+        > multichain-cli testchain liststreampublisheritems "test-stream" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" true 10 100
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "liststreampublisheritems", "params": ["test-stream", "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", false, 20] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -3347,7 +3806,7 @@ class RpcClient:
         Returns stream publishers.
 
         Arguments:
-        1. "stream-identifier"              (string, required) Stream identifier - one of the following: stream txid, stream reference, stream name.
+        1. "stream-identifier"              (string, required) Stream identifier - one of: create txid, stream reference, stream name.
         2. "address(es)"                    (string, optional, default=*) Publisher addresses, comma delimited
          or
         2. address(es)                      (array, optional) A json array of publisher addresses 
@@ -3361,31 +3820,63 @@ class RpcClient:
         "stream-publishers"                 (array) List of stream publishers.
 
         Examples:
-        > multichain-cli coblo2 liststreampublishers "test-stream" 
-        > multichain-cli coblo2 liststreampublishers "test-stream" 1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd
-        > multichain-cli coblo2 liststreampublishers "test-stream" "*" true 10 100
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "liststreampublishers", "params": ["test-stream", "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain liststreampublishers "test-stream" 
+        > multichain-cli testchain liststreampublishers "test-stream" 1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd
+        > multichain-cli testchain liststreampublishers "test-stream" "*" true 10 100
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "liststreampublishers", "params": ["test-stream", "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
-    def liststreamtxitems(self, stream_identifier, txid, verbose=None):
+    def liststreamqueryitems(self, stream_identifier, query, verbose=None):
         """
-        liststreamtxitems "stream-identifier" "txid" ( verbose )
+        liststreamqueryitems "stream-identifier" query ( verbose )
+
+        Returns stream items for specific query.
+
+        Arguments:
+        1. "stream-identifier"              (string, required) Stream identifier - one of: create txid, stream reference, stream name.
+        2. query                            (object, required) Query
+            {
+              "key" : "key"                   (string, optional, default: "") Item key
+                or
+              "keys" : keys                   (array, optional) Item keys, array of strings
+                and/or
+              "publisher" : "publisher"       (string, optional, default: "") Publisher
+                or
+              "publishers" : publishers       (array, optional) Publishers, array of strings
+            }
+        3. verbose                          (boolean, optional, default=false) If true, returns information about item transaction 
+
+        Result:
+        "stream-items"                      (array) List of stream items for specific query.
+
+        Examples:
+        > multichain-cli testchain liststreamqueryitems "test-stream" "{\"keys\":[\"key01\","key02"]}"
+        > multichain-cli testchain liststreamqueryitems "test-stream" "{\"keys\":[\"key01\","key02"],\"publisher\":\"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ\"}" true 
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "liststreamqueryitems", "params": ["test-stream", "{\"keys\":[\"key01\","key02"],\"publisher\":\"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ\"}", false] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
+
+        """
+
+    def liststreamtxitems(self, stream_identifier, txids, verbose=None):
+        """
+        liststreamtxitems "stream-identifier" txids ( verbose )
 
         Returns stream items.
 
         Arguments:
-        1. "stream-identifier"              (string, required) Stream identifier - one of the following: stream txid, stream reference, stream name.
-        2. "txid"                           (string, required) The transaction id
+        1. "stream-identifier"              (string, required) Stream identifier - one of: create txid, stream reference, stream name.
+        2. "txids"                          (string, required) Transaction IDs, comma delimited
+         or
+        2. txids                            (array, required) Array of transaction IDs
         3. verbose                          (boolean, optional, default=false) If true, returns information about item transaction 
 
         Result:
         "stream-items"                      (array) Array of stream items.
 
         Examples:
-        > multichain-cli coblo2 liststreamtxitems "mytxid"
-        > multichain-cli coblo2 liststreamtxitems "mytxid"  true
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "liststreamtxitems", "params": ["mytxid", false] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain liststreamtxitems "mytxid"
+        > multichain-cli testchain liststreamtxitems "mytxid"  true
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "liststreamtxitems", "params": ["mytxid", false] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -3439,16 +3930,16 @@ class RpcClient:
         Examples:
 
         List the most recent 10 transactions in the systems
-        > multichain-cli coblo2 listtransactions 
+        > multichain-cli testchain listtransactions 
 
         List the most recent 10 transactions for the tabby account
-        > multichain-cli coblo2 listtransactions "tabby"
+        > multichain-cli testchain listtransactions "tabby"
 
         List transactions 100 to 120 from the tabby account
-        > multichain-cli coblo2 listtransactions "tabby" 20 100
+        > multichain-cli testchain listtransactions "tabby" 20 100
 
         As a json rpc call
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listtransactions", "params": ["tabby", 20, 100] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listtransactions", "params": ["tabby", 20, 100] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -3486,9 +3977,9 @@ class RpcClient:
         ]
 
         Examples
-        > multichain-cli coblo2 listunspent 
-        > multichain-cli coblo2 listunspent 6 9999999 "[\"1PGFqEzfmQch1gKD3ra4k18PNj3tTUUSqg\",\"1LtvqCaApEdUGFkpKMM4MstjcaL4dKg8SP\"]"
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listunspent", "params": [6, 9999999 "[\"1PGFqEzfmQch1gKD3ra4k18PNj3tTUUSqg\",\"1LtvqCaApEdUGFkpKMM4MstjcaL4dKg8SP\"]"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain listunspent 
+        > multichain-cli testchain listunspent 6 9999999 "[\"1PGFqEzfmQch1gKD3ra4k18PNj3tTUUSqg\",\"1LtvqCaApEdUGFkpKMM4MstjcaL4dKg8SP\"]"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listunspent", "params": [6, 9999999 "[\"1PGFqEzfmQch1gKD3ra4k18PNj3tTUUSqg\",\"1LtvqCaApEdUGFkpKMM4MstjcaL4dKg8SP\"]"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -3496,7 +3987,7 @@ class RpcClient:
         """
         listwallettransactions ( count skip includeWatchonly verbose )
 
-        Lists information about the <count> most recent transactions in this nodeâ  s wallet.
+        Lists information about the <count> most recent transactions in this node’s wallet.
 
         Arguments:
         1. count                            (numeric, optional, default=10) The number of transactions to return
@@ -3537,13 +4028,13 @@ class RpcClient:
         Examples:
 
         List the most recent 10 transactions in the systems
-        > multichain-cli coblo2 listwallettransactions 
+        > multichain-cli testchain listwallettransactions 
 
         List transactions 100 to 120 
-        > multichain-cli coblo2 listwallettransactions 20 100
+        > multichain-cli testchain listwallettransactions 20 100
 
         As a json rpc call
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listwallettransactions", "params": [20, 100] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listwallettransactions", "params": [20, 100] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -3575,19 +4066,19 @@ class RpcClient:
         Examples:
 
         List the unspent transactions
-        > multichain-cli coblo2 listunspent 
+        > multichain-cli testchain listunspent 
 
         Lock an unspent transaction
-        > multichain-cli coblo2 lockunspent false "[{\"txid\":\"a08e6907dbbd3d809776dbfc5d82e371b764ed838b5655e72f463568df1aadf0\",\"vout\":1}]"
+        > multichain-cli testchain lockunspent false "[{\"txid\":\"a08e6907dbbd3d809776dbfc5d82e371b764ed838b5655e72f463568df1aadf0\",\"vout\":1}]"
 
         List the locked transactions
-        > multichain-cli coblo2 listlockunspent 
+        > multichain-cli testchain listlockunspent 
 
         Unlock the transaction again
-        > multichain-cli coblo2 lockunspent true "[{\"txid\":\"a08e6907dbbd3d809776dbfc5d82e371b764ed838b5655e72f463568df1aadf0\",\"vout\":1}]"
+        > multichain-cli testchain lockunspent true "[{\"txid\":\"a08e6907dbbd3d809776dbfc5d82e371b764ed838b5655e72f463568df1aadf0\",\"vout\":1}]"
 
         As a json rpc call
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "lockunspent", "params": [false, "[{\"txid\":\"a08e6907dbbd3d809776dbfc5d82e371b764ed838b5655e72f463568df1aadf0\",\"vout\":1}]"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "lockunspent", "params": [false, "[{\"txid\":\"a08e6907dbbd3d809776dbfc5d82e371b764ed838b5655e72f463568df1aadf0\",\"vout\":1}]"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -3609,13 +4100,13 @@ class RpcClient:
         Examples:
 
         Move 0.01 btc from the default account to the account named tabby
-        > multichain-cli coblo2 move "" "tabby" 0.01
+        > multichain-cli testchain move "" "tabby" 0.01
 
         Move 0.01 btc timotei to akiko with a comment and funds have 6 confirmations
-        > multichain-cli coblo2 move "timotei" "akiko" 0.01 6 "happy birthday!"
+        > multichain-cli testchain move "timotei" "akiko" 0.01 6 "happy birthday!"
 
         As a json rpc call
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "move", "params": ["timotei", "akiko", 0.01, 6, "happy birthday!"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "move", "params": ["timotei", "akiko", 0.01, 6, "happy birthday!"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -3640,9 +4131,9 @@ class RpcClient:
         }
 
         Examples:
-        > multichain-cli coblo2 preparelockunspent "{\"12345-6789-1234\":100}"
-        > multichain-cli coblo2 preparelockunspent "{\"12345-6789-1234\":100,\"1234-5678-1234\":200}"
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "preparelockunspent", "params": ["{\"12345-6789-1234\":100,\"1234-5678-1234\":200}"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain preparelockunspent "{\"12345-6789-1234\":100}"
+        > multichain-cli testchain preparelockunspent "{\"12345-6789-1234\":100,\"1234-5678-1234\":200}"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "preparelockunspent", "params": ["{\"12345-6789-1234\":100,\"1234-5678-1234\":200}"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -3668,20 +4159,20 @@ class RpcClient:
         }
 
         Examples:
-        > multichain-cli coblo2 preparelockunspentfrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "{\"12345-6789-1234\":100}"
-        > multichain-cli coblo2 preparelockunspentfrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "{\"12345-6789-1234\":100,\"1234-5678-1234\":200}"
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "preparelockunspentfrom", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "{\"12345-6789-1234\":100,\"1234-5678-1234\":200}"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain preparelockunspentfrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "{\"12345-6789-1234\":100}"
+        > multichain-cli testchain preparelockunspentfrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "{\"12345-6789-1234\":100,\"1234-5678-1234\":200}"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "preparelockunspentfrom", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "{\"12345-6789-1234\":100,\"1234-5678-1234\":200}"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
-    def publish(self, stream_identifier, key_or_keys, data_hex_or_data_obj):
+    def publish(self, stream_identifier, key_or_keys, data_hex_or_data_obj, options=None):
         """
-        publish "stream-identifier" "key"|keys "data-hex"|data-obj 
+        publish "stream-identifier" "key"|keys "data-hex"|data-obj "options" 
 
         Publishes stream item
 
         Arguments:
-        1. "stream-identifier"              (string, required) Stream identifier - one of the following: stream txid, stream reference, stream name.
+        1. "stream-identifier"              (string, required) Stream identifier - one of: create txid, stream reference, stream name.
         2. "key"                            (string, required) Item key
          or
         2. keys                             (array, required) Array of item keys
@@ -3696,25 +4187,31 @@ class RpcClient:
             {
               "text" : "data-text"          (string, required) Data string
             }
+         or
+        3. data-cached                      (object, required) Binary raw data created with appendbinarycache
+            {
+              "cache" : "identifier"        (string, required) Binary cache identifier
+            }
+        4. "options"                        (string, optional) Should be "offchain" or omitted
 
         Result:
         "transactionid"                     (string) The transaction id.
 
         Examples:
-        > multichain-cli coblo2 publish test "hello world" 48656C6C6F20576F726C64210A
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "publish", "params": ["test", "hello world", "48656C6C6F20576F726C64210A"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain publish test "hello world" 48656C6C6F20576F726C64210A
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "publish", "params": ["test", "hello world", "48656C6C6F20576F726C64210A"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
-    def publishfrom(self, from_address, stream_identifier, key_or_keys, data_hex_or_data_obj):
+    def publishfrom(self, from_address, stream_identifier, key_or_keys, data_hex_or_data_obj, options=None):
         """
-        publishfrom "from-address" "stream-identifier" "key"|keys "data-hex"|data-obj 
+        publishfrom "from-address" "stream-identifier" "key"|keys "data-hex"|data-obj "options" 
 
         Publishes stream item from specific address
 
         Arguments:
-        1. "from-address"                   (string, required) Address used for issuing.
-        2. "stream-identifier"              (string, required) Stream identifier - one of the following: stream txid, stream reference, stream name.
+        1. "from-address"                   (string, required) Address used for publishsing.
+        2. "stream-identifier"              (string, required) Stream identifier - one of: create txid, stream reference, stream name.
         3. "key"                            (string, required) Item key
          or
         3. keys                             (array, required) Array of item keys
@@ -3729,13 +4226,110 @@ class RpcClient:
             {
               "text" : "data-text"          (string, required) Data string
             }
+         or
+        4. data-cached                      (object, required) Binary raw data created with appendbinarycache
+            {
+              "cache" : "identifier"        (string, required) Binary cache identifier
+            }
+        5. "options"                        (string, optional) Should be "offchain" or omitted
 
         Result:
         "transactionid"                     (string) The transaction id.
 
         Examples:
-        > multichain-cli coblo2 publishfrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" test "hello world" 48656C6C6F20576F726C64210A
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "publishfrom", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "test", "hello world", "48656C6C6F20576F726C64210A"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain publishfrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" test "hello world" 48656C6C6F20576F726C64210A
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "publishfrom", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "test", "hello world", "48656C6C6F20576F726C64210A"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
+
+        """
+
+    def publishmulti(self, stream_identifier, items, options=None):
+        """
+        publishmulti "stream-identifier" items "options" 
+
+        Publishes several stream items
+
+        Arguments:
+        1. "stream-identifier"                (string, required) Stream identifier - one of: create txid, stream reference, stream name. Default for items if "for" field is omitted
+        2. items                              (array, required) Array of stream items. 
+          [
+            {
+              "for" : "stream-identifier"     (string, optional) Stream identifier, uses default if omitted.
+              "options" : "options"           (string, optional) Should be "offchain" or omitted
+              "key" : "key"                   (string, optional, default: "") Item key
+                or
+              "keys" : keys                   (array, optional) Item keys, array of strings
+              "data" : "data-hex"             (string, optional, default: "") Data hex string
+                or
+              "data" :                        (object, required) JSON data object
+                {
+                  "json" : data-json          (object, required) Valid JSON string
+                }
+                or
+              "data" :                        (object, required) Text data object
+                {
+                  "text" : "data-text"        (string, required) Data string
+                }
+                or
+              "data"                          (object, required) Binary raw data created with appendbinarycache
+                {
+                  "cache" : "identifier"      (string, required) Binary cache identifier
+                }
+            }
+          ]
+        3. "options"                          (string, optional) Should be "offchain" or omitted. Default for items if "options" field is omitted
+
+        Result:
+        "transactionid"                       (string) The transaction id.
+
+        Examples:
+        > multichain-cli testchain publishmulti test [{"key":"hello world","data":"48656C6C6F20576F726C64210A"}]
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "publishmulti", "params": ["test", [{"key":"hello world","data":"48656C6C6F20576F726C64210A"}]] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
+
+        """
+
+    def publishmultifrom(self, from_address, stream_identifier, items, options=None):
+        """
+        publishmultifrom "from-address" "stream-identifier" items "options" 
+
+        Publishes several stream items
+
+        Arguments:
+        1. "from-address"                     (string, required) Address used for publishing.
+        2. "stream-identifier"                (string, required) Stream identifier - one of: create txid, stream reference, stream name. Default for items if "for" field is omitted
+        3. items                              (array, required) Array of stream items. 
+          [
+            {
+              "for" : "stream-identifier"     (string, optional) Stream identifier, uses default if omitted.
+              "options" : "options"           (string, optional) Should be "offchain" or omitted
+              "key" : "key"                   (string, optional, default: "") Item key
+                or
+              "keys" : keys                   (array, optional) Item keys, array of strings
+              "data" : "data-hex"             (string, optional, default: "") Data hex string
+                or
+              "data" :                        (object, required) JSON data object
+                {
+                  "json" : data-json          (object, required) Valid JSON string
+                }
+                or
+              "data" :                        (object, required) Text data object
+                {
+                  "text" : "data-text"        (string, required) Data string
+                }
+                or
+              "data"                          (object, required) Binary raw data created with appendbinarycache
+                {
+                  "cache" : "identifier"      (string, required) Binary cache identifier
+                }
+            }
+          ]
+        4. "options"                          (string, optional) Should be "offchain" or omitted. Default for items if "options" field is omitted
+
+        Result:
+        "transactionid"                       (string) The transaction id.
+
+        Examples:
+        > multichain-cli testchain publishmultifrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" test [{"key":"hello world","data":"48656C6C6F20576F726C64210A"}]
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "publishmultifrom", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "test", [{"key":"hello world","data":"48656C6C6F20576F726C64210A"}]] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -3769,9 +4363,9 @@ class RpcClient:
         "transactionid"                     (string) The transaction id.
 
         Examples:
-        > multichain-cli coblo2 revoke "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 0.1 connect,send,receive
-        > multichain-cli coblo2 revoke "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 0.1 mine "permission to mine" "Rogue Miner"
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "revoke", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", 0.1, admin "disabling temporary admin", "Admins Ltd."] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain revoke "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 0.1 connect,send,receive
+        > multichain-cli testchain revoke "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 0.1 mine "permission to mine" "Rogue Miner"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "revoke", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", 0.1, admin "disabling temporary admin", "Admins Ltd."] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -3799,9 +4393,9 @@ class RpcClient:
         "transactionid"                     (string) The transaction id.
 
         Examples:
-        > multichain-cli coblo2 revokefrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 0.1 connect,send,receive
-        > multichain-cli coblo2 revokefrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 0.1 mine "permission to mine" "Rogue Miner"
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "revokefrom", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", 0.1, admin "disabling temporary admin", "Admins Ltd."] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain revokefrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 0.1 connect,send,receive
+        > multichain-cli testchain revokefrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 0.1 mine "permission to mine" "Rogue Miner"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "revokefrom", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", 0.1, admin "disabling temporary admin", "Admins Ltd."] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -3830,9 +4424,9 @@ class RpcClient:
         "transactionid"                     (string) The transaction id.
 
         Examples:
-        > multichain-cli coblo2 send "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "{\"12345-6789-1234\":100,\"1234-5678-1234\":200}"
-        > multichain-cli coblo2 send "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 0.1 "donation" "seans outpost"
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "send", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", 0.1, "donation", "seans outpost"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain send "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "{\"12345-6789-1234\":100,\"1234-5678-1234\":200}"
+        > multichain-cli testchain send "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 0.1 "donation" "seans outpost"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "send", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", 0.1, "donation", "seans outpost"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -3844,7 +4438,7 @@ class RpcClient:
 
         Arguments:
         1. "address"                        (string, required) The address to send to.
-        2. "asset-identifier"               (string, required) Asset identifier - one of the following: issue txid, asset reference, asset name.
+        2. "asset-identifier"               (string, required) Asset identifier - one of: issue txid, asset reference, asset name.
         3. asset-qty                        (numeric, required) Asset quantity to send. eg 0.1
         4. native-amount                    (numeric, optional) native currency amount to send. eg 0.1, Default: minimum-per-output.
         5. "comment"                        (string, optional) A comment used to store what the transaction is for. 
@@ -3857,9 +4451,9 @@ class RpcClient:
         "transactionid"                     (string) The transaction id.
 
         Examples:
-        > multichain-cli coblo2 sendasset "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 12345-6789-1234 100
-        > multichain-cli coblo2 sendasset "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 12345-6789-1234 100 0.1 "donation" "seans outpost"
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "sendasset", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", 12345-6789-1234, 100, 0.1, "donation", "seans outpost"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain sendasset "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 12345-6789-1234 100
+        > multichain-cli testchain sendasset "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 12345-6789-1234 100 0.1 "donation" "seans outpost"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "sendasset", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", 12345-6789-1234, 100, 0.1, "donation", "seans outpost"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -3872,7 +4466,7 @@ class RpcClient:
         Arguments:
         1. "from-address"                   (string, required) Address to send from. 
         2. "to-address"                     (string, required) The address to send to.
-        3. "asset-identifier"               (string, required) Asset identifier - one of the following: issue txid, asset reference, asset name.
+        3. "asset-identifier"               (string, required) Asset identifier - one of: issue txid, asset reference, asset name.
         4. asset-qty                        (numeric, required) Asset quantity to send. eg 0.1
         5. native-amount                    (numeric, optional) native currency amount to send. eg 0.1, Default: minimum-per-output.
         6. "comment"                        (string, optional) A comment used to store what the transaction is for. 
@@ -3885,9 +4479,9 @@ class RpcClient:
         "transactionid"                     (string) The transaction id.
 
         Examples:
-        > multichain-cli coblo2 sendassetfrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 0.1 12345-6789-1234 100
-        > multichain-cli coblo2 sendassetfrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 0.1 12345-6789-1234 100 "donation" "seans outpost"
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "sendassetfrom", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", 0.1, 12345-6789-1234, 100, "donation", "seans outpost"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain sendassetfrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 0.1 12345-6789-1234 100
+        > multichain-cli testchain sendassetfrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 0.1 12345-6789-1234 100 "donation" "seans outpost"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "sendassetfrom", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", 0.1, 12345-6789-1234, 100, "donation", "seans outpost"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -3917,9 +4511,9 @@ class RpcClient:
         "transactionid"  (string) The transaction id.
 
         Examples:
-        > multichain-cli coblo2 sendfrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "{\"12345-6789-1234\":100,\"1234-5678-1234\":200}"
-        > multichain-cli coblo2 sendfrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 0.1 "donation" "seans outpost"
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "sendfrom", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", 0.1, "donation", "seans outpost"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain sendfrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "{\"12345-6789-1234\":100,\"1234-5678-1234\":200}"
+        > multichain-cli testchain sendfrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 0.1 "donation" "seans outpost"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "sendfrom", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", 0.1, "donation", "seans outpost"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -3946,13 +4540,13 @@ class RpcClient:
         Examples:
 
         Send 0.01 btc from the default account to the address, must have at least 1 confirmation
-        > multichain-cli coblo2 sendfromaccount "" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 0.01
+        > multichain-cli testchain sendfromaccount "" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 0.01
 
         Send 0.01 from the tabby account to the given address, funds must have at least 6 confirmations
-        > multichain-cli coblo2 sendfromaccount "tabby" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 0.01 6 "donation" "seans outpost"
+        > multichain-cli testchain sendfromaccount "tabby" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 0.01 6 "donation" "seans outpost"
 
         As a json rpc call
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "sendfromaccount", "params": ["tabby", "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", 0.01, 6, "donation", "seans outpost"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "sendfromaccount", "params": ["tabby", "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", 0.01, 6, "donation", "seans outpost"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -3978,13 +4572,13 @@ class RpcClient:
         Examples:
 
         Send two amounts to two different addresses:
-        > multichain-cli coblo2 sendmany "tabby" "{\"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ\":0.01,\"1353tsE8YMTA4EuV7dgUXGjNFf9KpVvKHz\":0.02}"
+        > multichain-cli testchain sendmany "tabby" "{\"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ\":0.01,\"1353tsE8YMTA4EuV7dgUXGjNFf9KpVvKHz\":0.02}"
 
         Send two amounts to two different addresses setting the confirmation and comment:
-        > multichain-cli coblo2 sendmany "tabby" "{\"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ\":0.01,\"1353tsE8YMTA4EuV7dgUXGjNFf9KpVvKHz\":0.02}" 6 "testing"
+        > multichain-cli testchain sendmany "tabby" "{\"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ\":0.01,\"1353tsE8YMTA4EuV7dgUXGjNFf9KpVvKHz\":0.02}" 6 "testing"
 
         As a json rpc call
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "sendmany", "params": ["tabby", "{\"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ\":0.01,\"1353tsE8YMTA4EuV7dgUXGjNFf9KpVvKHz\":0.02}", 6, "testing"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "sendmany", "params": ["tabby", "{\"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ\":0.01,\"1353tsE8YMTA4EuV7dgUXGjNFf9KpVvKHz\":0.02}", 6, "testing"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -4009,9 +4603,9 @@ class RpcClient:
         "transactionid"                     (string) The transaction id.
 
         Examples:
-        > multichain-cli coblo2 sendwithdata "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "{\"12345-6789-1234\":100,\"1234-5678-1234\":200}" 48656C6C6F20576F726C64210A
-        > multichain-cli coblo2 sendwithdata "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 0.1 48656C6C6F20576F726C64210A
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "sendwithdata", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", 0.1, 48656C6C6F20576F726C64210A] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain sendwithdata "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "{\"12345-6789-1234\":100,\"1234-5678-1234\":200}" 48656C6C6F20576F726C64210A
+        > multichain-cli testchain sendwithdata "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 0.1 48656C6C6F20576F726C64210A
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "sendwithdata", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", 0.1, 48656C6C6F20576F726C64210A] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -4037,9 +4631,9 @@ class RpcClient:
         "transactionid"                     (string) The transaction id.
 
         Examples:
-        > multichain-cli coblo2 sendwithdatafrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "{\"12345-6789-1234\":100,\"1234-5678-1234\":200}" 48656C6C6F20576F726C64210A
-        > multichain-cli coblo2 sendwithdatafrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 0.1 48656C6C6F20576F726C64210A
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "sendwithdatafrom", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", 0.1, 48656C6C6F20576F726C64210A] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain sendwithdatafrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "{\"12345-6789-1234\":100,\"1234-5678-1234\":200}" 48656C6C6F20576F726C64210A
+        > multichain-cli testchain sendwithdatafrom "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 0.1 48656C6C6F20576F726C64210A
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "sendwithdatafrom", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", 0.1, 48656C6C6F20576F726C64210A] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -4054,8 +4648,8 @@ class RpcClient:
         2. "account"                        (string, required) The account to assign the address to.
 
         Examples:
-        > multichain-cli coblo2 setaccount "1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ" "tabby"
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "setaccount", "params": ["1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ", "tabby"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain setaccount "1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ" "tabby"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "setaccount", "params": ["1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ", "tabby"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -4072,8 +4666,8 @@ class RpcClient:
         true|false                          (boolean) Returns true if successful
 
         Examples:
-        > multichain-cli coblo2 settxfee 0.00001
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "settxfee", "params": [0.00001] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain settxfee 0.00001
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "settxfee", "params": [0.00001] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -4094,16 +4688,16 @@ class RpcClient:
         Examples:
 
         Unlock the wallet for 30 seconds
-        > multichain-cli coblo2 walletpassphrase "mypassphrase" 30
+        > multichain-cli testchain walletpassphrase "mypassphrase" 30
 
         Create the signature
-        > multichain-cli coblo2 signmessage "1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ" "my message"
+        > multichain-cli testchain signmessage "1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ" "my message"
 
         Verify the signature
-        > multichain-cli coblo2 verifymessage "1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ" "signature" "my message"
+        > multichain-cli testchain verifymessage "1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ" "signature" "my message"
 
         As json rpc
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "signmessage", "params": ["1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ", "my message"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "signmessage", "params": ["1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ", "my message"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
@@ -4114,9 +4708,9 @@ class RpcClient:
         Subscribes to the stream.
 
         Arguments:
-        1. "stream-identifier"              (string, required) Stream identifier - one of the following: stream txid, stream reference, stream name.
+        1. "stream-identifier"              (string, required) Stream identifier - one of: create txid, stream reference, stream name.
          or
-        1. "asset-identifier"               (string, required) Asset identifier - one of the following: asset txid, asset reference, asset name.
+        1. "asset-identifier"               (string, required) Asset identifier - one of: issue txid, asset reference, asset name.
          or
         1. entity-identifier(s)             (array, optional) A json array of stream or asset identifiers 
         2. rescan                           (boolean, optional, default=true) Rescan the wallet for transactions
@@ -4128,34 +4722,103 @@ class RpcClient:
         Examples:
 
         Subscribe to the stream with rescan
-        > multichain-cli coblo2 subscribe "test-stream"
+        > multichain-cli testchain subscribe "test-stream"
 
         Subscribe to the stream without rescan
-        > multichain-cli coblo2 subscribe "test-stream" false
+        > multichain-cli testchain subscribe "test-stream" false
 
         As a JSON-RPC call
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "subscribe", "params": ["test-stream", false] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "subscribe", "params": ["test-stream", false] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 
-    def unsubscribe(self, entity_identifiers):
+    def unsubscribe(self, entity_identifiers, purge=None):
         """
-        unsubscribe entity-identifier(s)
+        unsubscribe entity-identifier(s) ( purge )
 
         Unsubscribes from the stream.
 
         Arguments:
-        1. "stream-identifier"              (string, required) Stream identifier - one of the following: stream txid, stream reference, stream name.
+        1. "stream-identifier"              (string, required) Stream identifier - one of: create txid, stream reference, stream name.
          or
-        1. "asset-identifier"               (string, required) Asset identifier - one of the following: asset txid, asset reference, asset name.
+        1. "asset-identifier"               (string, required) Asset identifier - one of: issue txid, asset reference, asset name.
          or
         1. entity-identifier(s)             (array, optional) A json array of stream or asset identifiers 
+        2. purge                            (boolean, optional, default=false) Purge all offchain data for the stream
 
         Result:
 
         Examples:
-        > multichain-cli coblo2 unsubscribe "test-stream"
-        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "unsubscribe", "params": ["test-stream", false] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+        > multichain-cli testchain unsubscribe "test-stream"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "unsubscribe", "params": ["test-stream", false] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
+
+        """
+
+    def walletlock(self):
+        """
+        walletlock
+
+        Removes the wallet encryption key from memory, locking the wallet.
+        After calling this method, you will need to call walletpassphrase again
+        before being able to call any methods which require the wallet to be unlocked.
+
+        Examples:
+
+        Set the passphrase for 2 minutes to perform a transaction
+        > multichain-cli testchain walletpassphrase "my pass phrase" 120
+
+        Perform a send (requires passphrase set)
+        > multichain-cli testchain sendtoaddress "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" 1.0
+
+        Clear the passphrase since we are done before 2 minutes is up
+        > multichain-cli testchain walletlock 
+
+        As json rpc call
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "walletlock", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
+
+        """
+
+    def walletpassphrase(self, passphrase, timeout):
+        """
+        walletpassphrase "passphrase" timeout
+
+        Stores the wallet decryption key in memory for 'timeout' seconds.
+        This is needed prior to performing transactions related to private keys such as sending assets
+
+        Arguments:
+        1. "passphrase"                     (string, required) The wallet passphrase
+        2. timeout                          (numeric, required) The time to keep the decryption key in seconds.
+
+        Note:
+        Issuing the walletpassphrase command while the wallet is already unlocked will set a new unlock
+        time that overrides the old one.
+
+        Examples:
+
+        unlock the wallet for 60 seconds
+        > multichain-cli testchain walletpassphrase "my pass phrase" 60
+
+        Lock the wallet again (before 60 seconds)
+        > multichain-cli testchain walletlock 
+
+        As json rpc call
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "walletpassphrase", "params": ["my pass phrase", 60] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
+
+        """
+
+    def walletpassphrasechange(self, oldpassphrase, newpassphrase):
+        """
+        walletpassphrasechange "oldpassphrase" "newpassphrase"
+
+        Changes the wallet passphrase from 'oldpassphrase' to 'newpassphrase'.
+
+        Arguments:
+        1. "oldpassphrase"                  (string, required) The current passphrase
+        2. "newpassphrase"                  (string, required) The new passphrase
+
+        Examples:
+        > multichain-cli testchain walletpassphrasechange "old one" "new one"
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "walletpassphrasechange", "params": ["old one", "new one"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332
 
         """
 

@@ -17,7 +17,7 @@ Content Blockchain RPC Client
 
 A Python 3 MultiChain RPC client build for the `Content Blockchain Project <https://content-blockchain.org/>`_
 
-This client is build against the API of the latest v2.0 alpha build of `MultiChain <https://www.multichain.com/developers/multichain-2-0-preview-releases/>`_ and includes code generated function annotations and api documentation to support code completion and get you up to speed fast.
+This client is build against the API of the v2.0 beta 2 build (February 11, 2019) of `MultiChain <https://www.multichain.com/download-install/>`_ and includes code generated function annotations and api documentation to support code completion and get you up to speed fast.
 
 
 Code Completion
@@ -46,4 +46,13 @@ The RPC client is published with the package name `mcrpc <https://pypi.python.or
     pip install mcrpc
 
 
-* Free software: GNU General Public License v3
+Release History
+===============
+
+1.0.2 (2019-02-13)
+------------------
+
+* Fix signature of appendrawexchange and completerawexchange
+* Build rpc client against Multichain 2 Beta 2
+* Add pretty-print support for response objects
+* Sort response class properties for cleaner diffs on updates

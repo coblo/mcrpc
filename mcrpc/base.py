@@ -5,6 +5,9 @@ from mcrpc.responses import *
 
 class BaseApiMethods:
 
+    def getassetinfo(self, asset_identifier, verbose=None):
+        return self._call("getassetinfo", asset_identifier, verbose)
+
     def getbestblockhash(self):
         return self._call("getbestblockhash")
 
@@ -27,12 +30,21 @@ class BaseApiMethods:
     def getdifficulty(self):
         return self._call("getdifficulty")
 
+    def getfiltercode(self, filter_identifier):
+        return self._call("getfiltercode", filter_identifier)
+
+    def getlastblockinfo(self, skip=None):
+        return self._call("getlastblockinfo", skip)
+
     def getmempoolinfo(self):
         data = self._call("getmempoolinfo")
         return Getmempoolinfo(**data)
 
     def getrawmempool(self, verbose=None):
         return self._call("getrawmempool", verbose)
+
+    def getstreaminfo(self, stream_identifier, verbose=None):
+        return self._call("getstreaminfo", stream_identifier, verbose)
 
     def gettxout(self, txid, n, includemempool=None):
         return self._call("gettxout", txid, n, includemempool)
@@ -50,14 +62,35 @@ class BaseApiMethods:
     def listpermissions(self, permissions=None, addresses=None, verbose=None):
         return self._call("listpermissions", permissions, addresses, verbose)
 
+    def liststreamfilters(self, filter_identifiers=None, verbose=None):
+        return self._call("liststreamfilters", filter_identifiers, verbose)
+
     def liststreams(self, stream_identifiers=None, verbose=None, count=None, start=None):
         return self._call("liststreams", stream_identifiers, verbose, count, start)
+
+    def listtxfilters(self, filter_identifiers=None, verbose=None):
+        return self._call("listtxfilters", filter_identifiers, verbose)
 
     def listupgrades(self, upgrade_identifiers=None):
         return self._call("listupgrades", upgrade_identifiers)
 
+    def runstreamfilter(self, filter_identifier, tx_hex_or_txid=None, vout=None):
+        return self._call("runstreamfilter", filter_identifier, tx_hex_or_txid, vout)
+
+    def runtxfilter(self, filter_identifier, tx_hex_or_txid=None):
+        return self._call("runtxfilter", filter_identifier, tx_hex_or_txid)
+
+    def teststreamfilter(self, restrictions, javascript_code, tx_hex_or_txid=None, vout=None):
+        return self._call("teststreamfilter", restrictions, javascript_code, tx_hex_or_txid, vout)
+
+    def testtxfilter(self, restrictions, javascript_code, tx_hex_or_txid=None):
+        return self._call("testtxfilter", restrictions, javascript_code, tx_hex_or_txid)
+
     def verifychain(self, checklevel=None, numblocks=None):
         return self._call("verifychain", checklevel, numblocks)
+
+    def verifypermission(self, address, permission):
+        return self._call("verifypermission", address, permission)
 
     def clearmempool(self):
         return self._call("clearmempool")
@@ -122,6 +155,14 @@ class BaseApiMethods:
     def getaddednodeinfo(self, dns, node=None):
         return self._call("getaddednodeinfo", dns, node)
 
+    def getchunkqueueinfo(self):
+        data = self._call("getchunkqueueinfo")
+        return Getchunkqueueinfo(**data)
+
+    def getchunkqueuetotals(self):
+        data = self._call("getchunkqueuetotals")
+        return Getchunkqueuetotals(**data)
+
     def getconnectioncount(self):
         return self._call("getconnectioncount")
 
@@ -139,8 +180,8 @@ class BaseApiMethods:
     def ping(self):
         return self._call("ping")
 
-    def appendrawchange(self, tx_hex_address, native_fee=None):
-        return self._call("appendrawchange", tx_hex_address, native_fee)
+    def appendrawchange(self, tx_hex, address, native_fee=None):
+        return self._call("appendrawchange", tx_hex, address, native_fee)
 
     def appendrawdata(self, tx_hex_data):
         return self._call("appendrawdata", tx_hex_data)
@@ -154,14 +195,23 @@ class BaseApiMethods:
     def getrawtransaction(self, txid, verbose=None):
         return self._call("getrawtransaction", txid, verbose)
 
-    def sendrawtransaction(self, tx_hex_, allowhighfees=None):
-        return self._call("sendrawtransaction", tx_hex_, allowhighfees)
+    def sendrawtransaction(self, tx_hex, allowhighfees=None):
+        return self._call("sendrawtransaction", tx_hex, allowhighfees)
+
+    def appendbinarycache(self, identifier, data_hex):
+        return self._call("appendbinarycache", identifier, data_hex)
+
+    def createbinarycache(self):
+        return self._call("createbinarycache")
 
     def createkeypairs(self, count=None):
         return self._call("createkeypairs", count)
 
     def createmultisig(self, nrequired, keys):
         return self._call("createmultisig", nrequired, keys)
+
+    def deletebinarycache(self, identifier):
+        return self._call("deletebinarycache", identifier)
 
     def estimatefee(self, nblocks):
         return self._call("estimatefee", nblocks)
@@ -178,11 +228,11 @@ class BaseApiMethods:
     def addmultisigaddress(self, nrequired, keys, account=None):
         return self._call("addmultisigaddress", nrequired, keys, account)
 
-    def appendrawexchange(self, hex_txid, vout, ask_assets):
-        return self._call("appendrawexchange", hex_txid, vout, ask_assets)
+    def appendrawexchange(self, hex, txid, vout, ask_assets):
+        return self._call("appendrawexchange", hex, txid, vout, ask_assets)
 
-    def approvefrom(self, from_address, upgrade_identifier, approve=None):
-        return self._call("approvefrom", from_address, upgrade_identifier, approve)
+    def approvefrom(self, from_address, upgrade_identifier_or_filter_identifier, approve=None):
+        return self._call("approvefrom", from_address, upgrade_identifier_or_filter_identifier, approve)
 
     def backupwallet(self, destination):
         return self._call("backupwallet", destination)
@@ -202,8 +252,8 @@ class BaseApiMethods:
     def createrawexchange(self, txid, vout, ask_assets):
         return self._call("createrawexchange", txid, vout, ask_assets)
 
-    def decoderawexchange(self, tx_hex_, verbose=None):
-        return self._call("decoderawexchange", tx_hex_, verbose)
+    def decoderawexchange(self, tx_hex, verbose=None):
+        return self._call("decoderawexchange", tx_hex, verbose)
 
     def disablerawtransaction(self, tx_hex):
         return self._call("disablerawtransaction", tx_hex)
@@ -305,8 +355,8 @@ class BaseApiMethods:
     def importprivkey(self, privkeys, label=None, rescan=None):
         return self._call("importprivkey", privkeys, label, rescan)
 
-    def importwallet(self, filename):
-        return self._call("importwallet", filename)
+    def importwallet(self, filename, rescan=None):
+        return self._call("importwallet", filename, rescan)
 
     def issue(self, address, asset_name_or_asset_params, quantity, smallest_unit=None, native_amount=None, custom_fields=None):
         return self._call("issue", address, asset_name_or_asset_params, quantity, smallest_unit, native_amount, custom_fields)
@@ -368,8 +418,11 @@ class BaseApiMethods:
     def liststreampublishers(self, stream_identifier, addresses=None, verbose=None, count=None, start=None, local_ordering=None):
         return self._call("liststreampublishers", stream_identifier, addresses, verbose, count, start, local_ordering)
 
-    def liststreamtxitems(self, stream_identifier, txid, verbose=None):
-        return self._call("liststreamtxitems", stream_identifier, txid, verbose)
+    def liststreamqueryitems(self, stream_identifier, query, verbose=None):
+        return self._call("liststreamqueryitems", stream_identifier, query, verbose)
+
+    def liststreamtxitems(self, stream_identifier, txids, verbose=None):
+        return self._call("liststreamtxitems", stream_identifier, txids, verbose)
 
     def listtransactions(self, account=None, count=None, from_includeWatchonly=None):
         return self._call("listtransactions", account, count, from_includeWatchonly)
@@ -389,11 +442,17 @@ class BaseApiMethods:
     def preparelockunspentfrom(self, from_address, asset_quantities, lock=None):
         return self._call("preparelockunspentfrom", from_address, asset_quantities, lock)
 
-    def publish(self, stream_identifier, key_or_keys, data_hex_or_data_obj):
-        return self._call("publish", stream_identifier, key_or_keys, data_hex_or_data_obj)
+    def publish(self, stream_identifier, key_or_keys, data_hex_or_data_obj, options=None):
+        return self._call("publish", stream_identifier, key_or_keys, data_hex_or_data_obj, options)
 
-    def publishfrom(self, from_address, stream_identifier, key_or_keys, data_hex_or_data_obj):
-        return self._call("publishfrom", from_address, stream_identifier, key_or_keys, data_hex_or_data_obj)
+    def publishfrom(self, from_address, stream_identifier, key_or_keys, data_hex_or_data_obj, options=None):
+        return self._call("publishfrom", from_address, stream_identifier, key_or_keys, data_hex_or_data_obj, options)
+
+    def publishmulti(self, stream_identifier, items, options=None):
+        return self._call("publishmulti", stream_identifier, items, options)
+
+    def publishmultifrom(self, from_address, stream_identifier, items, options=None):
+        return self._call("publishmultifrom", from_address, stream_identifier, items, options)
 
     def resendwallettransactions(self):
         return self._call("resendwallettransactions")
@@ -437,6 +496,15 @@ class BaseApiMethods:
     def subscribe(self, entity_identifiers, rescan=None):
         return self._call("subscribe", entity_identifiers, rescan)
 
-    def unsubscribe(self, entity_identifiers):
-        return self._call("unsubscribe", entity_identifiers)
+    def unsubscribe(self, entity_identifiers, purge=None):
+        return self._call("unsubscribe", entity_identifiers, purge)
+
+    def walletlock(self):
+        return self._call("walletlock")
+
+    def walletpassphrase(self, passphrase, timeout):
+        return self._call("walletpassphrase", passphrase, timeout)
+
+    def walletpassphrasechange(self, oldpassphrase, newpassphrase):
+        return self._call("walletpassphrasechange", oldpassphrase, newpassphrase)
 

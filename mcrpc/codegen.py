@@ -17,6 +17,9 @@ class {classname}:
 
     def as_dict(self):
         return self._kwargs
+        
+    def __repr__(self):
+        return repr(self._kwargs)
 
     def __eq__(self, other):
         if isinstance(other, self.__class__):
@@ -51,7 +54,7 @@ def build_response_class(method, resp):
         return result
 
     setters = []
-    for field in resp.keys():
+    for field in sorted(resp.keys()):
         setter = 'self.{} = kwargs["{}"]'.format(field, field)
         setters.append(setter)
     setters = '\n        '.join(setters)
@@ -124,7 +127,10 @@ def build_code(client):
                 )
         else:
 
-            sig_clean = sig\
+            sig_clean = sig \
+                .replace('from ', 'from_') \
+                .replace('hex ', 'hex_') \
+                .replace('open ', 'open_')\
                 .replace('( ', '(')\
                 .replace(' )', ')')\
                 .replace('"', '')\
@@ -132,9 +138,7 @@ def build_code(client):
                 .replace('-', '_')\
                 .replace('(s)', 's')\
                 .replace('(es)', 'es')\
-                .replace('from ', 'from_')\
-                .replace('hex ', 'hex_')\
-                .replace('open ', 'open_')
+
 
             is_clean = not any(c in sig_clean for c in '{')
 
@@ -143,6 +147,12 @@ def build_code(client):
                 args_kwargs = sig_clean.split('(')
                 args = args_kwargs[0].split()
                 kwargs = args_kwargs[1].strip(')').split() if len(args_kwargs) > 1 else []
+
+                # special case new 'options' kwarg that is not in brackets
+                if args and args[-1] == 'options':
+                    args = args[:-1]
+                    kwargs.append('options')
+
                 call = ', '.join(args + kwargs)
                 sig_kwargs = ['{}=None'.format(kw) for kw in kwargs]
                 sig = ', '.join(args + sig_kwargs)
@@ -175,7 +185,7 @@ def build_code(client):
 
 
 def generate_code():
-    client = RpcClient('127.0.0.1', '7010', 'testuser', 'testpassword', False)
+    client = RpcClient('127.0.0.1', '9000', 'testuser', 'testpassword', False)
     build_code(client)
 
 
