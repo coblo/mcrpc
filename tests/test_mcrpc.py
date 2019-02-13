@@ -16,7 +16,7 @@ class TestMCRPC(unittest.TestCase):
     def setUp(self):
         """Set up test fixtures, if any."""
         self.c = RpcClient(
-            '127.0.0.1', '7010', 'testuser', 'testpassword', False
+            '127.0.0.1', '9000', 'testuser', 'testpassword', False
         )
 
     def test_getinfo(self):
@@ -36,7 +36,7 @@ class TestMCRPC(unittest.TestCase):
 
     def test_get_api_methods(self):
         methods = get_api_methods(self.c)
-        self.assertEqual(len(methods), 148)
+        self.assertEqual(len(methods), 170)
         self.c.getinfo()
 
     def test_encoding_text(self):
