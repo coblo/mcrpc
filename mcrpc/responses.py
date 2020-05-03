@@ -21,7 +21,7 @@ class Getblockchaininfo:
 
     def as_dict(self):
         return self._kwargs
-        
+
     def __repr__(self):
         return repr(self._kwargs)
 
@@ -40,7 +40,7 @@ class Getmempoolinfo:
 
     def as_dict(self):
         return self._kwargs
-        
+
     def __repr__(self):
         return repr(self._kwargs)
 
@@ -64,7 +64,7 @@ class Gettxoutsetinfo:
 
     def as_dict(self):
         return self._kwargs
-        
+
     def __repr__(self):
         return repr(self._kwargs)
 
@@ -110,7 +110,7 @@ class Getinfo:
 
     def as_dict(self):
         return self._kwargs
-        
+
     def __repr__(self):
         return repr(self._kwargs)
 
@@ -130,7 +130,7 @@ class Getinitstatus:
 
     def as_dict(self):
         return self._kwargs
-        
+
     def __repr__(self):
         return repr(self._kwargs)
 
@@ -173,7 +173,7 @@ class Getruntimeparams:
 
     def as_dict(self):
         return self._kwargs
-        
+
     def __repr__(self):
         return repr(self._kwargs)
 
@@ -202,7 +202,7 @@ class Getmininginfo:
 
     def as_dict(self):
         return self._kwargs
-        
+
     def __repr__(self):
         return repr(self._kwargs)
 
@@ -221,7 +221,7 @@ class Getchunkqueueinfo:
 
     def as_dict(self):
         return self._kwargs
-        
+
     def __repr__(self):
         return repr(self._kwargs)
 
@@ -240,7 +240,7 @@ class Getchunkqueuetotals:
 
     def as_dict(self):
         return self._kwargs
-        
+
     def __repr__(self):
         return repr(self._kwargs)
 
@@ -260,7 +260,7 @@ class Getnettotals:
 
     def as_dict(self):
         return self._kwargs
-        
+
     def __repr__(self):
         return repr(self._kwargs)
 
@@ -286,7 +286,7 @@ class Getnetworkinfo:
 
     def as_dict(self):
         return self._kwargs
-        
+
     def __repr__(self):
         return repr(self._kwargs)
 
@@ -310,7 +310,7 @@ class Getwalletinfo:
 
     def as_dict(self):
         return self._kwargs
-        
+
     def __repr__(self):
         return repr(self._kwargs)
 

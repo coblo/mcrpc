@@ -8,7 +8,7 @@ from mcrpc.client import RpcClient
 
 HERE = os.path.dirname(__file__)
 
-IGNORE = ['purgefeed']
+IGNORE = ["purgefeed"]
 
 
 resp_tpl = """
@@ -19,7 +19,7 @@ class {classname}:
 
     def as_dict(self):
         return self._kwargs
-        
+
     def __repr__(self):
         return repr(self._kwargs)
 
@@ -33,7 +33,7 @@ class {classname}:
 
 def get_stub_template():
     filepath = os.path.join(HERE, "client.tpl")
-    with open(filepath, 'rt', encoding='utf-8') as f:
+    with open(filepath, "rt", encoding="utf-8") as f:
         return Template(f.read())
 
 
