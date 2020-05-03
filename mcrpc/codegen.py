@@ -195,7 +195,4 @@ def generate_code():
 
 
 if __name__ == "__main__":
-    import mcrpc
-    from pprint import pprint
-    # generate_code()
-    pprint(get_api_methods(mcrpc.autoconnect()))
+    generate_code()
