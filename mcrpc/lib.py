@@ -3,7 +3,6 @@ from os import listdir
 from os.path import exists, join
 from typing import List, Optional
 import appdirs
-import psutil
 from configobj import ConfigObj
 
 
@@ -19,16 +18,6 @@ def read_chains() -> List[str]:
     return chains
 
 
-def read_node_processes() -> List[psutil.Process]:
-    """Returns a list of running multichain processes."""
-    procs = []
-    for proc in psutil.process_iter(["name"]):
-        if proc.info["name"].startswith("multichaind"):
-            procs.append(proc)
-            print(proc)
-    return procs
-
-
 def read_node_config(chain: str) -> ConfigObj:
     """Read node configuration from multichain.conf"""
     conf_path = join(DATADIR, chain, "multichain.conf")
@@ -42,10 +31,12 @@ def read_chain_params(chain: str) -> ConfigObj:
 
 
 def autoconnect(chain: Optional[str] = None) -> Optional["RpcClient"]:
-    """Return RPC client for chain from on-disk information."""
+    """Return RPC client for chain from on-disk information.
+
+    If no chain-name is passed it will return the first one found.
+    """
     import mcrpc
 
-    # Use first found chain if no chain was selected
     if chain is None:
         try:
             chain = read_chains()[0]
