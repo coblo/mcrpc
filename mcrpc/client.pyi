@@ -1068,6 +1068,28 @@ class RpcClient:
 
         """
 
+    def purgefeed(self, feed_name, file_or_day_or_asterisk):
+        """
+        purgefeed "feed-name" file|days|"*"
+
+        Available only in Enterprise Edition.
+
+        Purges old feed files
+
+        Arguments:
+        1. "feed-name"                      (string, required) Feed name
+        2. file                             (integer, required) >= 0 Purge files before this file, normally, adapter read file.
+         or
+        2. days                             (integer, required) <0 Purge only events more than this number of days ago.
+         or
+        2. "*"                              (string, required) Purge all files and reset feed pointer 
+
+        Examples:
+        > multichain-cli coblo2 purgefeed feed1 1000
+        > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "purgefeed", "params": [feed1, 1000] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
+
+        """
+
     def resumefeed(self, feed_name, buffer=None):
         """
         resumefeed "feed-name" ( buffer )

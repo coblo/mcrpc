@@ -150,6 +150,9 @@ class BaseApiMethods:
     def pausefeed(self, feed_name, buffer=None):
         return self._call("pausefeed", feed_name, buffer)
 
+    def purgefeed(self, feed_name, file_or_day_or_asterisk):
+        return self._call("purgefeed", feed_name, file_or_day_or_asterisk)
+
     def resumefeed(self, feed_name, buffer=None):
         return self._call("resumefeed", feed_name, buffer)
 

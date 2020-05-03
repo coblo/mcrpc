@@ -8,7 +8,7 @@ from mcrpc.client import RpcClient
 
 HERE = os.path.dirname(__file__)
 
-IGNORE = ["purgefeed"]
+IGNORE = []
 
 
 resp_tpl = """
@@ -127,6 +127,7 @@ def build_code(client):
 
             sig_clean = (
                 sig.replace("from ", "from_")
+                .replace('file|days|"*"', "file_or_day_or_asterisk")
                 .replace("hex ", "hex_")
                 .replace("open ", "open_")
                 .replace("globals ", "globals_")
@@ -194,4 +195,7 @@ def generate_code():
 
 
 if __name__ == "__main__":
-    generate_code()
+    import mcrpc
+    from pprint import pprint
+    # generate_code()
+    pprint(get_api_methods(mcrpc.autoconnect()))
