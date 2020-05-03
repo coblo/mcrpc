@@ -179,6 +179,7 @@ def build_code(client):
         outf.write(stub_out)
 
     resp_out_path = os.path.join(HERE, "responses.py")
+    resp_out = resp_out.strip() + '\n'
     with open(resp_out_path, "wt", encoding="utf-8") as outf:
         outf.write(resp_out)
 
