@@ -41,7 +41,7 @@ def read_chain_params(chain: str) -> ConfigObj:
     return ConfigObj(conf_path)
 
 
-def autoconnect(chain: Optional[str] = None) -> Optional['RpcClient']:
+def autoconnect(chain: Optional[str] = None) -> Optional["RpcClient"]:
     """Return RPC client for chain from on-disk information."""
     import mcrpc
 
@@ -53,10 +53,10 @@ def autoconnect(chain: Optional[str] = None) -> Optional['RpcClient']:
             return None
     params = read_chain_params(chain)
     config = read_node_config(chain)
-    host = config.get('rpcbind') or '127.0.0.1'
-    port = config.get('rpcport') or params['default-rpc-port']
-    user = config['rpcuser']
-    pwd = config['rpcpassword']
+    host = config.get("rpcbind") or "127.0.0.1"
+    port = config.get("rpcport") or params["default-rpc-port"]
+    user = config["rpcuser"]
+    pwd = config["rpcpassword"]
     client = mcrpc.RpcClient(host, port, user, pwd)
     # Test client connection before returning
     try:

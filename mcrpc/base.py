@@ -4,7 +4,6 @@ from mcrpc.responses import *
 
 
 class BaseApiMethods:
-
     def getassetinfo(self, asset_identifier, verbose=None):
         return self._call("getassetinfo", asset_identifier, verbose)
 
@@ -65,7 +64,9 @@ class BaseApiMethods:
     def liststreamfilters(self, filter_identifiers=None, verbose=None):
         return self._call("liststreamfilters", filter_identifiers, verbose)
 
-    def liststreams(self, stream_identifiers=None, verbose=None, count=None, start=None):
+    def liststreams(
+        self, stream_identifiers=None, verbose=None, count=None, start=None
+    ):
         return self._call("liststreams", stream_identifiers, verbose, count, start)
 
     def listtxfilters(self, filter_identifiers=None, verbose=None):
@@ -80,8 +81,12 @@ class BaseApiMethods:
     def runtxfilter(self, filter_identifier, tx_hex_or_txid=None):
         return self._call("runtxfilter", filter_identifier, tx_hex_or_txid)
 
-    def teststreamfilter(self, restrictions, javascript_code, tx_hex_or_txid=None, vout=None):
-        return self._call("teststreamfilter", restrictions, javascript_code, tx_hex_or_txid, vout)
+    def teststreamfilter(
+        self, restrictions, javascript_code, tx_hex_or_txid=None, vout=None
+    ):
+        return self._call(
+            "teststreamfilter", restrictions, javascript_code, tx_hex_or_txid, vout
+        )
 
     def testtxfilter(self, restrictions, javascript_code, tx_hex_or_txid=None):
         return self._call("testtxfilter", restrictions, javascript_code, tx_hex_or_txid)
@@ -134,8 +139,12 @@ class BaseApiMethods:
     def createfeed(self, feed_name, parameters=None):
         return self._call("createfeed", feed_name, parameters)
 
-    def datareftobinarycache(self, identifier, dataref, count_bytes=None, start_byte=None):
-        return self._call("datareftobinarycache", identifier, dataref, count_bytes, start_byte)
+    def datareftobinarycache(
+        self, identifier, dataref, count_bytes=None, start_byte=None
+    ):
+        return self._call(
+            "datareftobinarycache", identifier, dataref, count_bytes, start_byte
+        )
 
     def deletefeed(self, feed_name, force=None):
         return self._call("deletefeed", feed_name, force)
@@ -262,23 +271,58 @@ class BaseApiMethods:
     def appendrawexchange(self, hex, txid, vout, ask_assets):
         return self._call("appendrawexchange", hex, txid, vout, ask_assets)
 
-    def approvefrom(self, from_address, upgrade_identifier_or_filter_identifier, approve=None):
-        return self._call("approvefrom", from_address, upgrade_identifier_or_filter_identifier, approve)
+    def approvefrom(
+        self, from_address, upgrade_identifier_or_filter_identifier, approve=None
+    ):
+        return self._call(
+            "approvefrom",
+            from_address,
+            upgrade_identifier_or_filter_identifier,
+            approve,
+        )
 
     def backupwallet(self, destination):
         return self._call("backupwallet", destination)
 
-    def combineunspent(self, addresses=None, minconf=None, maxcombines=None, mininputs=None, maxinputs=None, maxtime=None):
-        return self._call("combineunspent", addresses, minconf, maxcombines, mininputs, maxinputs, maxtime)
+    def combineunspent(
+        self,
+        addresses=None,
+        minconf=None,
+        maxcombines=None,
+        mininputs=None,
+        maxinputs=None,
+        maxtime=None,
+    ):
+        return self._call(
+            "combineunspent",
+            addresses,
+            minconf,
+            maxcombines,
+            mininputs,
+            maxinputs,
+            maxtime,
+        )
 
-    def completerawexchange(self, hex_txid, vout, ask_assets, data_or_publish_new_stream_item=None):
-        return self._call("completerawexchange", hex_txid, vout, ask_assets, data_or_publish_new_stream_item)
+    def completerawexchange(
+        self, hex_txid, vout, ask_assets, data_or_publish_new_stream_item=None
+    ):
+        return self._call(
+            "completerawexchange",
+            hex_txid,
+            vout,
+            ask_assets,
+            data_or_publish_new_stream_item,
+        )
 
     def create(self, entity_type, entity_name, open_, custom_fields=None):
         return self._call("create", entity_type, entity_name, open_, custom_fields)
 
-    def createfrom(self, from_address, entity_type, entity_name, open_, custom_fields=None):
-        return self._call("createfrom", from_address, entity_type, entity_name, open_, custom_fields)
+    def createfrom(
+        self, from_address, entity_type, entity_name, open_, custom_fields=None
+    ):
+        return self._call(
+            "createfrom", from_address, entity_type, entity_name, open_, custom_fields
+        )
 
     def createrawexchange(self, txid, vout, ask_assets):
         return self._call("createrawexchange", txid, vout, ask_assets)
@@ -316,8 +360,12 @@ class BaseApiMethods:
     def getaddresstransaction(self, address, txid, verbose=None):
         return self._call("getaddresstransaction", address, txid, verbose)
 
-    def getassetbalances(self, account=None, minconf=None, includeWatchonly=None, includeLocked=None):
-        return self._call("getassetbalances", account, minconf, includeWatchonly, includeLocked)
+    def getassetbalances(
+        self, account=None, minconf=None, includeWatchonly=None, includeLocked=None
+    ):
+        return self._call(
+            "getassetbalances", account, minconf, includeWatchonly, includeLocked
+        )
 
     def getassettransaction(self, asset_identifier, txid, verbose=None):
         return self._call("getassettransaction", asset_identifier, txid, verbose)
@@ -325,8 +373,22 @@ class BaseApiMethods:
     def getbalance(self, account=None, minconf=None, includeWatchonly=None):
         return self._call("getbalance", account, minconf, includeWatchonly)
 
-    def getmultibalances(self, addresses=None, assets=None, minconf=None, includeLocked=None, includeWatchonly=None):
-        return self._call("getmultibalances", addresses, assets, minconf, includeLocked, includeWatchonly)
+    def getmultibalances(
+        self,
+        addresses=None,
+        assets=None,
+        minconf=None,
+        includeLocked=None,
+        includeWatchonly=None,
+    ):
+        return self._call(
+            "getmultibalances",
+            addresses,
+            assets,
+            minconf,
+            includeLocked,
+            includeWatchonly,
+        )
 
     def getnewaddress(self, account=None):
         return self._call("getnewaddress", account)
@@ -368,17 +430,89 @@ class BaseApiMethods:
     def getwallettransaction(self, txid, includeWatchonly=None, verbose=None):
         return self._call("getwallettransaction", txid, includeWatchonly, verbose)
 
-    def grant(self, addresses, permissions, native_amount=None, startblock=None, endblock=None, comment=None, comment_to=None):
-        return self._call("grant", addresses, permissions, native_amount, startblock, endblock, comment, comment_to)
+    def grant(
+        self,
+        addresses,
+        permissions,
+        native_amount=None,
+        startblock=None,
+        endblock=None,
+        comment=None,
+        comment_to=None,
+    ):
+        return self._call(
+            "grant",
+            addresses,
+            permissions,
+            native_amount,
+            startblock,
+            endblock,
+            comment,
+            comment_to,
+        )
 
-    def grantfrom(self, from_address, to_addresses, permissions, native_amount=None, startblock=None, endblock=None, comment=None, comment_to=None):
-        return self._call("grantfrom", from_address, to_addresses, permissions, native_amount, startblock, endblock, comment, comment_to)
+    def grantfrom(
+        self,
+        from_address,
+        to_addresses,
+        permissions,
+        native_amount=None,
+        startblock=None,
+        endblock=None,
+        comment=None,
+        comment_to=None,
+    ):
+        return self._call(
+            "grantfrom",
+            from_address,
+            to_addresses,
+            permissions,
+            native_amount,
+            startblock,
+            endblock,
+            comment,
+            comment_to,
+        )
 
-    def grantwithdata(self, addresses, permissions, data_or_publish_new_stream_item, native_amount=None, startblock=None, endblock=None):
-        return self._call("grantwithdata", addresses, permissions, data_or_publish_new_stream_item, native_amount, startblock, endblock)
+    def grantwithdata(
+        self,
+        addresses,
+        permissions,
+        data_or_publish_new_stream_item,
+        native_amount=None,
+        startblock=None,
+        endblock=None,
+    ):
+        return self._call(
+            "grantwithdata",
+            addresses,
+            permissions,
+            data_or_publish_new_stream_item,
+            native_amount,
+            startblock,
+            endblock,
+        )
 
-    def grantwithdatafrom(self, from_address, to_addresses, permissions, data_or_publish_new_stream_item, native_amount=None, startblock=None, endblock=None):
-        return self._call("grantwithdatafrom", from_address, to_addresses, permissions, data_or_publish_new_stream_item, native_amount, startblock, endblock)
+    def grantwithdatafrom(
+        self,
+        from_address,
+        to_addresses,
+        permissions,
+        data_or_publish_new_stream_item,
+        native_amount=None,
+        startblock=None,
+        endblock=None,
+    ):
+        return self._call(
+            "grantwithdatafrom",
+            from_address,
+            to_addresses,
+            permissions,
+            data_or_publish_new_stream_item,
+            native_amount,
+            startblock,
+            endblock,
+        )
 
     def importaddress(self, addresses, label=None, rescan=None):
         return self._call("importaddress", addresses, label, rescan)
@@ -389,17 +523,81 @@ class BaseApiMethods:
     def importwallet(self, filename, rescan=None):
         return self._call("importwallet", filename, rescan)
 
-    def issue(self, address, asset_name_or_asset_params, quantity, smallest_unit=None, native_amount=None, custom_fields=None):
-        return self._call("issue", address, asset_name_or_asset_params, quantity, smallest_unit, native_amount, custom_fields)
+    def issue(
+        self,
+        address,
+        asset_name_or_asset_params,
+        quantity,
+        smallest_unit=None,
+        native_amount=None,
+        custom_fields=None,
+    ):
+        return self._call(
+            "issue",
+            address,
+            asset_name_or_asset_params,
+            quantity,
+            smallest_unit,
+            native_amount,
+            custom_fields,
+        )
 
-    def issuefrom(self, from_address, to_address, asset_name_or_asset_params, quantity, smallest_unit=None, native_amount=None, custom_fields=None):
-        return self._call("issuefrom", from_address, to_address, asset_name_or_asset_params, quantity, smallest_unit, native_amount, custom_fields)
+    def issuefrom(
+        self,
+        from_address,
+        to_address,
+        asset_name_or_asset_params,
+        quantity,
+        smallest_unit=None,
+        native_amount=None,
+        custom_fields=None,
+    ):
+        return self._call(
+            "issuefrom",
+            from_address,
+            to_address,
+            asset_name_or_asset_params,
+            quantity,
+            smallest_unit,
+            native_amount,
+            custom_fields,
+        )
 
-    def issuemore(self, address, asset_identifier, quantity, native_amount=None, custom_fields=None):
-        return self._call("issuemore", address, asset_identifier, quantity, native_amount, custom_fields)
+    def issuemore(
+        self,
+        address,
+        asset_identifier,
+        quantity,
+        native_amount=None,
+        custom_fields=None,
+    ):
+        return self._call(
+            "issuemore",
+            address,
+            asset_identifier,
+            quantity,
+            native_amount,
+            custom_fields,
+        )
 
-    def issuemorefrom(self, from_address, to_address, asset_identifier, quantity, native_amount=None, custom_fields=None):
-        return self._call("issuemorefrom", from_address, to_address, asset_identifier, quantity, native_amount, custom_fields)
+    def issuemorefrom(
+        self,
+        from_address,
+        to_address,
+        asset_identifier,
+        quantity,
+        native_amount=None,
+        custom_fields=None,
+    ):
+        return self._call(
+            "issuemorefrom",
+            from_address,
+            to_address,
+            asset_identifier,
+            quantity,
+            native_amount,
+            custom_fields,
+        )
 
     def keypoolrefill(self, newsize=None):
         return self._call("keypoolrefill", newsize)
@@ -416,38 +614,151 @@ class BaseApiMethods:
     def listaddresstransactions(self, address, count=None, skip=None, verbose=None):
         return self._call("listaddresstransactions", address, count, skip, verbose)
 
-    def listassettransactions(self, asset_identifier, verbose=None, count=None, start=None, local_ordering=None):
-        return self._call("listassettransactions", asset_identifier, verbose, count, start, local_ordering)
+    def listassettransactions(
+        self,
+        asset_identifier,
+        verbose=None,
+        count=None,
+        start=None,
+        local_ordering=None,
+    ):
+        return self._call(
+            "listassettransactions",
+            asset_identifier,
+            verbose,
+            count,
+            start,
+            local_ordering,
+        )
 
     def listlockunspent(self):
         return self._call("listlockunspent")
 
-    def listreceivedbyaccount(self, minconf=None, includeempty=None, includeWatchonly=None):
-        return self._call("listreceivedbyaccount", minconf, includeempty, includeWatchonly)
+    def listreceivedbyaccount(
+        self, minconf=None, includeempty=None, includeWatchonly=None
+    ):
+        return self._call(
+            "listreceivedbyaccount", minconf, includeempty, includeWatchonly
+        )
 
-    def listreceivedbyaddress(self, minconf=None, includeempty=None, includeWatchonly=None):
-        return self._call("listreceivedbyaddress", minconf, includeempty, includeWatchonly)
+    def listreceivedbyaddress(
+        self, minconf=None, includeempty=None, includeWatchonly=None
+    ):
+        return self._call(
+            "listreceivedbyaddress", minconf, includeempty, includeWatchonly
+        )
 
-    def listsinceblock(self, blockhash=None, target_confirmations=None, includeWatchonly=None):
-        return self._call("listsinceblock", blockhash, target_confirmations, includeWatchonly)
+    def listsinceblock(
+        self, blockhash=None, target_confirmations=None, includeWatchonly=None
+    ):
+        return self._call(
+            "listsinceblock", blockhash, target_confirmations, includeWatchonly
+        )
 
-    def liststreamblockitems(self, stream_identifier, block_set_identifier, verbose=None, count=None, start=None):
-        return self._call("liststreamblockitems", stream_identifier, block_set_identifier, verbose, count, start)
+    def liststreamblockitems(
+        self,
+        stream_identifier,
+        block_set_identifier,
+        verbose=None,
+        count=None,
+        start=None,
+    ):
+        return self._call(
+            "liststreamblockitems",
+            stream_identifier,
+            block_set_identifier,
+            verbose,
+            count,
+            start,
+        )
 
-    def liststreamitems(self, stream_identifier, verbose=None, count=None, start=None, local_ordering=None):
-        return self._call("liststreamitems", stream_identifier, verbose, count, start, local_ordering)
+    def liststreamitems(
+        self,
+        stream_identifier,
+        verbose=None,
+        count=None,
+        start=None,
+        local_ordering=None,
+    ):
+        return self._call(
+            "liststreamitems", stream_identifier, verbose, count, start, local_ordering
+        )
 
-    def liststreamkeyitems(self, stream_identifier, key, verbose=None, count=None, start=None, local_ordering=None):
-        return self._call("liststreamkeyitems", stream_identifier, key, verbose, count, start, local_ordering)
+    def liststreamkeyitems(
+        self,
+        stream_identifier,
+        key,
+        verbose=None,
+        count=None,
+        start=None,
+        local_ordering=None,
+    ):
+        return self._call(
+            "liststreamkeyitems",
+            stream_identifier,
+            key,
+            verbose,
+            count,
+            start,
+            local_ordering,
+        )
 
-    def liststreamkeys(self, stream_identifier, keys=None, verbose=None, count=None, start=None, local_ordering=None):
-        return self._call("liststreamkeys", stream_identifier, keys, verbose, count, start, local_ordering)
+    def liststreamkeys(
+        self,
+        stream_identifier,
+        keys=None,
+        verbose=None,
+        count=None,
+        start=None,
+        local_ordering=None,
+    ):
+        return self._call(
+            "liststreamkeys",
+            stream_identifier,
+            keys,
+            verbose,
+            count,
+            start,
+            local_ordering,
+        )
 
-    def liststreampublisheritems(self, stream_identifier, address, verbose=None, count=None, start=None, local_ordering=None):
-        return self._call("liststreampublisheritems", stream_identifier, address, verbose, count, start, local_ordering)
+    def liststreampublisheritems(
+        self,
+        stream_identifier,
+        address,
+        verbose=None,
+        count=None,
+        start=None,
+        local_ordering=None,
+    ):
+        return self._call(
+            "liststreampublisheritems",
+            stream_identifier,
+            address,
+            verbose,
+            count,
+            start,
+            local_ordering,
+        )
 
-    def liststreampublishers(self, stream_identifier, addresses=None, verbose=None, count=None, start=None, local_ordering=None):
-        return self._call("liststreampublishers", stream_identifier, addresses, verbose, count, start, local_ordering)
+    def liststreampublishers(
+        self,
+        stream_identifier,
+        addresses=None,
+        verbose=None,
+        count=None,
+        start=None,
+        local_ordering=None,
+    ):
+        return self._call(
+            "liststreampublishers",
+            stream_identifier,
+            addresses,
+            verbose,
+            count,
+            start,
+            local_ordering,
+        )
 
     def liststreamqueryitems(self, stream_identifier, query, verbose=None):
         return self._call("liststreamqueryitems", stream_identifier, query, verbose)
@@ -461,8 +772,12 @@ class BaseApiMethods:
     def listunspent(self, minconf=None, maxconf=None, addresses=None):
         return self._call("listunspent", minconf, maxconf, addresses)
 
-    def listwallettransactions(self, count=None, skip=None, includeWatchonly=None, verbose=None):
-        return self._call("listwallettransactions", count, skip, includeWatchonly, verbose)
+    def listwallettransactions(
+        self, count=None, skip=None, includeWatchonly=None, verbose=None
+    ):
+        return self._call(
+            "listwallettransactions", count, skip, includeWatchonly, verbose
+        )
 
     def move(self, fromaccount, toaccount, amount, minconf=None, comment=None):
         return self._call("move", fromaccount, toaccount, amount, minconf, comment)
@@ -471,58 +786,191 @@ class BaseApiMethods:
         return self._call("preparelockunspent", asset_quantities, lock)
 
     def preparelockunspentfrom(self, from_address, asset_quantities, lock=None):
-        return self._call("preparelockunspentfrom", from_address, asset_quantities, lock)
+        return self._call(
+            "preparelockunspentfrom", from_address, asset_quantities, lock
+        )
 
-    def publish(self, stream_identifier, key_or_keys, data_hex_or_data_obj, options=None):
-        return self._call("publish", stream_identifier, key_or_keys, data_hex_or_data_obj, options)
+    def publish(
+        self, stream_identifier, key_or_keys, data_hex_or_data_obj, options=None
+    ):
+        return self._call(
+            "publish", stream_identifier, key_or_keys, data_hex_or_data_obj, options
+        )
 
-    def publishfrom(self, from_address, stream_identifier, key_or_keys, data_hex_or_data_obj, options=None):
-        return self._call("publishfrom", from_address, stream_identifier, key_or_keys, data_hex_or_data_obj, options)
+    def publishfrom(
+        self,
+        from_address,
+        stream_identifier,
+        key_or_keys,
+        data_hex_or_data_obj,
+        options=None,
+    ):
+        return self._call(
+            "publishfrom",
+            from_address,
+            stream_identifier,
+            key_or_keys,
+            data_hex_or_data_obj,
+            options,
+        )
 
     def publishmulti(self, stream_identifier, items, options=None):
         return self._call("publishmulti", stream_identifier, items, options)
 
     def publishmultifrom(self, from_address, stream_identifier, items, options=None):
-        return self._call("publishmultifrom", from_address, stream_identifier, items, options)
+        return self._call(
+            "publishmultifrom", from_address, stream_identifier, items, options
+        )
 
     def purgepublisheditems(self, txids_or_txouts_or_blocks):
         return self._call("purgepublisheditems", txids_or_txouts_or_blocks)
 
     def purgestreamitems(self, stream_identifier, txids_or_txouts_or_blocks_or_query):
-        return self._call("purgestreamitems", stream_identifier, txids_or_txouts_or_blocks_or_query)
+        return self._call(
+            "purgestreamitems", stream_identifier, txids_or_txouts_or_blocks_or_query
+        )
 
     def resendwallettransactions(self):
         return self._call("resendwallettransactions")
 
-    def retrievestreamitems(self, stream_identifier, txids_or_txouts_or_blocks_or_query):
-        return self._call("retrievestreamitems", stream_identifier, txids_or_txouts_or_blocks_or_query)
+    def retrievestreamitems(
+        self, stream_identifier, txids_or_txouts_or_blocks_or_query
+    ):
+        return self._call(
+            "retrievestreamitems", stream_identifier, txids_or_txouts_or_blocks_or_query
+        )
 
-    def revoke(self, addresses, permissions, native_amount=None, comment=None, comment_to=None):
-        return self._call("revoke", addresses, permissions, native_amount, comment, comment_to)
+    def revoke(
+        self, addresses, permissions, native_amount=None, comment=None, comment_to=None
+    ):
+        return self._call(
+            "revoke", addresses, permissions, native_amount, comment, comment_to
+        )
 
-    def revokefrom(self, from_address, to_addresses, permissions, native_amount=None, comment=None, comment_to=None):
-        return self._call("revokefrom", from_address, to_addresses, permissions, native_amount, comment, comment_to)
+    def revokefrom(
+        self,
+        from_address,
+        to_addresses,
+        permissions,
+        native_amount=None,
+        comment=None,
+        comment_to=None,
+    ):
+        return self._call(
+            "revokefrom",
+            from_address,
+            to_addresses,
+            permissions,
+            native_amount,
+            comment,
+            comment_to,
+        )
 
     def send(self, address, amount_or_asset_quantities, comment=None, comment_to=None):
-        return self._call("send", address, amount_or_asset_quantities, comment, comment_to)
+        return self._call(
+            "send", address, amount_or_asset_quantities, comment, comment_to
+        )
 
-    def sendasset(self, address, asset_identifier, asset_qty, native_amount=None, comment=None, comment_to=None):
-        return self._call("sendasset", address, asset_identifier, asset_qty, native_amount, comment, comment_to)
+    def sendasset(
+        self,
+        address,
+        asset_identifier,
+        asset_qty,
+        native_amount=None,
+        comment=None,
+        comment_to=None,
+    ):
+        return self._call(
+            "sendasset",
+            address,
+            asset_identifier,
+            asset_qty,
+            native_amount,
+            comment,
+            comment_to,
+        )
 
-    def sendassetfrom(self, from_address, to_address, asset_identifier, asset_qty, native_amount=None, comment=None, comment_to=None):
-        return self._call("sendassetfrom", from_address, to_address, asset_identifier, asset_qty, native_amount, comment, comment_to)
+    def sendassetfrom(
+        self,
+        from_address,
+        to_address,
+        asset_identifier,
+        asset_qty,
+        native_amount=None,
+        comment=None,
+        comment_to=None,
+    ):
+        return self._call(
+            "sendassetfrom",
+            from_address,
+            to_address,
+            asset_identifier,
+            asset_qty,
+            native_amount,
+            comment,
+            comment_to,
+        )
 
-    def sendfrom(self, from_address, to_address, amount_or_asset_quantities, comment=None, comment_to=None):
-        return self._call("sendfrom", from_address, to_address, amount_or_asset_quantities, comment, comment_to)
+    def sendfrom(
+        self,
+        from_address,
+        to_address,
+        amount_or_asset_quantities,
+        comment=None,
+        comment_to=None,
+    ):
+        return self._call(
+            "sendfrom",
+            from_address,
+            to_address,
+            amount_or_asset_quantities,
+            comment,
+            comment_to,
+        )
 
-    def sendfromaccount(self, fromaccount, toaddress, amount, minconf=None, comment=None, comment_to=None):
-        return self._call("sendfromaccount", fromaccount, toaddress, amount, minconf, comment, comment_to)
+    def sendfromaccount(
+        self,
+        fromaccount,
+        toaddress,
+        amount,
+        minconf=None,
+        comment=None,
+        comment_to=None,
+    ):
+        return self._call(
+            "sendfromaccount",
+            fromaccount,
+            toaddress,
+            amount,
+            minconf,
+            comment,
+            comment_to,
+        )
 
-    def sendwithdata(self, address, amount_or_asset_quantities, data_or_publish_new_stream_item):
-        return self._call("sendwithdata", address, amount_or_asset_quantities, data_or_publish_new_stream_item)
+    def sendwithdata(
+        self, address, amount_or_asset_quantities, data_or_publish_new_stream_item
+    ):
+        return self._call(
+            "sendwithdata",
+            address,
+            amount_or_asset_quantities,
+            data_or_publish_new_stream_item,
+        )
 
-    def sendwithdatafrom(self, from_address, to_address, amount_or_asset_quantities, data_or_publish_new_stream_item):
-        return self._call("sendwithdatafrom", from_address, to_address, amount_or_asset_quantities, data_or_publish_new_stream_item)
+    def sendwithdatafrom(
+        self,
+        from_address,
+        to_address,
+        amount_or_asset_quantities,
+        data_or_publish_new_stream_item,
+    ):
+        return self._call(
+            "sendwithdatafrom",
+            from_address,
+            to_address,
+            amount_or_asset_quantities,
+            data_or_publish_new_stream_item,
+        )
 
     def setaccount(self, address, account):
         return self._call("setaccount", address, account)
@@ -539,8 +987,12 @@ class BaseApiMethods:
     def trimsubscribe(self, stream_identifiers, parameters):
         return self._call("trimsubscribe", stream_identifiers, parameters)
 
-    def txouttobinarycache(self, identifier, txid, vout, count_bytes=None, start_byte=None):
-        return self._call("txouttobinarycache", identifier, txid, vout, count_bytes, start_byte)
+    def txouttobinarycache(
+        self, identifier, txid, vout, count_bytes=None, start_byte=None
+    ):
+        return self._call(
+            "txouttobinarycache", identifier, txid, vout, count_bytes, start_byte
+        )
 
     def unsubscribe(self, entity_identifiers, purge=None):
         return self._call("unsubscribe", entity_identifiers, purge)
@@ -553,4 +1005,3 @@ class BaseApiMethods:
 
     def walletpassphrasechange(self, oldpassphrase, newpassphrase):
         return self._call("walletpassphrasechange", oldpassphrase, newpassphrase)
-

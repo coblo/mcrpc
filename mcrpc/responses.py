@@ -319,4 +319,3 @@ class Getwalletinfo:
             return self._kwargs == other._kwargs
         else:
             return False
-
