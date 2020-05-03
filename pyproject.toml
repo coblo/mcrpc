@@ -29,6 +29,23 @@ simplejson = "^3.17.0"
 pytest = "^5.0"
 black = { version = "^19.10b0", python = "^3.6" }
 
+[tool.black]
+target-version = ['py36']
+exclude = '''
+(
+  /(
+      \.eggs
+    | \.git
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | build
+    | dist
+  )/
+  | base.py
+  | client.pyi
+)
+'''
 
 [build-system]
 requires = ["poetry>=1.0.5"]
