@@ -33,7 +33,25 @@ on Python Package Index. Install it with:
 $ pip3 install mcrpc
 ```
 
+## Usage
+
+If you have a local blockchain node with default data-dir you can do:
+
+```python
+import mcrpc
+
+client = mcrpc.autoconnect()
+client.getinfo()
+```
+
 ## Change Log
+
+### 2.0.6.0 (2020-05-03)
+- Add autoconnect convenience function
+- Switched package versioning to match multichain
+- Switched to poetry based packaging
+- Updated to multichain node 2.0.6
+
 
 ### 1.0.2 (2019-02-13)
 - Fix signature of appendrawexchange and completerawexchange
