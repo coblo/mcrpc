@@ -729,7 +729,7 @@ class RpcClient:
         """
         getblockchainparams ( displaynames with-upgrades )
 
-        Returns a list of values of this blockchain’s parameters
+        Returns a list of values of this blockchainâ€™s parameters
 
         Arguments:
         1. displaynames                     (boolean, optional, default=true) use display names instead of internal
@@ -798,7 +798,7 @@ class RpcClient:
         """
         getruntimeparams 
 
-        Returns a selection of this node’s runtime parameters.
+        Returns a selection of this nodeâ€™s runtime parameters.
 
         Result:
         An object containing various runtime parameters
@@ -2721,7 +2721,7 @@ class RpcClient:
         """
         getaddresstransaction "address" "txid" ( verbose )
 
-        Provides information about transaction txid related to address in this node’s wallet
+        Provides information about transaction txid related to address in this nodeâ€™s wallet
 
         Arguments:
         1. "address"                        (string, required) Address used for balance calculation.
@@ -3064,7 +3064,7 @@ class RpcClient:
         """
         gettotalbalances ( minconf includeWatchonly includeLocked )
 
-        Returns a list of all the asset balances in this node’s wallet, with at least minconf confirmations.
+        Returns a list of all the asset balances in this nodeâ€™s wallet, with at least minconf confirmations.
 
         Arguments:
         1. minconf                          (numeric, optional, default=1) Only include transactions confirmed at least this many times.
@@ -3676,7 +3676,7 @@ class RpcClient:
         """
         listaddresstransactions "address" ( count skip verbose )
 
-        Lists information about the <count> most recent transactions related to address in this node’s wallet.
+        Lists information about the <count> most recent transactions related to address in this nodeâ€™s wallet.
 
         Arguments:
         1. "address"                        (string, required)  Address to list transactions for.
@@ -4212,7 +4212,7 @@ class RpcClient:
         """
         listwallettransactions ( count skip includeWatchonly verbose )
 
-        Lists information about the <count> most recent transactions in this node’s wallet.
+        Lists information about the <count> most recent transactions in this nodeâ€™s wallet.
 
         Arguments:
         1. count                            (numeric, optional, default=10) The number of transactions to return
