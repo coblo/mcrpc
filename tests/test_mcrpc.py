@@ -5,13 +5,13 @@ import pytest
 from string import Template
 from decimal import Decimal
 from codegen import get_api_methods, get_stub_template
+import mcrpc
 from mcrpc.exceptions import RpcError
 from mcrpc import responses
 
 
 @pytest.fixture
 def client():
-    import mcrpc
     return mcrpc.autoconnect()
 
 
@@ -36,17 +36,17 @@ def test_load_stub_template(client):
 
 def test_get_api_methods(client):
     methods = get_api_methods(client)
-    assert len(methods) == 170
+    assert len(methods) == 186
 
 
+@pytest.mark.skip(reason="do not spam live chain")
 def test_encoding_text(client):
-    s = 'I sat döwn for “coffee” at the café'
+    s = "I sat döwn for “coffee” at the café"
     try:
-        client.create('stream', 'test', True)
+        client.create("stream", "test", True)
     except RpcError:
         pass
-    txid = client.publish('test', 'testkey', {'text': s})
-    resp = client.getstreamitem('test', txid)
-    rs = resp['data']['text']
+    txid = client.publish("test", "testkey", {"text": s})
+    resp = client.getstreamitem("test", txid)
+    rs = resp["data"]["text"]
     assert rs == s
-

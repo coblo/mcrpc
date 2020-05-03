@@ -36,5 +36,6 @@ class RpcClient(BaseApiMethods):
         return partial(self._call, method)
 
 
+
 if __name__ == '__main__':
     c = RpcClient('127.0.0.1', '7010', 'testuser', 'testpassword', False)

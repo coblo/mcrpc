@@ -8,6 +8,10 @@ from mcrpc.client import RpcClient
 
 HERE = os.path.dirname(__file__)
 
+IGNORE = (
+    'purgefeed',
+)
+
 
 resp_tpl = """
 class {classname}:
@@ -97,6 +101,8 @@ def build_code(client):
     )
 
     for method, sig in get_api_methods(client):
+        if method in IGNORE:
+            continue
         help_ = indent(client._call('help', method), 8 * ' ')
         if not sig:
             # We can reliably build methods, stubs and response types/objects

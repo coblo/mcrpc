@@ -102,6 +102,10 @@ class BaseApiMethods:
         data = self._call("getinfo")
         return Getinfo(**data)
 
+    def getinitstatus(self):
+        data = self._call("getinitstatus")
+        return Getinitstatus(**data)
+
     def getruntimeparams(self):
         data = self._call("getruntimeparams")
         return Getruntimeparams(**data)
@@ -123,6 +127,33 @@ class BaseApiMethods:
 
     def stop(self):
         return self._call("stop")
+
+    def addtofeed(self, feed_name, entities, globals=None, action=None, options=None):
+        return self._call("addtofeed", feed_name, entities, globals, action, options)
+
+    def createfeed(self, feed_name, parameters=None):
+        return self._call("createfeed", feed_name, parameters)
+
+    def datareftobinarycache(self, identifier, dataref, count_bytes=None, start_byte=None):
+        return self._call("datareftobinarycache", identifier, dataref, count_bytes, start_byte)
+
+    def deletefeed(self, feed_name, force=None):
+        return self._call("deletefeed", feed_name, force)
+
+    def getdatarefdata(self, dataref, count_bytes=None, start_byte=None):
+        return self._call("getdatarefdata", dataref, count_bytes, start_byte)
+
+    def listfeeds(self, feed_names=None, verbose=None):
+        return self._call("listfeeds", feed_names, verbose)
+
+    def pausefeed(self, feed_name, buffer=None):
+        return self._call("pausefeed", feed_name, buffer)
+
+    def resumefeed(self, feed_name, buffer=None):
+        return self._call("resumefeed", feed_name, buffer)
+
+    def updatefeed(self, feed_name, entities, globals=None, action=None, options=None):
+        return self._call("updatefeed", feed_name, entities, globals, action, options)
 
     def getgenerate(self):
         return self._call("getgenerate")
@@ -454,8 +485,17 @@ class BaseApiMethods:
     def publishmultifrom(self, from_address, stream_identifier, items, options=None):
         return self._call("publishmultifrom", from_address, stream_identifier, items, options)
 
+    def purgepublisheditems(self, txids_or_txouts_or_blocks):
+        return self._call("purgepublisheditems", txids_or_txouts_or_blocks)
+
+    def purgestreamitems(self, stream_identifier, txids_or_txouts_or_blocks_or_query):
+        return self._call("purgestreamitems", stream_identifier, txids_or_txouts_or_blocks_or_query)
+
     def resendwallettransactions(self):
         return self._call("resendwallettransactions")
+
+    def retrievestreamitems(self, stream_identifier, txids_or_txouts_or_blocks_or_query):
+        return self._call("retrievestreamitems", stream_identifier, txids_or_txouts_or_blocks_or_query)
 
     def revoke(self, addresses, permissions, native_amount=None, comment=None, comment_to=None):
         return self._call("revoke", addresses, permissions, native_amount, comment, comment_to)
@@ -493,8 +533,14 @@ class BaseApiMethods:
     def signmessage(self, address_or_privkey, message):
         return self._call("signmessage", address_or_privkey, message)
 
-    def subscribe(self, entity_identifiers, rescan=None):
-        return self._call("subscribe", entity_identifiers, rescan)
+    def subscribe(self, entity_identifiers, rescan=None, parameters=None):
+        return self._call("subscribe", entity_identifiers, rescan, parameters)
+
+    def trimsubscribe(self, stream_identifiers, parameters):
+        return self._call("trimsubscribe", stream_identifiers, parameters)
+
+    def txouttobinarycache(self, identifier, txid, vout, count_bytes=None, start_byte=None):
+        return self._call("txouttobinarycache", identifier, txid, vout, count_bytes, start_byte)
 
     def unsubscribe(self, entity_identifiers, purge=None):
         return self._call("unsubscribe", entity_identifiers, purge)

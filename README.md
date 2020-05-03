@@ -6,7 +6,7 @@
 
 ## Content Blockchain RPC Client
 
-A Python 3 MultiChain RPC client build for the 
+A Python 3 MultiChain RPC client built for the 
 [Content Blockchain Project](https://content-blockchain.org/)
 
 The versioning scheme follows [MultiChain](https://www.multichain.com/download-community/)

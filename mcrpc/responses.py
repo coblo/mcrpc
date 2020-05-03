@@ -85,6 +85,7 @@ class Getinfo:
         self.connections = kwargs["connections"]
         self.description = kwargs["description"]
         self.difficulty = kwargs["difficulty"]
+        self.edition = kwargs["edition"]
         self.errors = kwargs["errors"]
         self.incomingpaused = kwargs["incomingpaused"]
         self.keypoololdest = kwargs["keypoololdest"]
@@ -106,6 +107,26 @@ class Getinfo:
         self.version = kwargs["version"]
         self.walletdbversion = kwargs["walletdbversion"]
         self.walletversion = kwargs["walletversion"]
+
+    def as_dict(self):
+        return self._kwargs
+        
+    def __repr__(self):
+        return repr(self._kwargs)
+
+    def __eq__(self, other):
+        if isinstance(other, self.__class__):
+            return self._kwargs == other._kwargs
+        else:
+            return False
+
+
+class Getinitstatus:
+    def __init__(self, **kwargs):
+        self._kwargs = kwargs
+        self.initialized = kwargs["initialized"]
+        self.nodeversion = kwargs["nodeversion"]
+        self.version = kwargs["version"]
 
     def as_dict(self):
         return self._kwargs
