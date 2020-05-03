@@ -4,17 +4,20 @@ import typing as t
 from decimal import Decimal
 from mcrpc.responses import *
 
+
 class RpcClient:
-    def __init__(
-        self, host: str, port: str, user: str, pwd: str, use_ssl: bool = False
-    ):
+
+    def __init__(self, host: str, port: str, user: str, pwd: str, use_ssl: bool=False):
         self.host = host
         self.port = port
         self.user = user
         self.pwd = pwd
         self.use_ssl = use_ssl
+
     def _url(self) -> str: ...
+
     def _call(self, method: str, *args): ...
+
     def getassetinfo(self, asset_identifier, verbose=None):
         """
         getassetinfo "asset-identifier" ( verbose )
@@ -33,6 +36,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getassetinfo", "params": [myasset] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getbestblockhash(self) -> str:
         """
         getbestblockhash
@@ -47,6 +51,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getbestblockhash", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getblock(self, hash_or_height, verbose=None):
         """
         getblock "hash"|height ( verbose )
@@ -89,6 +94,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getblock", "params": ["00000000c937983704a73af28acdec37b049d214adbda81d7e2a3dd146f6ed09"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getblockchaininfo(self) -> Getblockchaininfo:
         """
         getblockchaininfo
@@ -114,6 +120,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getblockchaininfo", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getblockcount(self) -> int:
         """
         getblockcount
@@ -128,6 +135,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getblockcount", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getblockhash(self, index):
         """
         getblockhash index
@@ -145,6 +153,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getblockhash", "params": [1000] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getchaintips(self) -> list:
         """
         getchaintips
@@ -177,6 +186,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getchaintips", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getdifficulty(self) -> Decimal:
         """
         getdifficulty
@@ -191,6 +201,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getdifficulty", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getfiltercode(self, filter_identifier):
         """
         getfiltercode "filter-identifier"
@@ -208,6 +219,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getfiltercode", "params": [filter1] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getlastblockinfo(self, skip=None):
         """
         getlastblockinfo ( skip )
@@ -231,6 +243,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getlastblockinfo", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getmempoolinfo(self) -> Getmempoolinfo:
         """
         getmempoolinfo
@@ -248,6 +261,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getmempoolinfo", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getrawmempool(self, verbose=None):
         """
         getrawmempool ( verbose )
@@ -283,6 +297,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getrawmempool", "params": [true] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getstreaminfo(self, stream_identifier, verbose=None):
         """
         getstreaminfo "stream-identifier" ( verbose )
@@ -301,6 +316,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getstreaminfo", "params": [mystream] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def gettxout(self, txid, n, includemempool=None):
         """
         gettxout "txid" n ( includemempool )
@@ -343,6 +359,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "gettxout", "params": ["txid", 1] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def gettxoutsetinfo(self) -> Gettxoutsetinfo:
         """
         gettxoutsetinfo
@@ -366,6 +383,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "gettxoutsetinfo", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def listassets(self, asset_identifiers=None, verbose=None, count=None, start=None):
         """
         listassets ( asset-identifier(s) verbose count start )
@@ -388,6 +406,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listassets", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def listblocks(self, block_set_identifier, verbose=None):
         """
         listblocks block-set-identifier ( verbose )
@@ -419,6 +438,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listblocks", "params": [1000] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def listpermissions(self, permissions=None, addresses=None, verbose=None):
         """
         listpermissions ( "permission(s)" address(es) verbose )
@@ -441,6 +461,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listpermissions", "params": [connect,send,receive] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def liststreamfilters(self, filter_identifiers=None, verbose=None):
         """
         liststreamfilters ( filter-identifier(s) verbose )
@@ -461,9 +482,8 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "liststreamfilters", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
-    def liststreams(
-        self, stream_identifiers=None, verbose=None, count=None, start=None
-    ):
+
+    def liststreams(self, stream_identifiers=None, verbose=None, count=None, start=None):
         """
         liststreams ( stream-identifier(s) verbose count start )
 
@@ -485,6 +505,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "liststreams", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def listtxfilters(self, filter_identifiers=None, verbose=None):
         """
         listtxfilters ( filter-identifier(s) verbose )
@@ -505,6 +526,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listtxfilters", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def listupgrades(self, upgrade_identifiers=None):
         """
         listupgrades (upgrade-identifier(s))
@@ -520,6 +542,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listupgrades", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def runstreamfilter(self, filter_identifier, tx_hex_or_txid=None, vout=None):
         """
         runstreamfilter "filter-identifier" ( "tx-hex"|"txid" vout )
@@ -547,6 +570,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "runstreamfilter", "params": [filter1] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def runtxfilter(self, filter_identifier, tx_hex_or_txid=None):
         """
         runtxfilter "filter-identifier" ( "tx-hex"|"txid" )
@@ -571,9 +595,8 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "runtxfilter", "params": [filter1] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
-    def teststreamfilter(
-        self, restrictions, javascript_code, tx_hex_or_txid=None, vout=None
-    ):
+
+    def teststreamfilter(self, restrictions, javascript_code, tx_hex_or_txid=None, vout=None):
         """
         teststreamfilter restrictions "javascript-code" ( "tx-hex"|"txid" vout )
 
@@ -610,6 +633,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "teststreamfilter", "params": ["{}", "javascript-code"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def testtxfilter(self, restrictions, javascript_code, tx_hex_or_txid=None):
         """
         testtxfilter restrictions "javascript-code" ( "tx-hex"|"txid" )
@@ -649,6 +673,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "testtxfilter", "params": ["{}", "javascript-code"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def verifychain(self, checklevel=None, numblocks=None):
         """
         verifychain ( checklevel numblocks )
@@ -667,6 +692,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "verifychain", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def verifypermission(self, address, permission):
         """
         verifypermission "address" "permission" 
@@ -685,6 +711,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "verifypermission", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "send"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def clearmempool(self):
         """
         clearmempool 
@@ -697,6 +724,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "clearmempool", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getblockchainparams(self, displaynames=None, with_upgrades=None):
         """
         getblockchainparams ( displaynames with-upgrades )
@@ -715,6 +743,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getblockchainparams", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getinfo(self) -> Getinfo:
         """
         getinfo
@@ -752,6 +781,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getinfo", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getinitstatus(self) -> Getinitstatus:
         """
         getinitstatus
@@ -763,6 +793,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getinitstatus", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getruntimeparams(self) -> Getruntimeparams:
         """
         getruntimeparams 
@@ -777,6 +808,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getruntimeparams", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def help(self, command=None):
         """
         help ( command )
@@ -790,6 +822,7 @@ class RpcClient:
         "text"                              (string) The help text
 
         """
+
     def pause(self, tasks):
         """
         pause "task(s)" 
@@ -804,6 +837,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "pause", "params": [incoming] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def resume(self, tasks):
         """
         resume "task(s)" 
@@ -818,6 +852,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "resume", "params": [mining] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def setlastblock(self, hash_or_height=None):
         """
         setlastblock ( "hash"|height )
@@ -838,6 +873,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "setlastblock", "params": ["00000000c937983704a73af28acdec37b049d214adbda81d7e2a3dd146f6ed09"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def setruntimeparam(self, parameter_name, parameter_value):
         """
         setruntimeparam "parameter-name" parameter-value 
@@ -869,12 +905,14 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "setruntimeparam", "params": ["miningturnover", 0.3] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def stop(self):
         """
         stop
 
         Shuts down the this blockchain node. Sends stop signal to MultiChain server.
         """
+
     def addtofeed(self, feed_name, entities, globals=None, action=None, options=None):
         """
         addtofeed "feed-name" entities ( "globals" "action" options )
@@ -905,6 +943,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "addtofeed", "params": ["feed1", "test-stream"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def createfeed(self, feed_name, parameters=None):
         """
         createfeed "feed-name" ( parameters ) 
@@ -923,9 +962,8 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "createfeed", "params": [feed1] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
-    def datareftobinarycache(
-        self, identifier, dataref, count_bytes=None, start_byte=None
-    ):
+
+    def datareftobinarycache(self, identifier, dataref, count_bytes=None, start_byte=None):
         """
         datareftobinarycache "identifier" "dataref" ( count-bytes start-byte )
 
@@ -949,6 +987,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "datareftobinarycache", "params": ["TjnVWwHYEg4", "dataref"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def deletefeed(self, feed_name, force=None):
         """
         deletefeed "feed-name" ( force )
@@ -967,6 +1006,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "deletefeedfeed", "params": [feed1] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getdatarefdata(self, dataref, count_bytes=None, start_byte=None):
         """
         getdatarefdata "dataref" ( count-bytes start-byte )
@@ -990,6 +1030,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getdatarefdata", "params": ["dataref"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def listfeeds(self, feed_names=None, verbose=None):
         """
         listfeeds ( feed-name(s) verbose ) 
@@ -1012,6 +1053,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listfeeds", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def pausefeed(self, feed_name, buffer=None):
         """
         pausefeed "feed-name" ( buffer )
@@ -1029,6 +1071,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "pausefeed", "params": [feed1] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def resumefeed(self, feed_name, buffer=None):
         """
         resumefeed "feed-name" ( buffer )
@@ -1046,6 +1089,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "resumefeed", "params": [feed1] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def updatefeed(self, feed_name, entities, globals=None, action=None, options=None):
         """
         updatefeed "feed-name" entities ( "globals" "action" options )
@@ -1081,6 +1125,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "updatefeed", "params": ["feed1", "test-stream"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getgenerate(self) -> bool:
         """
         getgenerate
@@ -1097,6 +1142,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getgenerate", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def gethashespersec(self) -> int:
         """
         gethashespersec
@@ -1112,6 +1158,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "gethashespersec", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def setgenerate(self, generate, genproclimit=None):
         """
         setgenerate generate ( genproclimit )
@@ -1142,6 +1189,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "setgenerate", "params": [true, 1] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getblocktemplate(self, jsonrequestobject=None):
         """
         getblocktemplate ( "jsonrequestobject" )
@@ -1203,6 +1251,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getblocktemplate", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getmininginfo(self) -> Getmininginfo:
         """
         getmininginfo
@@ -1228,6 +1277,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getmininginfo", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getnetworkhashps(self, blocks=None, height=None):
         """
         getnetworkhashps ( blocks height )
@@ -1248,6 +1298,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getnetworkhashps", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def prioritisetransaction(self, txid, priority_delta, fee_delta):
         """
         prioritisetransaction txid priority-delta fee-delta
@@ -1270,6 +1321,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "prioritisetransaction", "params": ["txid", 0.0, 10000] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def submitblock(self, hexdata, jsonparametersobject=None):
         """
         submitblock hexdata ( "jsonparametersobject" )
@@ -1292,6 +1344,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "submitblock", "params": ["mydata"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def addnode(self, node, add_or_remove_or_onetry):
         """
         addnode "node" "add"|"remove"|"onetry"
@@ -1309,6 +1362,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "addnode", "params": ["192.168.0.6:8333", "onetry"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getaddednodeinfo(self, dns, node=None):
         """
         getaddednodeinfo dns ( "node" )
@@ -1346,6 +1400,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getaddednodeinfo", "params": [true, "192.168.0.201"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getchunkqueueinfo(self) -> Getchunkqueueinfo:
         """
         getchunkqueueinfo
@@ -1357,6 +1412,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getchunkqueueinfo", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getchunkqueuetotals(self) -> Getchunkqueuetotals:
         """
         getchunkqueuetotals
@@ -1368,6 +1424,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getchunkqueuetotals", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getconnectioncount(self) -> int:
         """
         getconnectioncount
@@ -1382,6 +1439,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getconnectioncount", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getnettotals(self) -> Getnettotals:
         """
         getnettotals
@@ -1401,6 +1459,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getnettotals", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getnetworkinfo(self) -> Getnetworkinfo:
         """
         getnetworkinfo
@@ -1439,6 +1498,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getnetworkinfo", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getpeerinfo(self) -> list:
         """
         getpeerinfo
@@ -1481,6 +1541,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getpeerinfo", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def ping(self) -> None:
         """
         ping
@@ -1496,6 +1557,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "ping", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def appendrawchange(self, tx_hex, address, native_fee=None):
         """
         appendrawchange "tx-hex" "address" ( native-fee )
@@ -1518,6 +1580,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "appendrawchange", "params": ["hex" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def appendrawdata(self, tx_hex_data):
         """
         appendrawdata tx-hex data 
@@ -1537,6 +1600,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "appendrawdata", "params": ["tx-hexstring","48656C6C6F20576F726C64210A"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def appendrawtransaction(self, *args):
         """
         appendrawtransaction "tx-hex" [{"txid":"id","vout":n},...] ( {"address":amount,...} [data] "action" ) 
@@ -1575,6 +1639,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "appendrawtransaction", "params": ["hexstring", "[{\"txid\":\"myid\",\"vout\":0}]", "{\"address\":0.01}"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def createrawtransaction(self, *args):
         """
         createrawtransaction [{"txid":"id","vout":n},...] {"address":amount,...} ( [data] "action" ) 
@@ -1612,6 +1677,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "createrawtransaction", "params": ["[{\"txid\":\"myid\",\"vout\":0}]", "{\"address\":0.01}"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def decoderawtransaction(self, tx_hex):
         """
         decoderawtransaction "tx-hex"
@@ -1662,6 +1728,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "decoderawtransaction", "params": ["hexstring"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def decodescript(self, script_hex):
         """
         decodescript script-hex
@@ -1689,6 +1756,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "decodescript", "params": ["hexstring"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getrawtransaction(self, txid, verbose=None):
         """
         getrawtransaction "txid" ( verbose )
@@ -1756,6 +1824,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getrawtransaction", "params": ["mytxid", 1] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def sendrawtransaction(self, tx_hex, allowhighfees=None):
         """
         sendrawtransaction "tx-hex" ( allowhighfees )
@@ -1785,6 +1854,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "sendrawtransaction", "params": ["signedhex"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def signrawtransaction(self, *args):
         """
         signrawtransaction "tx-hex" ( [{"txid":"id","vout":n,"scriptPubKey":"hex","redeemScript":"hex"},...] ["privatekey1",...] sighashtype )
@@ -1831,6 +1901,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "signrawtransaction", "params": ["myhex"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def appendbinarycache(self, identifier, data_hex):
         """
         appendbinarycache "identifier" "data-hex" 
@@ -1849,6 +1920,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "appendbinarycache", "params": ["TjnVWwHYEg4","f4c3dd510dd55761015c9d96bff7793b0d501dd6f01a959fd7"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def createbinarycache(self) -> str:
         """
         createbinarycache 
@@ -1865,6 +1937,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "createbinarycache", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def createkeypairs(self, count=None):
         """
         createkeypairs ( count )
@@ -1888,6 +1961,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "createkeypairs", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def createmultisig(self, nrequired, keys):
         """
         createmultisig nrequired keys
@@ -1918,6 +1992,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "createmultisig", "params": [2, "[\"16sSauSf5pF2UkUwvKGq4qjNRzBZYqgEL5\",\"171sgjn4YtPu27adkKGrdDwzRTxnRkBfKV\"]"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def deletebinarycache(self, identifier):
         """
         deletebinarycache "identifier"  
@@ -1934,6 +2009,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "deletebinarycache", "params": ["TjnVWwHYEg4"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def estimatefee(self, nblocks):
         """
         estimatefee nblocks
@@ -1955,6 +2031,7 @@ class RpcClient:
         > multichain-cli coblo2 estimatefee 6
 
         """
+
     def estimatepriority(self, nblocks):
         """
         estimatepriority nblocks
@@ -1976,6 +2053,7 @@ class RpcClient:
         > multichain-cli coblo2 estimatepriority 6
 
         """
+
     def validateaddress(self, address_or_pubkey_or_privkey):
         """
         validateaddress "address"|"pubkey"|"privkey"
@@ -2005,6 +2083,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "validateaddress", "params": ["1PSSGeFHDnKNxiEyFrD1wcEaHr9hrQDDWc"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def verifymessage(self, address, signature, message):
         """
         verifymessage "address" "signature" "message"
@@ -2034,6 +2113,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "verifymessage", "params": ["1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ", "signature", "my message"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def addmultisigaddress(self, nrequired, keys, account=None):
         """
         addmultisigaddress nrequired keys ( "account" )
@@ -2063,6 +2143,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "addmultisigaddress", "params": [2, "[\"16sSauSf5pF2UkUwvKGq4qjNRzBZYqgEL5\",\"171sgjn4YtPu27adkKGrdDwzRTxnRkBfKV\"]"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def appendrawexchange(self, hex, txid, vout, ask_assets):
         """
         appendrawexchange "hex" "txid" vout ask-assets 
@@ -2090,9 +2171,8 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "appendrawexchange", "params": ["hexstring","f4c3dd510dd55761015c9d96bff7793b0d501dd6f01a959fd7dd02478fb47dfb",1,"{\"1234-5678-1234\":200}\"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
-    def approvefrom(
-        self, from_address, upgrade_identifier_or_filter_identifier, approve=None
-    ):
+
+    def approvefrom(self, from_address, upgrade_identifier_or_filter_identifier, approve=None):
         """
         approvefrom "from-address" "upgrade-identifier"|"filter-identifier" ( approve )
 
@@ -2124,6 +2204,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "approvefrom", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "upgrade1", true] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def backupwallet(self, destination):
         """
         backupwallet "destination"
@@ -2138,15 +2219,8 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "backupwallet", "params": ["backup.dat"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
-    def combineunspent(
-        self,
-        addresses=None,
-        minconf=None,
-        maxcombines=None,
-        mininputs=None,
-        maxinputs=None,
-        maxtime=None,
-    ):
+
+    def combineunspent(self, addresses=None, minconf=None, maxcombines=None, mininputs=None, maxinputs=None, maxtime=None):
         """
         combineunspent ( "address(es)" minconf maxcombines mininputs maxinputs maxtime )
 
@@ -2169,9 +2243,8 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "combineunspent", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd",1,100, 5, 20, 120] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
-    def completerawexchange(
-        self, hex_txid, vout, ask_assets, data_or_publish_new_stream_item=None
-    ):
+
+    def completerawexchange(self, hex_txid, vout, ask_assets, data_or_publish_new_stream_item=None):
         """
         completerawexchange hex txid vout ask-assets ( data|publish-new-stream-item ) 
 
@@ -2197,6 +2270,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "completerawexchange", "params": ["hexstring","f4c3dd510dd55761015c9d96bff7793b0d501dd6f01a959fd7dd02478fb47dfb",1,"{\"1234-5678-1234\":200}\"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def create(self, entity_type, entity_name, open_, custom_fields=None):
         """
         create "entity-type" "entity-name" open ( custom-fields )
@@ -2284,9 +2358,8 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "create", "params": ["stream", "test", false] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
-    def createfrom(
-        self, from_address, entity_type, entity_name, open_, custom_fields=None
-    ):
+
+    def createfrom(self, from_address, entity_type, entity_name, open_, custom_fields=None):
         """
         createfrom "from-address" "entity-type" "entity-name" open ( custom-fields )
 
@@ -2377,6 +2450,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "createfrom", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "stream", "test", false] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def createrawexchange(self, txid, vout, ask_assets):
         """
         createrawexchange "txid" vout ask-assets
@@ -2401,6 +2475,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "createrawexchange", "params": ["f4c3dd510dd55761015c9d96bff7793b0d501dd6f01a959fd7dd02478fb47dfb",1,"{\"1234-5678-1234\":200}\"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def createrawsendfrom(self, *args):
         """
         createrawsendfrom "from-address" {"address":amount,...} ( [data] "action" ) 
@@ -2428,6 +2503,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "createrawsendfrom", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "{\"address\":0.01}"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def decoderawexchange(self, tx_hex, verbose=None):
         """
         decoderawexchange "tx-hex" ( verbose )
@@ -2446,6 +2522,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "decoderawexchange", "params": ["hexstring"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def disablerawtransaction(self, tx_hex):
         """
         disablerawtransaction "tx-hex"
@@ -2463,6 +2540,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "disablerawtransaction", "params": ["hexstring"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def dumpprivkey(self, address):
         """
         dumpprivkey "address"
@@ -2482,6 +2560,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "dumpprivkey", "params": ["1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def dumpwallet(self, filename):
         """
         dumpwallet "filename"
@@ -2496,6 +2575,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "dumpwallet", "params": ["test"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def encryptwallet(self, passphrase):
         """
         encryptwallet "passphrase"
@@ -2528,6 +2608,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "encryptwallet", "params": ["my pass phrase"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getaccount(self, address):
         """
         getaccount "address"
@@ -2545,6 +2626,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getaccount", "params": ["1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getaccountaddress(self, account):
         """
         getaccountaddress "account"
@@ -2567,6 +2649,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getaccountaddress", "params": ["myaccount"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getaddressbalances(self, address, minconf=None, includeLocked=None):
         """
         getaddressbalances "address" ( minconf includeLocked ) 
@@ -2589,6 +2672,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getaddressbalances", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getaddresses(self, verbose=None):
         """
         getaddresses ( verbose )
@@ -2611,6 +2695,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getaddresses", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getaddressesbyaccount(self, account):
         """
         getaddressesbyaccount "account"
@@ -2631,6 +2716,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getaddressesbyaccount", "params": ["tabby"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getaddresstransaction(self, address, txid, verbose=None):
         """
         getaddresstransaction "address" "txid" ( verbose )
@@ -2678,9 +2764,8 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getaddresstransaction", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
-    def getassetbalances(
-        self, account=None, minconf=None, includeWatchonly=None, includeLocked=None
-    ):
+
+    def getassetbalances(self, account=None, minconf=None, includeWatchonly=None, includeLocked=None):
         """
         getassetbalances ( "account" minconf includeWatchonly includeLocked )
 
@@ -2714,6 +2799,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getassetbalances", "params": ["tabby", 6] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getassettransaction(self, asset_identifier, txid, verbose=None):
         """
         getassettransaction "asset-identifier" "txid" ( verbose )
@@ -2734,6 +2820,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getassettransaction", "params": ["myasset", "mytxid", false] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getbalance(self, account=None, minconf=None, includeWatchonly=None):
         """
         getbalance ( "account" minconf includeWatchonly )
@@ -2769,14 +2856,8 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getbalance", "params": ["tabby", 6] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
-    def getmultibalances(
-        self,
-        addresses=None,
-        assets=None,
-        minconf=None,
-        includeLocked=None,
-        includeWatchonly=None,
-    ):
+
+    def getmultibalances(self, addresses=None, assets=None, minconf=None, includeLocked=None, includeWatchonly=None):
         """
         getmultibalances ( address(es) assets minconf includeLocked includeWatchonly ) 
 
@@ -2802,6 +2883,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getmultibalances", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getnewaddress(self, account=None):
         """
         getnewaddress ( "account" )
@@ -2826,6 +2908,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getnewaddress", "params": ["myaccount"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getrawchangeaddress(self) -> str:
         """
         getrawchangeaddress
@@ -2841,6 +2924,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getrawchangeaddress", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getreceivedbyaccount(self, account, minconf=None):
         """
         getreceivedbyaccount "account" ( minconf )
@@ -2869,6 +2953,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getreceivedbyaccount", "params": ["tabby", 6] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getreceivedbyaddress(self, address, minconf=None):
         """
         getreceivedbyaddress "address" ( minconf )
@@ -2897,6 +2982,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getreceivedbyaddress", "params": ["1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ", 6] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getstreamitem(self, stream_identifier, txid, verbose=None):
         """
         getstreamitem "stream-identifier" "txid" ( verbose )
@@ -2917,6 +3003,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getstreamitem", "params": ["mytxid", false] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getstreamkeysummary(self, stream_identifier, key, mode):
         """
         getstreamkeysummary "stream-identifier" "key" "mode"
@@ -2945,6 +3032,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getstreamkeysummary", "params": ["test-stream", "key01", "jsonobjectmerge,ignore,recursive"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getstreampublishersummary(self, stream_identifier, address, mode):
         """
         getstreampublishersummary "stream-identifier" "address" "mode"
@@ -2971,6 +3059,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "liststreampublisheritems", "params": ["test-stream", "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "jsonobjectmerge,ignore,recursive"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def gettotalbalances(self, minconf=None, includeWatchonly=None, includeLocked=None):
         """
         gettotalbalances ( minconf includeWatchonly includeLocked )
@@ -3003,6 +3092,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "gettotalbalances", "params": ["tabby", 6] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def gettransaction(self, txid, includeWatchonly=None):
         """
         gettransaction "txid" ( includeWatchonly )
@@ -3042,6 +3132,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "gettransaction", "params": ["1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def gettxoutdata(self, txid, vout, count_bytes=None, start_byte=None):
         """
         gettxoutdata "txid" vout ( count-bytes start-byte )
@@ -3066,12 +3157,14 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "gettxoutdata", "params": ["txid", 1] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getunconfirmedbalance(self) -> int:
         """
         getunconfirmedbalance
         Returns the server's total unconfirmed balance
 
         """
+
     def getwalletinfo(self) -> Getwalletinfo:
         """
         getwalletinfo
@@ -3094,6 +3187,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getwalletinfo", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def getwallettransaction(self, txid, includeWatchonly=None, verbose=None):
         """
         getwallettransaction "txid" ( includeWatchonly verbose )
@@ -3141,16 +3235,8 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getwallettransaction", "params": ["1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
-    def grant(
-        self,
-        addresses,
-        permissions,
-        native_amount=None,
-        startblock=None,
-        endblock=None,
-        comment=None,
-        comment_to=None,
-    ):
+
+    def grant(self, addresses, permissions, native_amount=None, startblock=None, endblock=None, comment=None, comment_to=None):
         """
         grant "address(es)" "permission(s)" ( native-amount startblock endblock "comment" "comment-to" )
 
@@ -3182,17 +3268,8 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "grant", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", 0.1, admin "temporary admin", "Admins Ltd." 20000 30000] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
-    def grantfrom(
-        self,
-        from_address,
-        to_addresses,
-        permissions,
-        native_amount=None,
-        startblock=None,
-        endblock=None,
-        comment=None,
-        comment_to=None,
-    ):
+
+    def grantfrom(self, from_address, to_addresses, permissions, native_amount=None, startblock=None, endblock=None, comment=None, comment_to=None):
         """
         grantfrom "from-address" "to-address(es)" "permission(s)" ( native-amount startblock endblock "comment" "comment-to" )
 
@@ -3224,15 +3301,8 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "grantfrom", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", 0.1, admin "temporary admin", "Admins Ltd." 20000 30000] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
-    def grantwithdata(
-        self,
-        addresses,
-        permissions,
-        data_or_publish_new_stream_item,
-        native_amount=None,
-        startblock=None,
-        endblock=None,
-    ):
+
+    def grantwithdata(self, addresses, permissions, data_or_publish_new_stream_item, native_amount=None, startblock=None, endblock=None):
         """
         grantwithdata "address(es)" "permission(s)" data|publish-new-stream-item ( native-amount startblock endblock )
 
@@ -3259,16 +3329,8 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "grantwithdata", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", admin, 48656C6C6F20576F726C64210A] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
-    def grantwithdatafrom(
-        self,
-        from_address,
-        to_addresses,
-        permissions,
-        data_or_publish_new_stream_item,
-        native_amount=None,
-        startblock=None,
-        endblock=None,
-    ):
+
+    def grantwithdatafrom(self, from_address, to_addresses, permissions, data_or_publish_new_stream_item, native_amount=None, startblock=None, endblock=None):
         """
         grantwithdatafrom "from-address" "to-address(es)" "permission(s)" data|publish-new-stream-item ( native-amount startblock endblock )
 
@@ -3296,6 +3358,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "grantwithdatafrom", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", admin, 48656C6C6F20576F726C64210A] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def importaddress(self, addresses, label=None, rescan=None):
         """
         importaddress address(es) ( "label" rescan )
@@ -3326,6 +3389,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "importaddress", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "testing", false] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def importprivkey(self, privkeys, label=None, rescan=None):
         """
         importprivkey privkey(s) ( "label" rescan )
@@ -3359,6 +3423,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "importprivkey", "params": ["mykey", "testing", false] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def importwallet(self, filename, rescan=None):
         """
         importwallet "filename" ( rescan )
@@ -3382,15 +3447,8 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "importwallet", "params": ["test"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
-    def issue(
-        self,
-        address,
-        asset_name_or_asset_params,
-        quantity,
-        smallest_unit=None,
-        native_amount=None,
-        custom_fields=None,
-    ):
+
+    def issue(self, address, asset_name_or_asset_params, quantity, smallest_unit=None, native_amount=None, custom_fields=None):
         """
         issue "address" "asset-name"|asset-params quantity ( smallest-unit native-amount custom-fields )
 
@@ -3424,16 +3482,8 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "issue", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "Dollar", 1000000, 0.01, 0.01 "description=1 Million dollars"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
-    def issuefrom(
-        self,
-        from_address,
-        to_address,
-        asset_name_or_asset_params,
-        quantity,
-        smallest_unit=None,
-        native_amount=None,
-        custom_fields=None,
-    ):
+
+    def issuefrom(self, from_address, to_address, asset_name_or_asset_params, quantity, smallest_unit=None, native_amount=None, custom_fields=None):
         """
         issuefrom "from-address" "to-address" "asset-name"|asset-params quantity ( smallest-unit native-amount custom-fields )
 
@@ -3468,14 +3518,8 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "issuefrom", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "Dollar", 1000000, 0.01, 0.01 "description=1 Million dollars"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
-    def issuemore(
-        self,
-        address,
-        asset_identifier,
-        quantity,
-        native_amount=None,
-        custom_fields=None,
-    ):
+
+    def issuemore(self, address, asset_identifier, quantity, native_amount=None, custom_fields=None):
         """
         issuemore "address" "asset-identifier" quantity ( native-amount custom-fields )
 
@@ -3501,15 +3545,8 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "issuemore", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "Dollar", 1000000,  0.01 "description=1 Million dollars"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
-    def issuemorefrom(
-        self,
-        from_address,
-        to_address,
-        asset_identifier,
-        quantity,
-        native_amount=None,
-        custom_fields=None,
-    ):
+
+    def issuemorefrom(self, from_address, to_address, asset_identifier, quantity, native_amount=None, custom_fields=None):
         """
         issuemorefrom "from-address" "to-address" "asset-identifier" quantity ( native-amount custom-fields )
 
@@ -3536,6 +3573,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "issuemorefrom", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "Dollar", 1000000, 0.01 "description=1 Million dollars"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def keypoolrefill(self, newsize=None):
         """
         keypoolrefill ( newsize )
@@ -3549,6 +3587,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "keypoolrefill", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def listaccounts(self, minconf=None, includeWatchonly=None):
         """
         listaccounts ( minconf includeWatchonly)
@@ -3580,6 +3619,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listaccounts", "params": [6] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def listaddresses(self, addresses=None, verbose=None, count=None, start=None):
         """
         listaddresses ( address(es) verbose count start ) 
@@ -3604,6 +3644,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listaddresses", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def listaddressgroupings(self) -> list:
         """
         listaddressgroupings
@@ -3630,6 +3671,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listaddressgroupings", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def listaddresstransactions(self, address, count=None, skip=None, verbose=None):
         """
         listaddresstransactions "address" ( count skip verbose )
@@ -3684,14 +3726,8 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listaddresstransactions", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", 20, 100] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
-    def listassettransactions(
-        self,
-        asset_identifier,
-        verbose=None,
-        count=None,
-        start=None,
-        local_ordering=None,
-    ):
+
+    def listassettransactions(self, asset_identifier, verbose=None, count=None, start=None, local_ordering=None):
         """
         listassettransactions "asset-identifier" ( verbose count start local-ordering )
 
@@ -3714,6 +3750,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listassettransactions", "params": ["test-asset", false, 20] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def listlockunspent(self) -> list:
         """
         listlockunspent
@@ -3748,9 +3785,8 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listlockunspent", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
-    def listreceivedbyaccount(
-        self, minconf=None, includeempty=None, includeWatchonly=None
-    ):
+
+    def listreceivedbyaccount(self, minconf=None, includeempty=None, includeWatchonly=None):
         """
         listreceivedbyaccount ( minconf includeempty includeWatchonly )
 
@@ -3778,9 +3814,8 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listreceivedbyaccount", "params": [6, true, true] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
-    def listreceivedbyaddress(
-        self, minconf=None, includeempty=None, includeWatchonly=None
-    ):
+
+    def listreceivedbyaddress(self, minconf=None, includeempty=None, includeWatchonly=None):
         """
         listreceivedbyaddress ( minconf includeempty includeWatchonly )
 
@@ -3809,9 +3844,8 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listreceivedbyaddress", "params": [6, true, true] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
-    def listsinceblock(
-        self, blockhash=None, target_confirmations=None, includeWatchonly=None
-    ):
+
+    def listsinceblock(self, blockhash=None, target_confirmations=None, includeWatchonly=None):
         """
         listsinceblock ( blockhash target-confirmations includeWatchonly )
 
@@ -3852,14 +3886,8 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listsinceblock", "params": ["000000000000000bacf66f7497b7dc45ef753ee9a7d38571037cdb1a57f663ad", 6] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
-    def liststreamblockitems(
-        self,
-        stream_identifier,
-        block_set_identifier,
-        verbose=None,
-        count=None,
-        start=None,
-    ):
+
+    def liststreamblockitems(self, stream_identifier, block_set_identifier, verbose=None, count=None, start=None):
         """
         liststreamblockitems "stream-identifier" block-set-identifier ( verbose count start )
 
@@ -3893,14 +3921,8 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "liststreamblockitems", "params": ["test-stream", 1000, false, 20] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
-    def liststreamitems(
-        self,
-        stream_identifier,
-        verbose=None,
-        count=None,
-        start=None,
-        local_ordering=None,
-    ):
+
+    def liststreamitems(self, stream_identifier, verbose=None, count=None, start=None, local_ordering=None):
         """
         liststreamitems "stream-identifier" ( verbose count start local-ordering )
 
@@ -3923,15 +3945,8 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "liststreamitems", "params": ["test-stream", false, 20] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
-    def liststreamkeyitems(
-        self,
-        stream_identifier,
-        key,
-        verbose=None,
-        count=None,
-        start=None,
-        local_ordering=None,
-    ):
+
+    def liststreamkeyitems(self, stream_identifier, key, verbose=None, count=None, start=None, local_ordering=None):
         """
         liststreamkeyitems "stream-identifier" "key" ( verbose count start local-ordering )
 
@@ -3955,15 +3970,8 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "liststreamkeyitems", "params": ["test-stream", "key01", false 20] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
-    def liststreamkeys(
-        self,
-        stream_identifier,
-        keys=None,
-        verbose=None,
-        count=None,
-        start=None,
-        local_ordering=None,
-    ):
+
+    def liststreamkeys(self, stream_identifier, keys=None, verbose=None, count=None, start=None, local_ordering=None):
         """
         liststreamkeys "stream-identifier" ( key(s) verbose count start local-ordering )
 
@@ -3990,15 +3998,8 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "liststreamkeys", "params": ["test-stream", "key01"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
-    def liststreampublisheritems(
-        self,
-        stream_identifier,
-        address,
-        verbose=None,
-        count=None,
-        start=None,
-        local_ordering=None,
-    ):
+
+    def liststreampublisheritems(self, stream_identifier, address, verbose=None, count=None, start=None, local_ordering=None):
         """
         liststreampublisheritems "stream-identifier" "address" ( verbose count start local-ordering )
 
@@ -4022,15 +4023,8 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "liststreampublisheritems", "params": ["test-stream", "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", false, 20] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
-    def liststreampublishers(
-        self,
-        stream_identifier,
-        addresses=None,
-        verbose=None,
-        count=None,
-        start=None,
-        local_ordering=None,
-    ):
+
+    def liststreampublishers(self, stream_identifier, addresses=None, verbose=None, count=None, start=None, local_ordering=None):
         """
         liststreampublishers "stream-identifier" ( address(es) verbose count start local-ordering )
 
@@ -4057,6 +4051,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "liststreampublishers", "params": ["test-stream", "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def liststreamqueryitems(self, stream_identifier, query, verbose=None):
         """
         liststreamqueryitems "stream-identifier" query ( verbose )
@@ -4086,6 +4081,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "liststreamqueryitems", "params": ["test-stream", "{\"keys\":[\"key01\","key02"],\"publisher\":\"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ\"}", false] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def liststreamtxitems(self, stream_identifier, txids, verbose=None):
         """
         liststreamtxitems "stream-identifier" txids ( verbose )
@@ -4108,6 +4104,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "liststreamtxitems", "params": ["mytxid", false] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def listtransactions(self, account=None, count=None, from_includeWatchonly=None):
         """
         listtransactions ( "account" count from includeWatchonly )
@@ -4170,6 +4167,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listtransactions", "params": ["tabby", 20, 100] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def listunspent(self, minconf=None, maxconf=None, addresses=None):
         """
         listunspent ( minconf maxconf addresses )
@@ -4209,9 +4207,8 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listunspent", "params": [6, 9999999 "[\"1PGFqEzfmQch1gKD3ra4k18PNj3tTUUSqg\",\"1LtvqCaApEdUGFkpKMM4MstjcaL4dKg8SP\"]"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
-    def listwallettransactions(
-        self, count=None, skip=None, includeWatchonly=None, verbose=None
-    ):
+
+    def listwallettransactions(self, count=None, skip=None, includeWatchonly=None, verbose=None):
         """
         listwallettransactions ( count skip includeWatchonly verbose )
 
@@ -4265,6 +4262,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "listwallettransactions", "params": [20, 100] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def lockunspent(self, *args):
         """
         lockunspent unlock [{"txid":"txid","vout":n},...]
@@ -4308,6 +4306,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "lockunspent", "params": [false, "[{\"txid\":\"a08e6907dbbd3d809776dbfc5d82e371b764ed838b5655e72f463568df1aadf0\",\"vout\":1}]"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def move(self, fromaccount, toaccount, amount, minconf=None, comment=None):
         """
         move "fromaccount" "toaccount" amount ( minconf "comment" )
@@ -4335,6 +4334,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "move", "params": ["timotei", "akiko", 0.01, 6, "happy birthday!"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def preparelockunspent(self, asset_quantities, lock=None):
         """
         preparelockunspent asset-quantities ( lock )
@@ -4361,6 +4361,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "preparelockunspent", "params": ["{\"12345-6789-1234\":100,\"1234-5678-1234\":200}"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def preparelockunspentfrom(self, from_address, asset_quantities, lock=None):
         """
         preparelockunspentfrom "from-address" asset-quantities ( lock )
@@ -4388,9 +4389,8 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "preparelockunspentfrom", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "{\"12345-6789-1234\":100,\"1234-5678-1234\":200}"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
-    def publish(
-        self, stream_identifier, key_or_keys, data_hex_or_data_obj, options=None
-    ):
+
+    def publish(self, stream_identifier, key_or_keys, data_hex_or_data_obj, options=None):
         """
         publish "stream-identifier" "key"|keys "data-hex"|data-obj "options" 
 
@@ -4427,14 +4427,8 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "publish", "params": ["test", "hello world", "48656C6C6F20576F726C64210A"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
-    def publishfrom(
-        self,
-        from_address,
-        stream_identifier,
-        key_or_keys,
-        data_hex_or_data_obj,
-        options=None,
-    ):
+
+    def publishfrom(self, from_address, stream_identifier, key_or_keys, data_hex_or_data_obj, options=None):
         """
         publishfrom "from-address" "stream-identifier" "key"|keys "data-hex"|data-obj "options" 
 
@@ -4472,6 +4466,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "publishfrom", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "test", "hello world", "48656C6C6F20576F726C64210A"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def publishmulti(self, stream_identifier, items, options=None):
         """
         publishmulti "stream-identifier" items "options" 
@@ -4516,6 +4511,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "publishmulti", "params": ["test", [{"key":"hello world","data":"48656C6C6F20576F726C64210A"}]] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def publishmultifrom(self, from_address, stream_identifier, items, options=None):
         """
         publishmultifrom "from-address" "stream-identifier" items "options" 
@@ -4561,6 +4557,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "publishmultifrom", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "test", [{"key":"hello world","data":"48656C6C6F20576F726C64210A"}]] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def purgepublisheditems(self, txids_or_txouts_or_blocks):
         """
         purgepublisheditems "txids"|txouts|blocks
@@ -4607,6 +4604,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "purgepublisheditems", "params": ["mytxid"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def purgestreamitems(self, stream_identifier, txids_or_txouts_or_blocks_or_query):
         """
         purgestreamitems stream-identifier "txids"|txouts|blocks|query
@@ -4666,15 +4664,15 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "purgestreamitems", "params": ["test-stream", "{\"keys\":[\"key01\","key02"],\"publisher\":\"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ\"}", false] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def resendwallettransactions(self) -> str:
         """
         resendwallettransactions
 
         Stop Resends wallet transactions.
         """
-    def retrievestreamitems(
-        self, stream_identifier, txids_or_txouts_or_blocks_or_query
-    ):
+
+    def retrievestreamitems(self, stream_identifier, txids_or_txouts_or_blocks_or_query):
         """
         retrievestreamitems stream-identifier "txids"|txouts|blocks|query
 
@@ -4733,9 +4731,8 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "retrievestreamitems", "params": ["test-stream", "{\"keys\":[\"key01\","key02"],\"publisher\":\"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ\"}", false] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
-    def revoke(
-        self, addresses, permissions, native_amount=None, comment=None, comment_to=None
-    ):
+
+    def revoke(self, addresses, permissions, native_amount=None, comment=None, comment_to=None):
         """
         revoke "address(es)" "permission(s)" ( native-amount "comment" "comment-to" )
 
@@ -4763,15 +4760,8 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "revoke", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", 0.1, admin "disabling temporary admin", "Admins Ltd."] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
-    def revokefrom(
-        self,
-        from_address,
-        to_addresses,
-        permissions,
-        native_amount=None,
-        comment=None,
-        comment_to=None,
-    ):
+
+    def revokefrom(self, from_address, to_addresses, permissions, native_amount=None, comment=None, comment_to=None):
         """
         revokefrom "from-address" "to-address(es)" "permission(s)" ( native-amount "comment" "comment-to" )
 
@@ -4800,6 +4790,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "revokefrom", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd" "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", 0.1, admin "disabling temporary admin", "Admins Ltd."] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def send(self, address, amount_or_asset_quantities, comment=None, comment_to=None):
         """
         send "address" amount|asset-quantities ( "comment" "comment-to" )
@@ -4830,15 +4821,8 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "send", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", 0.1, "donation", "seans outpost"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
-    def sendasset(
-        self,
-        address,
-        asset_identifier,
-        asset_qty,
-        native_amount=None,
-        comment=None,
-        comment_to=None,
-    ):
+
+    def sendasset(self, address, asset_identifier, asset_qty, native_amount=None, comment=None, comment_to=None):
         """
         sendasset "address" "asset-identifier" asset-qty ( native-amount "comment" "comment-to" )
 
@@ -4864,16 +4848,8 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "sendasset", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", 12345-6789-1234, 100, 0.1, "donation", "seans outpost"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
-    def sendassetfrom(
-        self,
-        from_address,
-        to_address,
-        asset_identifier,
-        asset_qty,
-        native_amount=None,
-        comment=None,
-        comment_to=None,
-    ):
+
+    def sendassetfrom(self, from_address, to_address, asset_identifier, asset_qty, native_amount=None, comment=None, comment_to=None):
         """
         sendassetfrom "from-address" "to-address" "asset-identifier" asset-qty ( native-amount "comment" "comment-to" )
 
@@ -4900,14 +4876,8 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "sendassetfrom", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", 0.1, 12345-6789-1234, 100, "donation", "seans outpost"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
-    def sendfrom(
-        self,
-        from_address,
-        to_address,
-        amount_or_asset_quantities,
-        comment=None,
-        comment_to=None,
-    ):
+
+    def sendfrom(self, from_address, to_address, amount_or_asset_quantities, comment=None, comment_to=None):
         """
         sendfrom "from-address" "to-address" amount|asset-quantities ( "comment" "comment-to" )
 
@@ -4938,15 +4908,8 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "sendfrom", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", 0.1, "donation", "seans outpost"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
-    def sendfromaccount(
-        self,
-        fromaccount,
-        toaddress,
-        amount,
-        minconf=None,
-        comment=None,
-        comment_to=None,
-    ):
+
+    def sendfromaccount(self, fromaccount, toaddress, amount, minconf=None, comment=None, comment_to=None):
         """
         sendfromaccount "fromaccount" toaddress amount ( minconf "comment" "comment-to" )
 
@@ -4978,6 +4941,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "sendfromaccount", "params": ["tabby", "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", 0.01, 6, "donation", "seans outpost"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def sendmany(self, *args):
         """
         sendmany "fromaccount" {"address":amount,...} ( minconf "comment" )
@@ -5009,9 +4973,8 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "sendmany", "params": ["tabby", "{\"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ\":0.01,\"1353tsE8YMTA4EuV7dgUXGjNFf9KpVvKHz\":0.02}", 6, "testing"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
-    def sendwithdata(
-        self, address, amount_or_asset_quantities, data_or_publish_new_stream_item
-    ):
+
+    def sendwithdata(self, address, amount_or_asset_quantities, data_or_publish_new_stream_item):
         """
         sendwithdata "address" amount|asset-quantities data|publish-new-stream-item
 
@@ -5037,13 +5000,8 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "sendwithdata", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", 0.1, 48656C6C6F20576F726C64210A] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
-    def sendwithdatafrom(
-        self,
-        from_address,
-        to_address,
-        amount_or_asset_quantities,
-        data_or_publish_new_stream_item,
-    ):
+
+    def sendwithdatafrom(self, from_address, to_address, amount_or_asset_quantities, data_or_publish_new_stream_item):
         """
         sendwithdatafrom "from-address" "to-address" amount|asset-quantities data|publish-new-stream-item
 
@@ -5070,6 +5028,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "sendwithdatafrom", "params": ["1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", "1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd", 0.1, 48656C6C6F20576F726C64210A] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def setaccount(self, address, account):
         """
         setaccount "address" "account"
@@ -5085,6 +5044,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "setaccount", "params": ["1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ", "tabby"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def settxfee(self, amount):
         """
         settxfee amount
@@ -5102,6 +5062,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "settxfee", "params": [0.00001] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def signmessage(self, address_or_privkey, message):
         """
         signmessage "address"|"privkey" "message"
@@ -5131,6 +5092,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "signmessage", "params": ["1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XZ", "my message"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def subscribe(self, entity_identifiers, rescan=None, parameters=None):
         """
         subscribe entity-identifier(s) ( rescan parameters )
@@ -5170,6 +5132,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "subscribe", "params": ["test-stream", false] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def trimsubscribe(self, stream_identifiers, parameters):
         """
         trimsubscribe stream-identifier(s) "parameters"
@@ -5197,9 +5160,8 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "trimsubscribe", "params": ["test-stream", "retrieve,publishers"] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
-    def txouttobinarycache(
-        self, identifier, txid, vout, count_bytes=None, start_byte=None
-    ):
+
+    def txouttobinarycache(self, identifier, txid, vout, count_bytes=None, start_byte=None):
         """
         txouttobinarycache "identifier" "txid" vout ( count-bytes start-byte )
 
@@ -5224,6 +5186,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "txouttobinarycache", "params": ["TjnVWwHYEg4", "txid", 1] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def unsubscribe(self, entity_identifiers, purge=None):
         """
         unsubscribe entity-identifier(s) ( purge )
@@ -5245,6 +5208,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "unsubscribe", "params": ["test-stream", false] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def walletlock(self):
         """
         walletlock
@@ -5268,6 +5232,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "walletlock", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def walletpassphrase(self, passphrase, timeout):
         """
         walletpassphrase "passphrase" timeout
@@ -5295,6 +5260,7 @@ class RpcClient:
         > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "walletpassphrase", "params": ["my pass phrase", 60] }' -H 'content-type: text/plain;' http://127.0.0.1:9718
 
         """
+
     def walletpassphrasechange(self, oldpassphrase, newpassphrase):
         """
         walletpassphrasechange "oldpassphrase" "newpassphrase"
