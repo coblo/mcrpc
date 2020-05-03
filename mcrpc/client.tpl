@@ -19,6 +19,3 @@ class RpcClient:
     def _call(self, method: str, *args): ...
 
 $methods
-
-def autoconnect
-
