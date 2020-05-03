@@ -170,18 +170,18 @@ def build_code(client):
                 )
 
     base_out_path = os.path.join(HERE, "base.py")
-    base_out = base_out.strip() + '\n'
+    base_out = base_out.strip() + "\n"
     with open(base_out_path, "wt", encoding="utf-8") as outf:
         outf.write(base_out)
 
     stub_out_path = os.path.join(HERE, "client.pyi")
     stub_out = get_stub_template().substitute(methods=stub_out)
-    stub_out = stub_out.strip() + '\n'
+    stub_out = stub_out.strip() + "\n"
     with open(stub_out_path, "wt", encoding="utf-8") as outf:
         outf.write(stub_out)
 
     resp_out_path = os.path.join(HERE, "responses.py")
-    resp_out = resp_out.strip() + '\n'
+    resp_out = resp_out.strip() + "\n"
     with open(resp_out_path, "wt", encoding="utf-8") as outf:
         outf.write(resp_out)
 

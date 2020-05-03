@@ -4,18 +4,13 @@ import typing as t
 from decimal import Decimal
 from mcrpc.responses import *
 
-
 class RpcClient:
-
     def __init__(self, host: str, port: str, user: str, pwd: str, use_ssl: bool=False):
         self.host = host
         self.port = port
         self.user = user
         self.pwd = pwd
         self.use_ssl = use_ssl
-
     def _url(self) -> str: ...
-
     def _call(self, method: str, *args): ...
-
 $methods
